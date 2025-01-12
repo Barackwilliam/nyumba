@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L8FYVV0MZV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jisajili bure</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css2/style.css' %}">
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                
+                <div class="signup-content">
+                   
+                    <form method="POST" id="signup-form" class="signup-form">
+                        {% csrf_token %}
+                        <h2 class="form-title">Unda Akaunti</h2>
+                        {% for message in messages %}
+                        <h3 style="text-align: center; color: red">{{message}}</h3>
+                            {% endfor %}
+                        <div class="form-group">
+                            <label>Username</label>
+                            <i class="ti-user"></i>
+                            <input type="text" class="form-input" name="username" id="username" placeholder='Jaza jina lako' required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Your Email</label>
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Jaza Email Yako"  required/>
+                            <i class="icon_mail_alt"></i>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Your password</label>
+                            <input type="password" class="form-input" name="password" id="password" placeholder="Weka Neno Siri" required/>
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span> 
+                            <i class="icon_lock_alt"></i>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm password</label>
+                            <input type="password" class="form-input" name="password2" id="password2" placeholder='Thibitisha Neno Siri' required/>
+                            <i class="icon_lock_alt"></i>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                        </div>
+                    </form>
+                    <div>
+                    <p class="loginhere">
+                        Je Tayari Una account ? <a href="{% url 'login' %}" class="loginhere-link">Ingia Hapa</a>
+                    </p></div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Management Dashboard</title>
+
+</head>
+<body>
+    <h2>Your Referral Dashboard</h2>
+    <p>Share this link to invite your friends:</p>
+    <input type="text" id="referralLink" value="{{ referral_link }}" readonly>
+    <button onclick="copyReferralLink()">Copy Link</button>
+    
+    <h3>Invited Users:</h3>
+    <ul>
+        {% for referral in referrals %}
+            <li>{{ referral.referred_user.username }}</li>
+        {% empty %}
+            <p>No users have signed up using your referral link yet.</p>
+        {% endfor %}
+    </ul>
+    
+    <script>
+    function copyReferralLink() {
+        var copyText = document.getElementById("referralLink");
+        copyText.select();
+        document.execCommand("copy");
+        alert("Referral link copied to clipboard!");
+    }
+    </script>
+    
+</body>
+</html>

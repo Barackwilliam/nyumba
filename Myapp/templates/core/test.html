@@ -1,0 +1,362 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <img src="{% if user.profile.profile_picture %}https://res-console.cloudinary.com/drc3xiipg/media_explorer_thumbnails/{{ user.profile.profile_picture.url|slice:'-36:' }}/detailed{% else %}{% static 'images/default.jpg' %}{% endif %}" alt="{{ user.username }}" class="img-fluid profile-img">
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+<div class="row">
+    {% for property in prop_list reversed %} 
+    <a href="{% url 'property_detail' property.id %}">
+    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
+        <div class="project-single" data-aos="fade-up">
+            <div class="project-inner project-head">
+                <div class="homes">
+                    <!-- homes img -->
+                    <div class="homes-tag button alt featured">{{property.p_status}}</div>
+                    <div class="homes-tag button alt sale">
+                        {% if property.p_status == "Sold" %}Closed{% else %}{{property.status}}{% endif %}
+                    </div>
+                    <div class="homes-price">{{property.price}} Tsh</div>
+                    <img src="{{property.image.url}}" alt="nyumba inapangishwa" class="img-responsive">
+                </div>
+                <div class="button-effect">
+                    <a href="{% url 'property_detail' property.id %}" class="btn"><i class="fa fa-link"></i></a>
+                    <a href="{{property.video_link}}" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
+                    <a href="{% url 'property_detail' property.id %}" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                </div>
+            </div>
+            <!-- homes content -->
+            <div class="homes-content">
+                <!-- homes address -->
+                <h3><a href="#">{{property.title}}</a></h3>
+                <p class="homes-address mb-3">
+                    <a href="{% url 'property_detail' property.id %}">
+                        <i class="fa fa-map-marker"></i><span>{{property.region}}, {{property.ward}}</span>
+                    </a>
+                </p>
+                <!-- homes List -->
+                <ul class="homes-list clearfix pb-3">
+                    <li class="the-icons">
+                        <i class="flaticon-bed mr-2" aria-hidden="true"></i>
+                        <span>{{property.bedrooms}} Bedrooms</span>
+                    </li>
+                    <li class="the-icons">
+                        <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
+                        <span>{{property.bathrooms}} Bathrooms</span>
+                    </li>
+                    <li class="the-icons">
+                        <i class="flaticon-square mr-2" aria-hidden="true"></i>
+                        <span>{{property.house_size}} sq m</span>
+                    </li>
+                    <li class="the-icons">
+                        <!-- Icon ya kushare mali -->
+                        <i class="fa fa-share-alt mr-2" aria-hidden="true"></i>
+                        <span>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" target="_blank">
+                                Share
+                            </a>
+                        </span>
+                    </li>
+                </ul>
+                <div class="footer">
+                    <a href="{% url 'property_detail' property.id %}">
+                        <img src="{{property.property_owner.url}}" alt="" class="mr-2"> {{ property.owner }}
+                    </a>
+                    <span>Posted at {{property.date_posted}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+    {% endfor %}
+</div>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Management Dashboard</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Container */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            border-right: 1px solid #ddd;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .sidebar ul li a.active {
+            color: #009688;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .header {
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #333;
+        }
+
+        .subheader {
+            color: #777;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+        }
+
+        /* Referral List */
+        .referral-list {
+            margin-top: 20px;
+        }
+
+        .referral-item {
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            margin-bottom: 10px;
+        }
+
+        /* Form Styles */
+        .referral-form {
+            margin-top: 30px;
+        }
+
+        .referral-form input {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .referral-form button {
+            padding: 10px 20px;
+            background-color: #009688;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Programs</a></li>
+                <li><a href="#">Members</a></li>
+                <li><a href="#">Sales</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Easy Affiliate Management</h1>
+                <p class="subheader">Manage your affiliate partners referral members under one place</p>
+            </div>
+
+            <!-- Referral List -->
+            <div class="referral-list">
+                <h2>Your Referrals</h2>
+                {% for referral in referrals %}
+                    <div class="referral-item">
+                        <strong>{{ referral.referred_user }}</strong> - WhatsApp: {{ referral.whatsapp_number }} (Status: {{ referral.status }})
+                    </div>
+                {% empty %}
+                    <div class="referral-item">No referrals yet.</div>
+                {% endfor %}
+            </div>
+
+            <!-- Referral Form -->
+            <div class="referral-form">
+                <h2>Add Referral</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="referred_user" placeholder="Referred User" required>
+                    <input type="text" name="whatsapp_number" placeholder="WhatsApp Number" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    {% for property in prop_list reversed %} 
+    <a href="{% url 'property_detail' property.id %}">
+    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
+        <div class="project-single" data-aos="fade-up">
+            <div class="project-inner project-head">
+                <div class="homes">
+                    <!-- homes img -->
+                    <div class="homes-tag button alt featured">{{property.p_status}}</div>
+                    <div class="homes-tag button alt sale">
+                        {% if property.p_status == "Sold" %}Closed{% else %}{{property.status}}{% endif %}
+                    </div>
+                    <div class="homes-price">{{property.price}} Tsh</div>
+                    <img src="{{property.image.url}}" alt="nyumba inapangishwa" class="img-responsive">
+                </div>
+                <div class="button-effect">
+                    <a href="{% url 'property_detail' property.id %}" class="btn"><i class="fa fa-link"></i></a>
+                    <a href="{{property.video_link}}" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
+                    <a href="{% url 'property_detail' property.id %}" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                </div>
+            </div>
+            <!-- homes content -->
+            <div class="homes-content">
+                <!-- homes address -->
+                <h3><a href="#">{{property.title}}</a></h3>
+                <p class="homes-address mb-3">
+                    <a href="{% url 'property_detail' property.id %}">
+                        <i class="fa fa-map-marker"></i><span>{{property.region}}, {{property.ward}}</span>
+                    </a>
+                </p>
+                <!-- homes List -->
+                <ul class="homes-list clearfix pb-3">
+                    <li class="the-icons">
+                        <i class="flaticon-bed mr-2" aria-hidden="true"></i>
+                        <span>{{property.bedrooms}} Bedrooms</span>
+                    </li>
+                    <li class="the-icons">
+                        <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
+                        <span>{{property.bathrooms}} Bathrooms</span>
+                    </li>
+                    <li class="the-icons">
+                        <i class="flaticon-square mr-2" aria-hidden="true"></i>
+                        <span>{{property.house_size}} sq m</span>
+                    </li>
+                    <li class="the-icons">
+                        <!-- Icon ya kushare mali -->
+                        <i class="fa fa-share-alt mr-2" aria-hidden="true"></i>
+                        <span>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" target="_blank">
+                                Share
+                            </a>
+                        </span>
+                    </li>
+                </ul>
+                <div class="footer">
+                    <a href="{% url 'property_detail' property.id %}">
+                        <img src="{{property.property_owner.url}}" alt="" class="mr-2"> {{ property.owner }}
+                    </a>
+                    <span>Posted at {{property.date_posted}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+    {% endfor %}
+</div>
+

@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L8FYVV0MZV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Offers</title>
+    <style>
+        /* Styles remain unchanged */
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 1.5rem;
+            }
+            .post-description {
+                font-size: 1rem;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #1d4354, #a43931);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .post-card {
+            background: #2a2a2a;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 30px;
+        }
+
+        .post-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .post-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .post-content {
+            padding: 20px;
+        }
+
+        .post-title {
+            font-size: 2rem;
+            margin: 0 0 10px;
+            color: #ffcc00;
+            text-transform: uppercase;
+        }
+
+        .post-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #f1f1f1;
+        }
+
+        .read-more-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6a00, #ee0979, #28a745);
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            margin: 20px auto;
+            transition: background-position 0.4s ease, transform 0.3s ease;
+            background-size: 300% 100%;
+            animation: gradientAnimation 5s ease infinite;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .read-more-button:hover {
+            transform: scale(1.05);
+        }
+
+        .button-container {
+            text-align: center; /* Center-aligns the buttons */
+            margin: 20px 0; /* Adds vertical spacing */
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        {% if offers %}
+            {% for offer in offers %}
+            <!-- Offer Card -->
+            <div class="post-card">
+                <div class="post-image">
+                    <img src="{{ offer.offer_image.url }}" alt="{{ offer.Title }}">
+                </div>
+                <div class="post-content">
+                    <h2 class="post-title">{{ offer.Title }}</h2>
+                    <p class="post-description">{{ offer.description }}</p>
+                    
+                    <div class="button-container">
+                        <a href="{% url 'offer_detail' slug=offer.slug %}" class="read-more-button">See More..!</a>
+                        <a href="{% url 'popular_featured' %}" class="read-more-button">Go home..!</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <h2>No offers available</h2>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        <p>NyumbaChap © 2025 | The Best House Finder Platform in Tanzania</p>
+    </div>
+
+</body>
+</html>

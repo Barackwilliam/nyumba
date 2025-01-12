@@ -1,0 +1,89 @@
+
+
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>vyumba vya kupangisha</title>
+
+
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'blog/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'blog/css/noscript.css' %}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+
+				<!-- Main -->
+					 <!-- <div id="main"> -->
+
+
+						<!-- Contact -->
+							 <article id="contact">
+								<h2 class="major">Contact</h2>
+
+								<p>Una maswali yoyote au maoni? Tunafurahia kusikia kutoka kwako! Iwe wewe ni mmiliki wa mali unayetaka kuweka tangazo la nyumba au mpangaji au mnunuzi unayetafuta ofa bora, tuko hapa kusaidia.</p>
+
+							<p>Wasiliana nasi kupitia barua pepe, simu, au ungana nasi kwenye majukwaa yetu ya mitandao ya kijamii. Kwa msaada wa haraka, tumia kipengele chetu cha gumzo ili kuzungumza na mwakilishi wetu."</p>
+
+
+								<form method="post" action="{% url 'Contact_us' %}">
+									{% csrf_token %}
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" required/>
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="email" name="email" id="email" required/>
+										</div>
+										<div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="4" required></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+								<ul class="icons">
+									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+						 </article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Design: Chipindi <a href="#">William</a>.</p>
+					</footer>
+
+			<!-- </div> -->
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+
+			<script src="{% static 'blog/js/jquery.min.js' %}"></script>
+			<script src="{% static 'blog/js/browser.min.js' %}"></script>
+			 <script src="{% static 'blog/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'sblog/js/util.js' %}"></script>
+			<script src="{% static 'blog/js/main.js' %}"></script>
+
+	</body>
+</html>

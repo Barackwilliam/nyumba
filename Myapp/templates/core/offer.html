@@ -1,0 +1,11 @@
+{% load static %}
+        <div class="widget-boxed popular mt-5">
+            {% for offer in offers %}
+            <div class="widget-boxed-header">
+                <h4>{{offer.Title}}</h4>
+            </div>
+            <div class="widget-boxed-body">
+                <div class="banner"><img src="{{offer.offer_image.url}}" alt="Offer of the day"></div>
+            </div>
+            {% endfor %}
+        </div>

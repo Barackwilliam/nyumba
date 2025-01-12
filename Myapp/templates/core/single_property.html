@@ -1,0 +1,534 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<body class="inner-pages sin-1 homepage-4 hd-white">
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- START SECTION HEADINGS -->
+        <!-- Header Container
+        ================================================== -->
+        <header id="header-container">
+            <!-- Header -->
+            <div id="header">
+                <div class="container container-header">
+                    <!-- Left Side Content -->
+                    <div class="left-side">
+                        <!-- Logo -->
+                        <div id="logo">
+                            <a href="{% url 'popular_featured' %}"><img src="{% static 'images/logo-red.svg' %}" alt=""></a>
+                        </div>
+                        <!-- Mobile Navigation -->
+                        <div class="mmenu-trigger">
+                            <button class="hamburger hamburger--collapse" type="button">
+                                <span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                        <!-- Main Navigation -->
+
+
+                        <!-- Main Navigation / End -->
+                    </div>
+                    <!-- Left Side Content / End -->
+
+                  
+
+                </div>
+            </div>
+            <!-- Header / End -->
+
+        </header>
+        <div class="clearfix"></div>
+        <!-- Header Container / End -->
+        <!-- END SECTION HEADINGS -->
+
+        <!-- START SECTION PROPERTIES LISTING -->
+        <section class="single-proper blog details">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 blog-pots">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <section class="headings-2 pt-0">
+                                    <div class="pro-wrapper">
+                                        <div class="detail-wrapper-body">
+                                            <div class="listing-title-bar">
+                                                <h3>{{property.title}} <span class="mrg-l-5 category-tag">{% if property.p_status == "Sold" %}Closed{% else %}{{property.status}}{% endif %}</span></h3>
+                                                <div class="mt-0">
+                                                    <a href="#" class="listing-address">
+                                                        <i class="fa fa-map-marker pr-2 ti-location-pin mrg-r-5"></i>{{property.region}}, {{property.ward}}
+                                                    </a>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="single detail-wrapper mr-2">
+                                            <div class="detail-wrapper-body">
+                                                <div class="listing-title-bar">
+                                                
+
+                                                    <h4>{% if property.status == "For Rent" %}Tsh. {{property.price}}/= Kwa Mwezi{% else %} Tsh. {{property.price}}/={% endif %}</h4>
+                                                    <div class="mt-0">
+                                                        <a href="#" class="listing-address">
+                                                            <p>{{property.house_size}} sq m</p>
+                                                        </a>
+                                                    </div>
+
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- main slider carousel items -->
+                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                    </ol>
+                                    <div class="carousel-inner carus" role="listbox">
+                                        <div class="carousel-item active">
+                                            <img class="d-block img-fluid" src="{{property.image.url}}" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block img-fluid" src="{{property.image1.url}}" alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block img-fluid" src="{{property.image2.url}}" alt="Third slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block img-fluid" src="{{property.image3.url}}" alt="Second slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                                <!-- cars content -->
+                                <div class="homes-content details-2 mb-4">
+                                    <!-- cars List -->
+                                    <ul class="homes-list clearfix">
+                                        <li>
+                                            <i class="fa fa-bed" aria-hidden="true"></i>
+                                            <span>{{property.bedrooms}} rooms</span>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-bath" aria-hidden="true"></i>
+                                            <span>{{property.bathrooms}} Bath</span>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-object-group" aria-hidden="true"></i>
+                                            <span>{{property.house_size}} sq m</span>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-car" aria-hidden="true"></i>
+                                            <span>0 Garages</span>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-columns" aria-hidden="true"></i>
+                                            <span>{{property.kitchen}} Kitchen </span>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-clone" aria-hidden="true"></i>
+                                            <span>0 Balcony</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="blog-info details mb-30">
+                                    <h5 class="mb-4">Description</h5>
+                                    <p class="mb-3">{{property.description}}</p>
+                                    <!-- <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum rerum beatae consequatur, totam fugit, alias fuga aliquam quod tempora a nisi esse magnam nulla quas! Error praesentium, vero dolorum laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum rerum beatae consequatur, totam fugit.</p>
+                                    <p class="mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum rerum beatae consequatur, totam fugit, alias fuga aliquam quod tempora a nisi esse magnam nulla quas! Error praesentium, vero dolorum laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum rerum beatae consequatur, totam fugit.</p> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single homes-content details mb-30">
+                            <!-- title -->
+                            <h3 class="mb-4">Property Details</h3>
+                            <ul class="homes-list clearfix" type="disc">
+                                <li>
+                                    <span class="font-weight-bold mr-1">Property ID:</span>
+                                    <span class="det"><a href="#">Hidden</a></span>
+                                </li>
+                                <li>
+                                    <span class="font-weight-bold mr-1">Property Type:</span>
+                                    <span class="det">{{property.property_type}}</span>
+                                </li>
+                                <li>
+                                    <span class="font-weight-bold mr-1">Property status:</span>
+                                    <span class="det">{% if property.p_status == "Sold" %}Closed{% else %}{{property.status}}{% endif %}</span>
+                                </li>
+                                <li>
+                                    <span class="font-weight-bold mr-1">Bei:</span>
+                                    <span class="det">{% if property.status == "For Rent" %}Tsh. {{property.price}}/= Kwa Mwezi{% else %} Tsh. {{property.price}}/={% endif %}</span>
+                                </li>
+                                <li>
+                                    <span class="font-weight-bold mr-1">Rooms:</span>
+                                    <span class="det">{{property.bedrooms}}</span>
+                                </li>
+                                <!-- <li>
+                                    <span class="font-weight-bold mr-1">Beds:</span>
+                                    <span class="det">{{property.bedrooms}}</span>
+                                </li> -->
+                                <li>
+                                    <span class="font-weight-bold mr-1">baths:</span>
+                                    <span class="det">{{property.bathrooms}}</span>
+                                </li>
+                                <li>
+                                    <span class="font-weight-bold mr-1">Garage:</span>
+                                    <span class="det">0</span>
+                                </li>
+                                <li>
+                                    <span class="font-weight-bold mr-1">Posted:</span>
+                                    <span class="det">{{property.date_posted}}</span>
+                                </li>
+                            </ul>
+                                                         
+                        </div>
+                        <div class="floor-plan property wprt-image-video w50 pro">
+                            <h5>Floor Plans</h5>
+                            <div>
+                                <h4> Example of Image that should be Uploaded by Owner</h4>
+                            <img alt="image" src="{% static 'images/bg/floor-plan-1.png' %}">
+                            </div>
+                        </div>
+                        <div class="floor-plan property wprt-image-video w50 pro">
+                            <h5>What's Nearby</h5>
+                            <div class="property-nearby">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="nearby-info mb-4">
+                                            <span class="nearby-title mb-3 d-block text-info">
+                                               <i class="fas fa-graduation-cap mr-2"></i><b class="title">Tupo jirani na .....</b>
+                                            </span>
+                                            <div class="nearby-list">
+                                                <ul class="property-list list-unstyled mb-0">
+                                                    <li class="d-flex">
+                                                        <h6 class="mb-3 mr-2">{{property.nearby}}</h6>
+                                                        <span>(Unapproximated Distance)</span>
+                                                        <ul class="list-unstyled list-inline ml-auto">
+                                                            <li class="list-inline-item m-0 text-warning"><i class="fas fa-star fa-xs"></i></li>
+                                                            <li class="list-inline-item m-0 text-warning"><i class="fas fa-star fa-xs"></i></li>
+                                                            <li class="list-inline-item m-0 text-warning"><i class="fas fa-star fa-xs"></i></li>
+                                                            <li class="list-inline-item m-0 text-warning"><i class="fas fa-star fa-xs"></i></li>
+                                                            <li class="list-inline-item m-0 text-warning"><i class="fas fa-star-half fa-xs"></i></li>
+                                                        </ul>
+                                                    </li>
+                                                   
+                                                </ul> 
+
+
+                                            </div>
+                                        </div>
+
+
+                                        
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="property wprt-image-video w50 pro vid-si3">
+                            <h5>Maisha ni Rahisi Ukiwa Nasi</h5>
+                           
+
+                            <video controls style="width: 100%; height:auto; max-width: 100; ">
+                                <source src="{% static 'videos/default.mp4' %}" type="video/mp4">
+                                Your browser does not support the video tag 
+                            </video>
+                           
+                            <!-- {% if property.video %}
+                            <video controls style="width: 100%; height:auto; max-width: 100; ">
+                                <source src="{{ property.video.url}}" type="video/mp4">
+                                Your browser does not support the video tag 
+                            </video> 
+                            {% endif %}-->
+                            <div class="iq-waves">
+                                <div class="waves wave-1"></div>
+                                <div class="waves wave-2"></div>
+                                <div class="waves wave-3"></div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="property-location map">
+                            <h5>Location by Rank</h5>
+                           
+                                <div class="col-lg-4 col-md-12 bgc"> 
+                                    <div class="call-info">
+                                        
+                                        <p class="mb-5">Please find below contact details and contact us today!</p>
+                                        <ul>
+                                            <li>
+                                                <div class="info">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    <p class="in-p">{{property.country}}</p>
+                                                </div>
+                                                <div class="info">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    <p class="in-p">{{property.region}}</p>
+                                                </div>
+                                                <div class="info">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    <p class="in-p">{{property.district}}</p>
+                                                </div>
+                                                <div class="info">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    <p class="in-p">{{property.ward}}</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="info">
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    <p class="in-p">{{property.business_phone}}</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="info">
+                                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                    <p class="in-p ti">{{property.business_email}}</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="info cll">
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                    <p class="in-p ti">{{property.date_posted}}</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>                
+                                </div> 
+                                
+                            <!-- </div> -->
+                        </div> 
+                       
+                    </div>
+                    <aside class="col-lg-4 col-md-12 car">
+                        <div class="single widget">
+                            <!-- Start: Schedule a Tour -->
+                            <div class="schedule widget-boxed mt-30">
+                                <div class="widget-boxed-header">
+                                    <h4><i class="fa fa-calendar pr-3 padd-r-10"></i>Schedule a Tour</h4>
+                                </div>
+                                <div class="widget-boxed-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 book">
+                                            <input type="text" id="reservation-date" data-lang="en" data-large-mode="true" data-min-year="2017" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 book2">
+                                            <input type="text" id="reservation-time" class="form-control" readonly="">
+                                        </div>
+                                    </div>
+                                    <div class="row mrg-top-15 mb-3">
+                                        <div class="col-lg-6 col-md-12 mt-4">
+                                            <label class="mb-4">Adult</label>
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+										 <button type="button" class="btn counter-btn theme-cl btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+											 <i class="fa fa-minus"></i>
+										 </button>
+									        </span>
+                                                <input type="text" name="quant[1]" class="border-0 text-center form-control input-number" data-min="0" data-max="10" value="0">
+                                                <span class="input-group-btn">
+											 <button type="button" class="btn counter-btn theme-cl btn-number" data-type="plus" data-field="quant[1]">
+											  <i class="fa fa-plus"></i>
+											 </button>
+									        </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 mt-4">
+                                            <label class="mb-4">Children</label>
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+										 <button type="button" class="btn counter-btn theme-cl btn-number" disabled="disabled" data-type="minus" data-field="quant[2]">
+											 <i class="fa fa-minus"></i>
+										 </button>
+									        </span>
+                                                <input type="text" name="quant[2]" class="border-0 text-center form-control input-number" data-min="0" data-max="10" value="0">
+                                                <span class="input-group-btn">
+											 <button type="button" class="btn counter-btn theme-cl btn-number" data-type="plus" data-field="quant[2]">
+											  <i class="fa fa-plus"></i>
+											 </button>
+									        </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'chat' %}" class="btn reservation btn-radius theme-btn full-width mrg-top-10">Let's Chat</a>
+                                </div>
+                            </div>
+                            <!-- End: Schedule a Tour -->
+                            <!-- end author-verified-badge -->
+                            <div class="sidebar">
+                                <div class="widget-boxed mt-33 mt-5">
+                                    <div class="widget-boxed-header">
+                                        <h3>Taarifa za Nyumba</h3>
+                                    </div>
+                                    <div class="widget-boxed-body">
+                                        <div class="sidebar-widget author-widget2">
+                                            <div class="author-box clearfix">
+                                                <img src="{{property.property_owner.url}}" alt="author-image" class="author__img">
+                                                <h4 class="author__title">{{ property.owner}}</h4>
+                                                <p class="author__meta">Agent</p>
+                                            </div>
+                                            <ul class="author__contact">
+                                                <li><span class="la la-map-marker"><i class="fa fa-map-marker"></i></span>{{property.ward}}, {{property.region}}</li>
+                                                <li><span class="la la-phone"><i class="fa fa-phone" aria-hidden="true"></i></span><a href="#">{{property.business_phone}}</a></li>
+                                                <li><span class="la la-envelope-o"><i class="fa fa-envelope" aria-hidden="true"></i></span><a href="#">{{property.business_email}}</a></li>
+                                            </ul>
+
+                                        
+                                            <div class="agent-contact-form-sidebar">
+
+
+                                                <h3>Weka Order</h3>
+                                                <form name="contact_form" method="post" action="{% url 'submit_inquiry' property.id %}">
+                                                    {% csrf_token %}
+
+                                                    <div class="form-group"
+                                                    <label for="id_full_name">Full Name</label>
+                                                    <input type="text"  name="full_name" id="id_full_name" placeholder="Full Name" required 
+                                                    class="form-control" value="{{form.full_name.value}}">
+                                                </div>
+
+                                                <div class="form-group"
+                                                    <label for="id_phone_number">Phone Number</label>
+                                                    <input type="text" id="id_phone_numbe" name="phone_number" placeholder="Phone Number" required 
+                                                    class="form-control" value="{{form.phone_number.value}}">
+                                                </div>
+
+                                                <div class="form-group"
+                                                    <label for="id_email">Email</label>
+                                                    <input type="email" id="id_email" name="email" placeholder="Email" required 
+                                                    class="form-control" value="{{form.email.value}}">
+                                                </div>
+
+                                                <div class="form-group"
+                                                    <label for="message">Message</label>
+                                                    <textarea placeholder="Message" name="message" id="id_message"  class="form-control" required>{{form.message.value}}</textarea> 
+                                                </div>
+                                                    
+                                                    <input type="submit" name="sendmessage" class="multiple-send-message" value="Tuma" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main-search-field-2">
+                                   
+                                    <!-- Start: Specials offer -->
+                                   
+
+                                 
+                                </div>
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="sidebar">
+                                <div class="widget-boxed mt-33 mt-5">
+                                <!-- cars List -->
+                                
+                                    <h5 style="background-color: white; color: rgb(255, 0, 0);">TAADHARI..!</h5>
+                                    <dl style="background-color: white;color: rgb(255, 5, 5);">
+                                        <p>Tunapenda kuwatahadharisha wateja wetu kuhusu matapeli wanaoweza kujitokeza wakati wa kutafuta nyumba kwenye tovuti yetu. Tafadhali zingatia yafuatayo:
+
+                                        <dt>Thibitisha Taarifa: </dt>
+                                        <dd>Kila wakati hakikisha unathibitisha taarifa za mmiliki wa nyumba na bei kabla ya kufanya malipo yoyote.</dd>
+                                        <dt>Epuka Malipo ya Awali:
+                                        </dt><dd>Usilazimike kufanya malipo kabla ya kuona nyumba au kuangalia au kusaini nyaraka rasmi kutoka serikali ya mtaa husika.</dd>
+                                        <dt>Ripoti Matukio ya Udanganyifu:</dt>
+                                        <dd>Ikiwa unakutana na matukio yoyote ya udanganyifu, tafadhali ripoti kwetu haraka.</dd>
+                                        <dt>Kwa Kuhitimisha:</dt> 
+                                        <dd>Hatutahusika Kwa utapeli wowote utakaotokea kwa kutokufuata maelekezo ya hapo juu.</dd>
+                                        Usisite kutuuliza maswali yoyote ili kupata msaada zaidi. Tunataka kuhakikisha unapata huduma salama na bora!
+                                        </p>
+                                        
+                                    </dl>
+                                    </div>
+                               
+
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                    </aside>
+                </div>
+                
+            </div>
+        </section>
+        <!-- END SECTION PROPERTIES LISTING -->
+
+
+
+        <!-- Time Dropper Script-->
+        <script>
+            this.$('#reservation-time').timeDropper({
+                setCurrentTime: false,
+                meridians: true,
+                primaryColor: "#e8212a",
+                borderColor: "#e8212a",
+                minutesInterval: '15'
+            });
+
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+                    disableOn: 700,
+                    type: 'iframe',
+                    mainClass: 'mfp-fade',
+                    removalDelay: 160,
+                    preloader: false,
+                    fixedContentPos: false
+                });
+            });
+
+        </script>
+
+        <script>
+            $('.slick-carousel').each(function() {
+                var slider = $(this);
+                $(this).slick({
+                    infinite: true,
+                    dots: false,
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '0'
+                });
+
+                $(this).closest('.slick-slider-area').find('.slick-prev').on("click", function() {
+                    slider.slick('slickPrev');
+                });
+                $(this).closest('.slick-slider-area').find('.slick-next').on("click", function() {
+                    slider.slick('slickNext');
+                });
+            });
+
+        </script>
+
+    </div>
+    <!-- Wrapper / End -->
+</body>
+
+
+{% endblock %}

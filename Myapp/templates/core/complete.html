@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L8FYVV0MZV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .login-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-container img {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+        
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .file-upload {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #6a0dad; /* Purple background for the container */
+            border-radius: 8px;
+            text-align: center;
+            color: white;
+        }
+
+        .file-upload input[type="file"] {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+            border: none;
+        }
+        
+        .file-upload input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Popup Modal CSS */
+        section {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        section.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(1.2);
+            background-color: #fff;
+            border-radius: 24px;
+            max-width: 400px;
+            width: 100%;
+            padding: 30px;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        section.active .modal-box {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-box i {
+            font-size: 70px;
+            color: #4070f4;
+        }
+
+        .modal-box h2 {
+            margin-top: 20px;
+            font-size: 25px;
+        }
+
+        .modal-box h3 {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .modal-box button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4070f4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .modal-box button:hover {
+            background-color: #265df2;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+      <h4>Hatua ya Mwisho</h4>
+        <img src="{% static 'images/nyumbachap.png' %}" alt="Logo"> <!-- Add your image source here -->
+        <p>Baada ya kufanya Malipo tuma picha ya Mesaji ya Muamala kabla ya dakika 30 Kupita</p>
+
+        <!-- Sehemu ya ku-upload picha -->
+        <form class="file-upload" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        
+            <label for="upload">Upload Image:</label>
+            <input type="file" id="upload" name="Transaction_image" accept=".jpg, .jpeg, .png"> <br><!-- Only image files allowed -->
+            <input type="submit" value="Submit" id="submit-btn">
+        </form>
+    </div>
+
+    <!-- Popup Modal -->
+    <section id="popup">
+      <div class="modal-box">
+        <i class="fa-regular fa-circle-check"></i>
+        <h2 id="modal-title">Completed</h2>
+        <h3 id="modal-message">Your image has been successfully uploaded.</h3>
+        <button class="close-btn">Ok, Close</button>
+      </div>
+      
+    </section>
+    <script>
+        // Popup functionality
+        const submitBtn = document.querySelector("#submit-btn");
+        const popup = document.querySelector("#popup");
+        const closeBtn = document.querySelector(".close-btn");
+        const uploadInput = document.querySelector("#upload");
+        const modalTitle = document.querySelector("#modal-title");
+        const modalMessage = document.querySelector("#modal-message");
+
+        // Show popup when the form is submitted
+        submitBtn.addEventListener("click", function(event) {
+            if (uploadInput.files.length === 0) {
+                // Kama hakuna picha imewekwa, zuia submission na toa ujumbe wa kosa
+                event.preventDefault(); // Zuia form isisubmit
+                modalTitle.textContent = "Error";
+                modalMessage.textContent = "Tafadhari weka picha ya Muhamala!";
+                popup.classList.add("active");
+            } else {
+                // Kama picha imewekwa, ruhusu form isubmit
+                modalTitle.textContent = "Completed";
+                modalMessage.textContent = "Your image has been successfully uploaded, wait for confirmation.";
+
+                // Ruhusu form kuendelea na submission baada ya popup kuonekana
+                popup.classList.add("active");
+
+                setTimeout(function() {
+                    // Endelea kusubmit form baada ya sekunde 2 (au bila kuchelewa)
+                    event.target.closest('form').submit();
+                }, 5000); // Popup itaonekana kwa sekunde 2 kisha form isubmit
+            }
+        });
+
+        // Close the popup
+        closeBtn.addEventListener("click", function() {
+            popup.classList.remove("active");
+        });
+    </script>
+</body>
+</html>
