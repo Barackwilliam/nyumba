@@ -1,0 +1,494 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+
+
+
+<body class="homepage-9 hp-6 homepage-1 mh">
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <!-- START SECTION HEADINGS -->
+        <!-- Header Container
+        ================================================== -->
+       
+        <div class="clearfix"></div>
+        <!-- Header Container / End -->
+
+        <!-- STAR HEADER SEARCH -->
+        <section id="hero-area" class="parallax-searchs home15 overlay thome-6 thome-1" data-stellar-background-ratio="0.5">
+            <div class="hero-main">
+                <div class="container" data-aos="zoom-in">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hero-inner">
+                                <!-- Welcome Text -->
+                                <div class="welcome-text">
+                                    <h1 class="h1">Find Your Dream 
+                                    <br class="d-md-none">
+                                    <span class="typed border-bottom"></span>
+                                </h1>
+                                    <p class="mt-4">We Have Over Million Properties For You.</p>
+                                </div>
+                                <!--/ End Welcome Text -->
+                                <!-- Search Form -->
+               
+                                <div class="col-12">
+                                    <form method="GET" action="{% url 'search_property' %}"> 
+                                    <div class="banner-search-wrap">
+                                        <ul class="nav nav-tabs rld-banner-tab">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#tabs_1">For Sale</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#tabs_2">For Rent</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="tabs_1">
+                                                <div class="rld-main-search">
+                                                    <div class="row">
+                                                        <div class="rld-single-input">
+                                                            <input type="text" placeholder="Enter Keyword..." name="q" value="{{request.GET.q}}">
+                                                        </div>
+                                                        <div class="rld-single-select ml-22">
+                                                           
+                                                        </div>
+                                                        <div class="rld-single-select">
+                                                           
+                                                        </div>
+
+                                                        <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
+                                                            <a class="btn btn-yellow" href="#"><button type="submit"> Search Now </button> </a> 
+                                                        </div>
+                                                        <div class="explore__form-checkbox-list full-filter">
+                                                            <div class="row">
+                                                                <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0">
+                                                                    <!-- Form Property Status -->
+                                                                    <div class="form-group categories">
+                                                                        <div class="nice-select form-control wide" tabindex="0"><span class="current"><i class="fa fa-home"></i>Property Status</span>
+                                                                            <ul class="list">
+                                                                                <li data-value="1" class="option selected ">For Sale</li>
+                                                                                <li data-value="2" class="option">For Rent</li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--/ End Form Property Status -->
+                                                                </div>
+                                                               
+                                                                    <!--/ End Form Bedrooms -->
+                                                                </div>
+                                                              
+                                                                </div>
+                                                                
+
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                                       
+                                                      
+
+                            </form>
+                                <!--/ End Search Form -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END HEADER SEARCH -->
+
+
+        
+        <!-- START SECTION POPULAR PLACES -->
+        <section class="popular-places bg-white">
+            <div class="container">
+                <div class="sec-title">
+                    <h2><span>Popular </span>Places</h2>
+                    <p>Nyumba Maeneo Maarufu Tanzania</p>
+                </div>
+                <div class="row">
+                
+                    {% for place in popular %}
+                  
+                    <div class="col-sm-6 col-lg-4 col-xl-4" data-aos="zoom-in" data-aos-delay="350">
+                        <!-- Image Box -->
+                        <a href="{% url 'property_list'%}" class="img-box hover-effect no-mb x3">
+                            
+                            <img src="{{place.image_of_place.url}} " class="img-responsive" alt="{{place.name_of_place}}">
+                            <!-- Badge -->
+                            <div class="listing-badges">
+                                <span class="featured">Featured</span>
+                            </div>
+                            <div class="img-box-content visible">
+                                <h4>{{place.name_of_place}}</h4>
+                                <span>{{place.number_of_property}} Houses</span>
+                            </div>
+                        </a>
+                    </div>
+</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- END SECTION POPULAR PLACES -->
+
+
+        <!-- START SECTION FEATURED PROPERTIES -->
+        <section class="featured portfolio bg-white-2 rec-pro full-l">
+            <div class="container-fluid">
+                <div class="sec-title">
+                    <h2><span>Featured </span>Properties</h2>
+                    <p>These are our featured properties</p>
+                </div>
+
+
+                {% for property in featured %}   
+               
+                    <div class="item col-xl-6 col-lg-12 col-md-12 col-xs-12 people sale no-pb">
+                        
+                        <div class="project-single no-mb" data-aos="fade-right">
+                            
+                            <div class="project-inner project-head">
+                        
+    
+                                 <div class="homes">
+                                    
+                                    <!-- homes img --> 
+                                    <a href="{% url 'property_list' %}" class="homes-img">
+                                        <div class="homes-tag button alt featured">Featured</div>
+                                        <div class="homes-tag button alt sale">For Sale</div>
+                                        <img src="{{property.f_property_name.image.url}}" alt="home-1" class="img-responsive">
+                                    </a>
+                                    
+                                </div>  
+                                <div class="button-effect">
+                                    <a href="{% url 'property_list' %}" class="btn"><i class="fa fa-link"></i></a>
+                                    <a href="{{ property.f_property_name.video_link }}" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
+                                    <a href="{{ property.f_property_name.image.url }}" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                                </div>
+                            </div>
+                            <!-- homes content -->
+
+                        
+                            <div class="homes-content">
+                                <!-- homes address -->
+                                <h3><a href="{% url 'property_list' %}">{{property.f_property_name.title}}</a></h3>
+                                <p class="homes-address mb-3">
+                                    <a href="{% url 'property_list' %}">
+                                        <i class="fa fa-map-marker"></i><span>{{property.f_property_name.region}}, {{property.f_property_name.district}}, {{property.f_property_name.ward}}</span>
+                                    </a>
+                                </p>
+                                <!-- homes List -->
+                                <ul class="homes-list clearfix pb-3">
+                                    <li class="the-icons">
+                                        <i class="flaticon-bed mr-2" aria-hidden="true"></i>
+                                        <span>{{property.f_property_name.bedrooms}} Bedrooms</span>
+                                    </li>
+                                    <li class="the-icons">
+                                        <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
+                                        <span>{{property.f_property_name.bathrooms}} Bathrooms</span>
+                                    </li>
+                                    <li class="the-icons">
+                                        <i class="flaticon-square mr-2" aria-hidden="true"></i>
+                                        <span>{{property.f_property_name.house_size}} sq m</span>
+                                    </li>
+                                    <li class="the-icons">
+                                        <i class="flaticon-car mr-2" aria-hidden="true"></i>
+                                        <span>0 Garages</span>
+                                    </li>
+                                </ul>
+                                <div class="price-properties footer pt-3 pb-0">
+                                    <h3 class="title mt-3">
+                                     <a href="{% url 'search_property' %}">Tsh {{property.f_property_name.price}}</a>
+                                    </h3>
+                                    <div class="compare">
+                                        <a href="{% url 'search_property' %}" title="Compare">
+                                            <i class="flaticon-compare"></i>
+                                        </a>
+                                        <a href="{% url 'search_property' %}" title="Share">
+                                            <i class="flaticon-share"></i>
+                                        </a>
+                                        <a href="{% url 'search_property' %}" title="Favorites">
+                                            <i class="flaticon-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    
+                    </div>
+                    {% endfor %}
+                </div>
+                
+
+                
+               
+                <div class="bg-all">
+                    <a href="{% url 'property_list'%}" class="btn btn-outline-light">View More</a>
+                </div>
+            </div>
+        </section>
+        <!-- END SECTION FEATURED PROPERTIES -->
+
+        <!-- START SECTION WHY CHOOSE US -->
+        <section class="how-it-works bg-white rec-pro">
+            <div class="container-fluid">
+                <div class="sec-title">
+                    <h2><span>Kwanini </span>Utuchague Sisi..?</h2>
+                    <p>Tunatoa Huduma kwa kila hatua Ndani ya masaa 24..!</p>
+
+                </div>
+                <div class="row service-1">
+                    <article class="col-lg-3 col-md-6 col-xs-12 serv" data-aos="fade-up" data-aos-delay="150">
+                        <div class="serv-flex">
+                            <div class="art-1 img-13">
+                                <img src="{% static 'images/icons/icon-4.svg'%}" alt="">
+                                <h3>Aina Mbalimbali Za Nyumba</h3>
+                            </div>
+                            <div class="service-text-p">
+                                <p class="text-center">"Utapata Nyumba za Aina Tofauti Zinazokidhi Mahitaji yako. Kutoka Nyumba za Kupanga Hadi za Kununua kwa kila Eneo Tanzania kwa bei utakayoiweza. Tunahakikisha unapata unachoitaji bila usumbufu"</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-md-6 col-xs-12 serv" data-aos="fade-up" data-aos-delay="250">
+                        <div class="serv-flex">
+                            <div class="art-1 img-14">
+                                <img src="{% static 'images/icons/icon-5.svg'%}" alt="">
+                                <h3>Tunaaminiwa na Wengi</h3>
+                            </div>
+                            <div class="service-text-p">
+                                <p class="text-center">"Kwa Miaka Mingi Tumekua chaguo la Kwanza Kwa wateja wetu Nchini Tanzania. Uhaminifu wetu ni msingi wa Mnafanikio Yetu tukihudumia maelfu ya wateja waliotimiza Ndoto Zao za Kumiliki au Kupanga nyumba au vyumba"</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-md-6 col-xs-12 serv mb-0 pt" data-aos="fade-up" data-aos-delay="350">
+                        <div class="serv-flex arrow">
+                            <div class="art-1 img-15">
+                                <img src="{% static 'images/icons/icon-6.svg'%}" alt="">
+                                <h3>Ufadhili Rahisi</h3>
+                            </div>
+                            <div class="service-text-p">
+                                <p class="text-center">"Tunashirikiana na Taasisi Mbalimbali ili kuhakikisha unapata Njia bora za ufadhili. Ikiwa ni kununua au kupanga, malipo yanayofaa yanaweza mchakato wa kupanga au kununua Nyumba ya Ndoto yako".</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-md-6 col-xs-12 serv mb-0 pt its-2" data-aos="fade-up" data-aos-delay="450">
+                        <div class="serv-flex">
+                            <div class="art-1 img-14">
+                                <img src="{% static 'images/icons/icon-15.svg'%}" alt="">
+                                <h3>Tupo karibu na wewe</h3>
+                            </div>
+                            <div class="service-text-p">
+                                <p class="text-center">"Tupo kila sehemu Mtaa kwa mtaa katika maeneo mbalimbali Nchini. Popote ulipo tupo lengo ni moja tu kuhakikisha unapata huduma bora na nyumba inayokufaa".</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- END SECTION WHY CHOOSE US -->        
+
+        <!-- START SECTION RECENTLY PROPERTIES -->
+        <section class="featured portfolio rec-pro disc">
+            <div class="container-fluid">
+                <div class="sec-title discover">
+                    <h2><span>Discover </span>Popular Properties</h2>
+                    <p>We provide full service at every step.</p>
+                </div>
+
+
+
+
+   
+                <div class="row">
+                    {% for nyumba in popular_properties reversed %} 
+                    
+                    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
+                        <div class="project-single" data-aos="fade-up">
+                            <div class="project-inner project-head">
+                                <div class="homes">
+                                    <!-- homes img --> 
+                                    <a href="{% url 'search_property' %}" class="homes-img">
+                                        <div class="homes-tag button alt featured">Featured</div>
+                                        <div class="homes-tag button alt sale">For Sale</div>
+                                        <div class="homes-price">{{nyumba.p_property_name.price}} Tsh</div>
+                                        <img src="{{nyumba.p_property_name.image.url}}" alt="home-1" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="button-effect">
+                                    <a href="{% url 'search_property' %}" class="btn"><i class="fa fa-link"></i></a>
+                                    <a href="{% url 'search_property' %}" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
+                                    <a href="{% url 'search_property' %}" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                                </div>
+                            </div>
+                            <!-- homes content -->
+                            <div class="homes-content">
+                                <!-- homes address -->
+                                <h3><a href="{% url 'search_property' %}">{{nyumbay.p_property_name.title}}</a></h3>
+                                <p class="homes-address mb-3">
+                                    <a href="{% url 'search_property' %}">
+                                        <i class="fa fa-map-marker"></i><span>{{nyumba.p_property_name.region}}, {{nyumba.p_property_name.ward}}</span>
+                                    </a>
+                                </p>
+                                <!-- homes List -->
+                                <ul class="homes-list clearfix pb-3">
+                                    <li class="the-icons">
+                                        <i class="flaticon-bed mr-2" aria-hidden="true"></i>
+                                        <span>{{nyumba.p_property_name.bedrooms}} Bedrooms</span>
+                                    </li>
+                                    <li class="the-icons">
+                                        <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
+                                        <span>{{nyumba.p_property_name.bathrooms}} Bathrooms</span>
+                                    </li>
+                                    <li class="the-icons">
+                                        <i class="flaticon-square mr-2" aria-hidden="true"></i>
+                                        <span>{{nyumba.p_property_name.house_size}} sq m</span>
+                                    </li>
+                                    <li class="the-icons">
+                                        <i class="flaticon-car mr-2" aria-hidden="true"></i>
+                                        <span>0 Garages</span>
+                                    </li>
+                                </ul>
+                                <div class="footer">
+                                    <a href="{% url 'search_property' %}">
+                                        <img src="{% static 'images/default.jpg' %}" alt="" class="mr-2"> {{nyumba.p_property_name.owner}}
+                                    </a>
+                                    <span>Posted at {{nyumba.p_property_name.date_posted}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </section>
+        <!-- END SECTION RECENTLY PROPERTIES -->
+
+        <!-- START SECTION AGENTS -->
+        <section class="team bg-white rec-pro">
+            <div class="container-fluid">
+                <div class="sec-title">
+                    <h2><span>Kwa Maada Zaidi</span> Wasiliana na</h2>
+                    <p>Agent Wetu Utasaidiwa ndani ya Muda usiozidi saa 24</p>
+                </div>
+                <div class="row team-all">
+                    <!--Team Block-->
+                    {% for agent in agents reversed %}
+                    <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="150">
+                        <div class="inner-box team-details">
+                            <div class="image team-head">
+                                <a href="#"><img src="{{agent.image_of_agent.url}}" alt="Agent image" /></a>
+                                <div class="team-hover">
+                                    <ul class="team-social">
+                                        <li><a href="{{agent.facebook_link}}" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="{{agent.twitter_link}}" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="{{agent.instagram_link}}" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="{{agent.linkedIn}}" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="lower-box">
+                                <h3><a href="#">{{agent.jina}}</a></h3>
+                                <div class="designation">{{agent.Cheo}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                   
+                </div>
+            </div>
+        </section>
+       
+        <!-- END SECTION AGENTS -->
+
+        <!-- START SECTION TESTIMONIALS -->
+        <section class="testimonials bg-white-2 rec-pro">
+            <div class="container-fluid">
+                <div class="sec-title">
+                    <h2><span>Maoni ya  </span>Wateja</h2>
+                    <p>Tunakusanya Maoni kutoka kwa watumiaji Mbalimbali.</p>
+                </div>
+
+                <div class="owl-carousel job_clientSlide">
+                    {% for client in clients reversed %}
+                   
+                    <div class="singleJobClinet" data-aos="zoom-in" data-aos-delay="150">
+                        <p>
+                            {{client.comment}}
+                        </p>
+                        <div class="detailJC">
+                            <span><img src="{{client.client_image.url}}" alt="client image"/></span>
+                            <h5>{{client.name}}</h5>
+                            <p>{{client.location}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}                                      
+                </div>
+            </div>
+        </section>
+        <!-- END SECTION TESTIMONIALS -->
+
+        <!-- STAR SECTION PARTNERS -->
+        <div class="partners bg-white rec-pro">
+            <div class="container-fluid">
+                <div class="sec-title">
+                    <h2><span>Our </span>Partners</h2>
+                    <p>The Companies That Represent Us.</p>
+                </div>
+                <div class="owl-carousel style2">
+                    {% for partner in partners reversed %}
+                    <div class="owl-item" data-aos="fade-up"><img src="{{partner.image_of_partners.url}}" alt=""></div>
+                    {% endfor %} 
+                   
+                </div>
+            </div>
+        </div>
+        <!-- END SECTION PARTNERS -->
+
+        {% if show_popup %}
+<div id="popup" style="display:none;">
+    <div class="popup-content">
+        <h2>Complete Your Profile</h2>
+        <p>Please complete your profile to access all features.</p>
+        <a href="{% url 'complete_profile' %}">Complete Profile</a>
+    </div>
+</div>
+<div id="overlay" style="display:none;"></div>
+
+<script>
+  // Show the popup after 3 seconds (you can change this time)
+  setTimeout(function(){
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+  }, 3000); // 3000 ms = 3 seconds
+</script>
+{% endif %}
+
+        {% endblock %}

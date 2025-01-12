@@ -1,0 +1,540 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+<!-- Mirrored from code-theme.com/html/findhouses/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 11 Aug 2024 13:00:39 GMT -->
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L8FYVV0MZV');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="html 5 template">
+    <meta name="author" content="">
+    <title>Vyumba vya bei nafuu</title>
+    <!-- FAVICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico'%}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css'%}">
+    <!-- GOOGLE FONTS -->
+    <link href="{% static 'https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i%7CMontserrat:600,800' %}" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href=" {% static 'font/flaticon.css' %}">
+    <link rel="stylesheet" href=" {% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href=" {% static 'css/fontawesome-5-all.min.css'%}">
+    <link rel="stylesheet" href=" {% static 'css/font-awesome.min.css' %}">
+    <!-- ARCHIVES CSS -->
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css'%}">
+    <link rel="stylesheet" href="{% static 'css/aos2.css'%}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lightcase.css'%}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/menu.css'%}">
+    <link rel="stylesheet" href="{% static 'css/slick.css'%}">
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    <link rel="stylesheet" href="{% static 'css/maps.css'%}">
+    <link rel="stylesheet" id="color" href="{% static 'css/colors/pink.css'%}">
+    <body>
+</head>
+
+<body class="maxw1600 m0a dashboard-bd">
+    <!-- Wrapper -->
+    <div id="wrapper" class="int_main_wraapper">
+        <!-- START SECTION HEADINGS -->
+        <!-- Header Container
+        ================================================== -->
+        <div class="dash-content-wrap">
+            <header id="header-container" class="db-top-header">
+                <!-- Header -->
+                <div id="header">
+                    <div class="container-fluid">
+                        <!-- Left Side Content -->
+                        <div class="left-side">
+                            <!-- Logo -->
+                            <div id="logo">
+                                <a href="{% url 'popular_featured' %}"><img src="{% static 'images/logo.svg' %}" alt=""></a>
+                            </div>
+                            <!-- Mobile Navigation -->
+                            <div class="mmenu-trigger">
+                                <button class="hamburger hamburger--collapse" type="button">
+                                    <span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+                                    </span>
+                                </button>
+                            </div>
+                            <!-- Main Navigation -->
+                            <nav id="navigation" class="style-1">
+                                <ul id="responsive">
+                                <li><a href="{% url 'popular_featured' %}">Home</a>
+
+                                    </li>
+                              {% if user.is_staff %}      
+                            <li><a href="{% url 'admin:index' %}">Admin</a>
+                           
+                            </li>
+                            {% endif %}
+
+                            {% if user.is_staff %}      
+                            <li><a href="{% url 'offer_list' %}">Share</a>
+                           
+                            </li>
+                            {% endif %}
+                       
+                           
+                                {% if request.user.is_authenticated and request.user.referrals.exists %}
+                                    <li><a href="{% url 'referral_dashboard' %}">Get Money</a></li>
+                                {% endif %}
+                            
+                            
+
+
+                                    <li><a href="{% url 'property_list' %}">Orodha ya Nyumba</a>
+
+                                    </li>
+                                    
+                                    <li><a href="{% url 'Blog_post' %}">Pages</a></li>
+
+                            </nav>
+                            <div class="clearfix"></div>
+                            <!-- Main Navigation / End -->
+                        </div>
+                        <!-- Left Side Content / End -->
+                        <!-- Right Side Content / -->
+                        <div class="header-user-menu user-menu">
+                            <div class="header-user-name">
+                                
+                                <span>
+                                    <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
+                                  </span> Hi, {{user.username}}
+                                   
+               
+                            </div>
+                            <ul>
+                                <li><a href="{% url 'edit_profile' %}"> Edit profile</a></li>
+                                <li><a href="{% url 'add_property' %}"> Sajili Nyumba</a></li>
+                                <li><a href="{% url 'jihudumie' %}">  Payments</a></li>
+                                <li><a href="{% url 'reset_password' %}"> Change Password</a></li>
+                                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                            </ul>
+                        </div>
+                        <!-- Right Side Content / End -->
+                    </div>
+                </div>
+                <!-- Header / End -->
+            </header>
+        </div>
+        <div class="clearfix"></div>
+        <!-- Header Container / End -->
+
+        <!-- START SECTION DASHBOARD -->
+        <section class="user-page section-padding">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-12 col-xs-12 pl-0 pr-0 user-dash">
+                        <div class="user-profile-box mb-0">
+                            <div class="sidebar-header"><img src="{% static 'images/logo-blue.svg' %}" alt="header-logo2.png"> </div>
+                            <div class="header clearfix">
+                                <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}"  alt="avatar" class="img-fluid profile-img">
+                            </div>
+                            <div class="active-user">
+                                <h2>{{user.username}}</h2>
+                            </div>
+                            <div class="detail clearfix">
+                                <ul class="mb-0">
+                                    <li>
+                                        <a class="active" href="{% url 'dashboard' %}">
+                                            <i class="fa fa-map-marker"></i> Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'edit_profile' %}">
+                                            <i class="fa fa-user"></i>Profile
+                                        </a>
+                                    </li>
+                                   
+                                    <li>
+                                        <a href="{% url 'property_list' %}">
+                                            <i class="fa fa-heart" aria-hidden="true"></i>Favorited Properties
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'add_property' %}">
+                                            <i class="fa fa-list" aria-hidden="true"></i>Sajili Nyumba
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'jihudumie' %}">
+                                            <i class="fas fa-credit-card"></i>Payments
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'Invoice' %}">
+                                            <i class="fas fa-paste"></i>Invoices
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'reset_password' %}">
+                                            <i class="fa fa-lock"></i>Change Password
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'login' %}">
+                                            <i class="fas fa-sign-out-alt"></i>Log Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-12 col-xs-12 pl-0 user-dash2">
+
+                        <div class="dashborad-box stat bg-white">
+
+                            <h4 class="title">Manage Dashboard</h4>
+                            <div class="section-body">
+
+                                <div class="row">
+
+                                    <div class="col-lg-3 col-md-6 col-xs-12 dar pro mr-3">
+                                        <div class="item">
+                                            <div class="icon">
+                                                <i class="fa fa-list" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="info">
+                                                <h6 class="number">{{total_published_property}}</h6>
+                                                <p class="type ml-1">Published Property</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-6 col-xs-12 dar rev mr-3">
+                                        <div class="item">
+                                            <div class="icon">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <div class="info">
+                                                <h6 class="number">{{total_views}}</h6>
+                                                <p class="type ml-1">Total viewers</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 dar com mr-3">
+                                        <div class="item mb-0">
+                                            <div class="icon">
+                                                <i class="fas fa-comments"></i>
+                                            </div>
+                                            <div class="info">
+                                                <h6 class="number">{{inquiry_count}}</h6>
+                                                <p class="type ml-1">Messages</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 dar booked">
+                                        <div class="item mb-0">
+                                            <div class="icon">
+                                                <i class="fas fa-heart"></i>
+                                            </div>
+                                            <div class="info">
+                                                <h6 class="number">None</h6>
+                                                <p class="type ml-1">Times Bookmarked</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="dashborad-box">
+                            <h4 class="title">Listing</h4>
+                            <div class="section-body listing-table">
+                                <div class="table-responsive">
+
+
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Listing Name</th>
+                                                <th>Date</th>
+                                                <th>Views</th>
+                                                <th>Status</th>
+                                                <th>Edit</th>
+                                            </tr>
+                                        </thead>
+                                        {% for property in properties %}
+                                        <tbody>
+                                            <tr>
+                                                <td>{{property.title}}</td>
+                                                <td>{{property.date_posted}}</td>
+                                                <td class="rating"><span>{{property.view_count}}</span></td>
+                                                <td class="status"><span class=" active">{{property.status}}</span></td>
+                                                <td class="edit"><a href="#"><i class="fa fa-pencil"></i></a></td>
+                                            </tr>
+
+                                        </tbody>
+                                        {% endfor %}
+                                    </table>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashborad-box">
+                            <h3 class="title">Message</h3>
+
+                            <div class="section-body">
+                                  {% if inquiries %}
+                                <div class="messages">
+                                     {% for inquiry in inquiries %}
+                                    <div class="message">
+                                        <div class="thumb">
+                                            <img class="img-fluid" src="{% static 'images/default.jpg' %}" alt="Use image">
+                                        </div>
+                                        <div class="body">
+                                            <h4>{{inquiry.full_name}}</h4>
+                                            
+                                            <p class="content mb-0 mt-2">{{inquiry.message}}</p>
+                                            <i><small>Namba: <b>{{inquiry.phone_number}}</b></small></i>
+                                            <p class="post-time"><i><small>{{inquiry.date_sent}}</small></i></p>
+                                            <div class="controller">
+                                                <ul>
+                                                    <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                    <li><a href="{% url 'delete_inquiry' id=inquiry.id %}"><i class="far fa-trash-alt"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                                </div>
+
+
+                                {% else %}
+                                <div class="message">
+                                    <p> No Message Yet</p>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                       
+                        <div class="dashborad-box mb-0">
+                            <h4 class="heading pt-0">Personal Information</h4>
+                            <div class="section-inforamation">
+
+                                {% include 'core/update_profile.html' %}
+
+                            </div>
+                        </div>
+
+                        <!-- START FOOTER -->
+                        <div class="second-footer">
+                            <div class="container">
+                                <p>2025 © Copyright - All Rights Reserved.</p>
+                                <p>Made With <i class="fa fa-heart" aria-hidden="true"></i> NyumbaChap</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END SECTION DASHBOARD -->
+
+        <a data-scroll href="#wrapper" class="go-up"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+        <!-- END FOOTER -->
+
+
+        <!-- START PRELOADER -->
+        <div id="preloader">
+            <div id="status">
+                <div class="status-mes"></div>
+            </div>
+        </div>
+        <!-- END PRELOADER -->
+
+        <!-- ARCHIVES JS -->
+        <script src="{% static 'js/jquery-3.5.1.min.js'%}"></script>
+        <script src="{% static 'js/rangeSlider.js'%}"></script>
+        <script src="{% static 'js/tether.min.js'%}"></script>
+        <script src="{% static 'js/moment.js'%}"></script>
+        <script src="{% static 'js/bootstrap.min.js'%}"></script>
+        <script src="{% static 'js/mmenu.min.js'%}"></script>
+        <script src="{% static 'js/mmenu.js'%}"></script>
+        <script src="{% static 'js/aos.js'%}"></script>
+        <script src="{% static 'js/aos2.js'%}"></script>
+        <script src="{% static 'js/animate.js'%}"></script>
+        <script src="{% static 'js/slick.min.js'%}"></script>
+        <script src="{% static 'js/fitvids.js'%}"></script>
+        <script src="{% static 'js/jquery.waypoints.min.js'%}"></script>
+        <script src="{% static 'js/typed.min.js'%}"></script>
+        <script src="{% static 'js/jquery.counterup.min.js'%}"></script>
+        <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+        <script src="{% static 'js/isotope.pkgd.min.js'%}"></script>
+        <script src="{% static 'js/smooth-scroll.min.js'%}"></script>
+        <script src="{% static 'js/lightcase.js'%}"></script>
+        <script src="{% static 'js/search.js'%}"></script>
+        <script src="{% static 'js/owl.carousel.js'%}"></script>
+        <script src="{% static 'js/jquery.magnific-popup.min.js'%}"></script>
+        <script src="{% static 'js/ajaxchimp.min.js'%}"></script>
+        <script src="{% static 'js/newsletter.js'%}"></script>
+        <script src="{% static 'js/jquery.form.js'%}"></script>
+        <script src="{% static 'js/jquery.validate.min.js'%}"></script>
+        <script src="{% static 'js/searched.js'%}"></script>
+        <script src="{% static 'js/forms-2.js'%}"></script>
+        <script src="{% static 'js/map-style2.js'%}"></script>
+        <script src="{% static 'js/range.js'%}"></script>
+        <script src="{% static 'js/color-switcher.js'%}"></script>
+        <script>
+            $(window).on('scroll load', function() {
+                $("#header.cloned #logo img").attr("src", $('#header #logo img').attr('data-sticky-logo'));
+            });
+
+        </script>
+
+        <!-- Slider Revolution scripts -->
+        <script src="{% static 'revolution/js/jquery.themepunch.tools.min.js'%}"></script>
+        <script src="{% static 'revolution/js/jquery.themepunch.revolution.min.js'%}"></script>
+
+        <script>
+            var typed = new Typed('.typed', {
+                strings: ["House ^2000", "Apartment ^2000", "Plaza ^4000"],
+                smartBackspace: false,
+                loop: true,
+                showCursor: true,
+                cursorChar: "|",
+                typeSpeed: 50,
+                backSpeed: 30,
+                startDelay: 800
+            });
+
+        </script>
+
+        <script>
+            $('.slick-lancers').slick({
+                infinite: false,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                dots: true,
+                arrows: false,
+                adaptiveHeight: true,
+                responsive: [{
+                    breakpoint: 1292,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        dots: true,
+                        arrows: false
+                    }
+                }, {
+                    breakpoint: 993,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        dots: true,
+                        arrows: false
+                    }
+                }, {
+                    breakpoint: 769,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        dots: true,
+                        arrows: false
+                    }
+                }]
+            });
+
+        </script>
+
+        <script>
+            $('.job_clientSlide').owlCarousel({
+                items: 2,
+                loop: true,
+                margin: 30,
+                autoplay: false,
+                nav: true,
+                smartSpeed: 1000,
+                slideSpeed: 1000,
+                navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    991: {
+                        items: 3
+                    }
+                }
+            });
+
+        </script>
+
+        <script>
+            $('.style2').owlCarousel({
+                loop: true,
+                margin: 0,
+                dots: false,
+                autoWidth: false,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                responsive: {
+                    0: {
+                        items: 2,
+                        margin: 20
+                    },
+                    400: {
+                        items: 2,
+                        margin: 20
+                    },
+                    500: {
+                        items: 3,
+                        margin: 20
+                    },
+                    768: {
+                        items: 4,
+                        margin: 20
+                    },
+                    992: {
+                        items: 5,
+                        margin: 20
+                    },
+                    1000: {
+                        items: 7,
+                        margin: 20
+                    }
+                }
+            });
+
+        </script>
+
+        <script>
+            $(".dropdown-filter").on('click', function() {
+
+                $(".explore__form-checkbox-list").toggleClass("filter-block");
+
+            });
+
+        </script>
+
+        <!-- MAIN JS -->
+        <script src="{% static 'js/script.js'%}"></script>
+
+    </div>
+    <!-- Wrapper / End -->
+</body>
+
+
+</html>

@@ -1,0 +1,150 @@
+
+{% load static %}
+
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nyumba za kupanga</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'blog/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'blog/css/noscript.css' %}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-gem"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Overview</h1>
+								<p>"NyumbaChap ni jukwaa lililoundwa kwa ajili ya kusaidia watumiaji kutafuta nyumba kwa urahisi zaidi. Ikiwa unatafuta nyumba ya kukodisha au kununua, NyumbaChap inakupa orodha bora za nyumba zilizoaminika, zikiwa zimesambazwa nchi nzima. Chagua nyumba kulingana na eneo, ukubwa, bei, na hali ya upatikanaji. Wamiliki wa nyumba wanaweza pia kuweka matangazo na kuzungumza moja kwa moja na wapangaji au wanunuzi watarajiwa."</p>
+
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#intro">Intro</a></li>
+								<li><a href="#work">Work</a></li>
+								<li><a href="#about">About</a></li>
+								<li><a href="{% url 'Contact_us' %}">Contact</a></li>
+								<!--<li><a href="#elements">Elements</a></li>-->
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Intro -->
+							<article id="intro">
+								<h2 class="major">Intro</h2>
+								<span class="image main"><img src="{% static 'blog/images/nyumbachap1.png' %}" alt="" /></span>
+								<p>NyumbaChap ni jukwaa linalozingatia mahitaji ya watumiaji, lililolenga kusaidia Watanzania na wageni kutoka nchi mbalimbali kupata nyumba za kukodi au kununua kwa urahisi katika miji, vijiji, na maeneo ya vijijini kote Tanzania. Tunakuunganisha moja kwa moja na wamiliki wa nyumba, hivyo kufanya mchakato mzima kuwa wa urahisi na usalama.
+
+									Jukwaa letu linakuruhusu kutafuta nyumba kwa kuchuja kulingana na mkoa, jiji, idadi ya vyumba, na bei unayoweza kumudu, hivyo basi kukupa udhibiti kamili wa kupata nyumba inayokufaa. Iwapo unahamia Dar es Salaam, Arusha, Mwanza, au maeneo mengine, NyumbaChap inakuhakikishia kuwa una chaguo nyingi zinazofaa.
+									
+									</p><p>Anza safari yako nasi leo na ugundue urahisi wa kupata nyumba ya ndoto yako au apartment unayopendelea.</p>
+							</article>
+
+						<!-- Work -->
+							<article id="work">
+								<h2 class="major">Work</h2>
+								<span class="image main"><img src="{% static 'blog/images/nyumbachap1.png' %}" alt="" /></span>
+								<ol>
+									<h3><i> "Lengo letu ni kutoa uzoefu wa utafutaji wa nyumba ulio rahisi na wa faida kwa wamiliki wa nyumba na wapangaji au wanunuzi. Hivi ndivyo tunavyorahisisha mchakato huo"</i></h3>
+								
+								<li><h3>Orodha Kamili za Nyumba: </h3>Tunakusanya orodha za nyumba kutoka kote Tanzania, kukuwezesha kuchunguza aina mbalimbali za nyumba na apartment zinazopatikana kwa kukodisha au kununua. Kuanzia apartment za bei nafuu hadi nyumba za kifahari, tunahakikisha kila aina ya mali inawakilishwa.
+
+								<li><h3>Utaftaji wa Kina: </h3>Tumia vichujio vyetu vya utaftaji kubaini matokeo kulingana na mahitaji yako. Unatafuta nyumba yenye vyumba vitatu ndani ya bajeti yako jijini Dodoma? Tunakusaidia kupata. Unahitaji nyumba ya kukodisha kwenye kata maalum jijini Dar es Salaam? Ingiza maelezo yako na tutakuletea matokeo.
+									
+								<li><h3>	Mawasiliano ya Moja kwa Moja: </h3>Mfumo wetu wa gumzo (chat) unakuwezesha kuwasiliana moja kwa moja na wamiliki wa nyumba, kuuliza maswali muhimu kabla ya kufanya uamuzi. Iwe ni kuhusu bei, upatikanaji, au masharti ya kukodisha, unaweza kuzungumza papo hapo.
+									
+								<li><h3>	Uwazi na Uaminifu:</h3> Orodha zote hupitia mchakato wa uhakiki, kuhakikisha kuwa unaangalia mali kutoka kwa wamiliki waaminifu pekee. Tumejizatiti kudumisha kiwango cha juu cha uwazi ili kuepuka vikwazo na mshangao usiotarajiwa wakati unapotembelea mali."
+									
+								</ol>
+							</article>
+
+						<!-- About -->
+							<article id="about">
+								<h2 class="major">About</h2>
+								<span class="image main"><img src="{% static 'blog/images/nyumbachap1.png' %}" alt="" /></span>
+								<h3>NyumbaChap ilianzishwa kwa lengo moja</h3> <p>kurahisisha mchakato wa kutafuta na kukodisha au kununua nyumba Tanzania. Tunatambua changamoto zinazoambatana na kutafuta nyumba, hasa unapoenda kwenye mji au eneo jipya. Ndiyo maana tulibuni jukwaa hili ili kutoa suluhisho la kuaminika kwa wapangaji na wamiliki wa nyumba.</p>
+
+									<p>Timu yetu inajumuisha wataalamu wa mali isiyohamishika na wataalamu wa teknolojia walio na uelewa wa kina wa soko la nyumba Tanzania. Hii inatupa uwezo wa kutoa jukwaa linalokidhi mahitaji yako na hata kuzidi matarajio yako.</p>
+									
+									<p>Mbali na orodha za mali, tunatoa rasilimali muhimu kupitia blogu yetu, ikijumuisha vidokezo kwa wapangaji wapya, ushauri kuhusu uwekezaji wa mali, na mwongozo wa kuelewa taratibu za kisheria za kukodisha au kununua mali Tanzania.</p>
+									
+									<p>Dira yetu ni kuona kuwa utafutaji wa nyumba hauwi tena kazi ya kusumbua, bali ni mchakato mwepesi na wa kufurahisha. Iwapo wewe ni mwanafunzi unayetafuta chumba nafuu mjini Arusha, au familia inayoangalia nyumba kubwa zaidi Zanzibar, tuko hapa kukusaidia kila hatua.".</p>
+							</article>
+
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">Contact</h2>
+
+								<p>Una maswali yoyote au maoni? Tunafurahia kusikia kutoka kwako! Iwe wewe ni mmiliki wa mali unayetaka kuweka tangazo la nyumba au mpangaji au mnunuzi unayetafuta ofa bora, tuko hapa kusaidia.</p>
+
+							<p>Wasiliana nasi kupitia barua pepe, simu, au ungana nasi kwenye majukwaa yetu ya mitandao ya kijamii. Kwa msaada wa haraka, tumia kipengele chetu cha gumzo ili kuzungumza na mwakilishi wetu."</p>
+
+
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="4"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+								<ul class="icons">
+									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</article> 
+
+						
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Designed by: <a href="{% url 'popular_featured' %}">Chipindi Group</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+
+			<script src="{% static 'blog/js/jquery.min.js' %}"></script>
+			<script src="{% static 'blog/js/browser.min.js' %}"></script>
+			 <script src="{% static 'blog/js/breakpoints.min.js' %}"></script> 
+			<script src="{% static 'blog/js/util.js' %}"></script>
+			<script src="{% static 'blog/js/main.js' %}"></script>
+
+	</body>
+</html>

@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #3b28eb;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #470dcf;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 20px; /* Space below the logo */
+        }
+        h1 {
+            color: #00d4ff;
+            margin: 0; /* Remove default margin */
+        }
+        p, ol {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        .chart {
+            margin: 20px 0;
+        }
+        .referral-link {
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #00d4ff;
+            border-radius: 5px;
+            background: #1a1a2e;
+            color: #f5f5f5;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .copy-btn {
+            background-color: #00d4ff;
+            color: #16213e;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .copy-btn:hover {
+            background-color: #00a1c6;
+        }
+        .alert {
+            display: none;
+            background-color: #28a745; /* Bright green */
+            color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        img {
+            width: 200px; /* Set width */
+            height: 150px; /* Set height */
+            margin: 0 auto; /* Center the image */
+            display: block; /* Ensure the image behaves as a block element */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'images/bg1.png' %}" alt="Logo"> <!-- Replace with your logo image -->
+        </div>
+        <h1>Start Earning Today!</h1>
+        <p>Share your referral link and earn <strong>Tsh 1000/=</strong> for every friend who signs up. Start sharing today and watch your earnings grow!</p>
+        <div class="chart">
+            <img src="{% static 'images/dor3.png' %}" alt="Discount Chart">
+        </div>
+        <div class="referral-link">
+            <p>Your Referral Link is Ready!</p>
+            <input type="text" id="referralLink" value="{{ referral_link }}" readonly>
+            <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+        <div id="copyAlert" class="alert">
+            &#10004; Link copied! Start sharing and earn now.
+        </div>
+    </div>
+
+    <script>
+        function copyLink() {
+            var copyText = document.getElementById("referralLink");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+
+            var alertBox = document.getElementById("copyAlert");
+            alertBox.style.display = "block";
+            setTimeout(() => {
+                alertBox.style.display = "none";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

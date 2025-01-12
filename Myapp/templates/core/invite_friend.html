@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeAgent Referral</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #3167b2;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #3167b2;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .container img {
+            width: 180px;
+            margin-bottom: 15px;
+        }
+          
+
+        .container h1 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .container p {
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ffffff; /* White border */
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+            background-color: #3167b2;
+            color: #ffffff;
+        }
+
+        .form-group input::placeholder {
+            color: #ffffff;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .checkbox-container label {
+            font-size: 0.9em;
+            color: #a6c33a;
+        }
+
+        .checkbox-container a {
+            color: #a6c33a;
+            text-decoration: none;
+        }
+
+        .checkbox-container a:hover {
+            text-decoration: underline;
+        }
+
+        .invite-button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            background-color: #a6c33a;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .invite-button:hover {
+            background-color: #8fad2d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+         
+         <img src="{% static 'images/bg1.png' %}" alt="FreeAgent Logo">
+         
+
+
+         
+        <h1>Join FreeAgent's referral scheme and get up to 100% off your bill!</h1>
+        <p>Register below to receive your unique referral link and start referring friends to FreeAgent.</p>
+        
+
+        
+        <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            <label for="referred_user">Referred User:</label>
+            <input type="text" name="referred_user" required>
+            <br>
+            <label for="whatsapp_number">WhatsApp Number:</label>
+            <input type="number" name="whatsapp_number" required>
+            <br>     
+        <div class="checkbox-container">
+            <input type="checkbox" id="terms">
+            <label for="terms">I agree to <a href="#">Terms & Conditions</a></label>
+        </div>       
+        <button class="invite-button" type="submit">INVITE FRIENDS</button>
+    </div>
+</form>
+
+</body>
+</html>

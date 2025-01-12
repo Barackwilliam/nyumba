@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="sw">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L8FYVV0MZV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jinsi ya Kulipia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        /* Background Animation */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/wavecut.png');
+            animation: wave 15s infinite linear;
+            z-index: -1;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        @keyframes wave {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 800px 0;
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            width: 90%;
+            gap: 20px;
+            animation: slideIn 1s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            width: 300px;
+            padding: 25px;
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+            color: #ffffff;
+            text-align: center; /* Center text */
+        }
+
+
+        ul li {
+            font-size: 0.9rem; /* Unaweza kubadilisha ukubwa kama unavyotaka */
+            list-style-type: none; /* Kuondoa nukta nukta kwenye orodha */
+        }
+
+        /* Kuongeza mstari chini ya kila hatua kwenye orodha */
+        ul li u {
+            text-decoration: underline;
+        }
+
+        /* Rangi za kila kadi kulingana na mtandao */
+        #Airtel {
+            background-color: #d82a2a; /* Rangi ya Airtel */
+        }
+
+        #Vodacom {
+            background-color: hsl(0, 100%, 50%); /* Rangi ya Vodacom */
+        }
+
+        #Tigo {
+            background-color: #4807fa; /* Rangi ya Tigo */
+        }
+
+        #Halotel {
+            background-color: #ff9306; /* Rangi ya Halotel */
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Button Styling */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #ff6f61;
+            color: #ffffff;
+            font-size: 1rem;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.4s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            background-color: #ff4f3d;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 111, 97, 0.5);
+        }
+
+        /* Floating Effect on Card Hover */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 0;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Icon Styling */
+        .card i {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Jinsi ya Kulipia</h1>
+    </header>
+
+    <div class="card-container">
+      
+
+        <!-- Vodacom -->
+        <div id="Vodacom" class="card">
+            <i class="fas fa-sim-card"></i>
+            <h2>Vodacom</h2>
+            <p>Namba ya Malipo: 0693703366 (William)</p>
+            <h3>Hatua za Kulipia</h3>
+            <ul>
+                <li>Bonyeza <b>*150*00#</b></li>
+                <li>Chagua no.1: <b>Tuma pesa</b></li>
+                <li>Chagua no.5: <b>Mitandao Mingine</b></li>
+                <li>Chagua no.1: <b>Airtel Money</b></li>
+                <li>Ingiza namba ya simu: <b>0693703366</b></li>
+                <li>Ingiza Kiasi</li>
+                <li>Ingiza Namba ya Siri kuthibitisha</li>
+            </ul>
+            <a href="{% url 'complete' %}" class="btn">Endelea..</a>
+        </div>
+
+        <!-- Tigo -->
+        <div id="Tigo" class="card">
+            <i class="fas fa-mobile-alt"></i>
+            <h2>Tigo</h2>
+            <p>Namba ya Malipo: 1324764 (Eliya Shop)</p>
+            <h3>Hatua za Kulipia</h3>
+            <ul>
+                <li>Bonyeza <b>*150*01#</b></li>
+                <li>Chagua no.5: <b>Lipa kwa Simu</b></li>
+                <li>Chagua no.5: <b>Kwenda Mitandao Mingine</b></li>
+                <li>Chagua no.3: <b>Airtel Money</b></li>
+                <li>Ingiza Lipa Namba: <b>1324764</b></li>
+                <li>Ingiza Kiasi</li>
+                <li>Ingiza Namba ya Siri kuthibitisha</li>
+            </ul>
+            <a href="{% url 'complete' %}" class="btn">Endelea..</a>
+        </div>
+
+          <!-- Airtel -->
+          <div id="Airtel" class="card">
+            <i class="fab fa-airbnb"></i>
+            <h2>Airtel</h2>
+            <p>Namba ya Malipo: 1324764 (Eliya Shop)</p>
+            <h3>Hatua za Kulipia</h3>
+            <ul>
+                <li>Bonyeza <b>*150*60#</b></li>
+                <li>Chagua no.5: <b>Lipa Bill</b></li>
+                <li>Chagua no.1: <b>Lipa kwa Simu</b></li>
+                <li>Chagua no.1: <b>Lipa kwa Airtel lipa namba</b></li>
+                <li>Ingiza Lipa Namba: <b>1324764</b></li>
+                <li>Ingiza Kiasi</li>
+                <li>Ingiza Namba ya Siri kuthibitisha</li>
+            </ul>
+            <a href="{% url 'complete' %}" class="btn">Endelea..</a>
+        </div>
+
+        <!-- Halotel -->
+        <div id="Halotel" class="card">
+            <i class="fas fa-phone"></i>
+            <h2>Halotel</h2>
+            <p>Namba ya Malipo: 0693703366 (William)</p>
+            <h3>Hatua za Kulipia</h3>
+            <ul>
+                <li>Bonyeza <b>*150*88#</b></li>
+                <li>Chagua no.1: <b>Tuma pesa</b></li>
+                <li>Chagua no.2: <b>Kwenda Mitandao Mingine</b></li>
+                <li>Chagua no.4: <b>Airtel Money</b></li>
+                <li>Ingiza Namba ya Simu: <b>0693703366</b></li>
+                <li>Ingiza Kiasi</li>
+                <li>Ingiza Namba ya Siri kuthibitisha</li>
+            </ul>
+            <a href="{% url 'complete' %}" class="btn">Endelea..</a>
+        </div>
+    </div>
+</body>
+
+</html>

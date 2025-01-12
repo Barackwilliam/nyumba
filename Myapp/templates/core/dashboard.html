@@ -1,0 +1,290 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="dashboard ya wakala wa NyumbaChap Limited">
+    <title>wakala wa NyumbaChap</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            color: #333;
+            padding: 20px; /* Reduced padding for smaller screens */
+        }
+
+        .dashboard-container {
+            max-width: 1100px;
+            margin: auto;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(1, 1, 1, 0.1);
+            overflow: hidden;
+            padding: 15px; /* Adjusted padding for better scaling */
+        }
+
+        /* Header */
+        .header {
+            background: #6a11cb;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem; /* Adjusted for responsiveness */
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            flex-wrap: wrap; /* Wraps tabs on smaller screens */
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: #6a11cb;
+            font-size: 0.9rem; /* Reduced font size for smaller devices */
+            padding: 8px 15px;
+            border: 2px solid #6a11cb;
+            border-radius: 25px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 5px;
+        }
+
+        .tabs a:hover,
+        .tabs a.active {
+            background-color: #6a11cb;
+            color: #fff;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Reduced min-width for more flexibility */
+            gap: 15px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(1, 1, 1, 0.2);
+        }
+  
+ 
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #6a11cb;
+        }
+
+        .invite-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .invite-section button {
+            width: 100%; /* Full width for smaller screens */
+            max-width: 200px;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 8px;
+            border: none;
+            background-color: #2575fc;
+            color: #fff;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .invite-section button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .invite-section button:hover {
+            background-color: #1e63d8;
+        }
+
+        /* Table */
+        .sales-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            overflow-x: auto; /* Ensures the table can scroll horizontally */
+            display: block; /* Makes table scrollable */
+        }
+
+        .sales-table th,
+        .sales-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        .sales-table th {
+            background-color: #f1f1f1;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: #fff;
+        }
+
+        .badge.approved {
+            background-color: #28a745;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tabs a {
+                margin: 5px 0;
+            }
+
+            .card h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header p,
+            .tabs a,
+            .sales-table th,
+            .sales-table td {
+                font-size: 0.75rem;
+            }
+
+            .invite-section button {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Hello {{user.username}} Unlock Earnings with a Simple Share</h1>
+            <p>We have rewarded you Tsh 1500/= as a gift for joining NyumbaChap Limited
+            </p><p>Don't leave money on the table.
+              Take control of your earnings by sharing your referral link today. The more you share, the more you earn!.</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <a href="{% url 'Get_referral_link' %}" class="active">Get link</a>
+            <a href="{% url 'property_list' %}">View House</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="card invite-section">
+                <h3 style="text-align:center">Showcasing Your house Means Filling Your Wallet!!</h3>
+                <p style="text-align:center; color:blue;"><small> If you post one house, we will pay you 10% of the search results, equal to Tsh 500/= for each person who views your house. <br>And you can post up-to 5 house and receive your cash instantly
+
+ Get involved in the market and start receiving payments every time you advertise a property. It’s easy and quick!.</small></p>
+                <a href="{% url 'dashboard' %}"><button>Start Now!</button></a>
+            </div>
+
+            <div class="card">
+                <h3  style="text-align:center">Taarifa za Account Yako</h3>
+              <p style="text-align:center; color:blue;"><small>Umezawadiwa Tsh 1500/= Kama bonus ya kujiunga NyumbaChap Limited share link kwa watu watano ili kuactivate account yako.<br> Pia utalipwa Tsh 1000/= kwa kila rafiki atakayejiunga kwa link uliyo mtumia.</small></p>
+              <br>
+                <p><strong>Email:</strong> {{user.email}} | <strong>Status:</strong> Active</p>
+                <p><strong>Total Earnings:</strong> Tsh: 1500/=</p>
+                <p><strong>Stage:</strong> <span class="badge approved">Approved</span></p>
+            </div>
+
+            <div class="card">
+                <h3 style="text-align:center">Friends Invited
+                </h3>
+              <p style="text-align:center; color:blue;"><small>  All friends that accept your invitation are listed below <br> What you need to do is Spread the word, invite friends, and enjoy your rewards <br><br>Hili uweze kulipwa kwa uhalaka zaidi Hakikisha sehemu ya Status kwenye list ya rafiki zako imebadilika kutoka <i><b>Pending</b></i> na kuwa <i><b>Approved</b></i> <br>Tunza <b><i>secrete code </i></b>Kwa matumizi ya malipo yako</small></p><br>
+
+                {% for referral in referrals %}
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Secrete code</th>
+                            <th>Earns</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ referral.referred_user.username }}</td>
+                            <td>{{ referral.referral_code }}</td>
+                            <td>15%</td>
+                            <td><span class="badge approved">{{ referral.status }}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% empty %}
+                <p style="text-align:center"  >No friend invited yet.</p>
+
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Secrete code</th>
+                            <th>Earns</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="badge approved"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

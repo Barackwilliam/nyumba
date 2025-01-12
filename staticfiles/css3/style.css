@@ -1,0 +1,804 @@
+/* ------------------ General CSS ------------------ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    background: #ffffff;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover,
+a:active,
+a:focus {
+    outline: none;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.pricing-table-title {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 60px 0 15px 0;
+}
+
+.pricing-table-title:first-child {
+    margin-top: 30px;
+}
+
+.pricing-table-title h2 {
+    font-size: 35px;
+    font-weight: 900;
+    color: #2A293E;
+    letter-spacing: 2px;
+}
+
+
+/* -------------- Pricing Table Style -------------- */
+.pricing-table {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.pricing-table .ptable-item {
+    width: 33.33%;
+    padding: 15px;
+}
+
+@media (max-width: 992px) {
+    .pricing-table .ptable-item {
+        width: 33.33%;
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-table .ptable-item {
+        width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .pricing-table .ptable-item {
+        width: 100%;
+    }
+}
+
+.pricing-table .ptable-single {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.pricing-table .ptable-header,
+.pricing-table .ptable-body,
+.pricing-table .ptable-footer {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.pricing-table .ptable-status ,
+.pricing-table .ptable-title,
+.pricing-table .ptable-price,
+.pricing-table .ptable-description,
+.pricing-table .ptable-action {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+
+/* --- Pricing Table 1 --- */
+.pricing-table.table-1 .ptable-single:hover {
+    box-shadow: 0 0 10px #999999;
+}
+
+.pricing-table.table-1 .ptable-header {
+    padding: 30px;
+    background: #2A293E;
+}
+
+.pricing-table.table-1 .ptable-item.featured-item .ptable-header {
+    background: #FF6F61;
+}
+
+.pricing-table.table-1 .ptable-status {
+    margin-top: -30px;
+    text-align: right;
+}
+
+.pricing-table.table-1 .ptable-status span {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    right: -30px;
+    padding: 7px 0;
+    text-align: center;
+    color: #FF6F61;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    background: #2A293E;
+}
+
+.pricing-table.table-1 .ptable-title h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.pricing-table.table-1 .ptable-price h2 {
+    color: #ffffff;
+    font-size: 60px;
+    font-weight: 900;
+    margin-left: 15px;
+}
+
+.pricing-table.table-1 .ptable-price h2 small {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 16px;
+    margin-left: -15px;
+}
+
+.pricing-table.table-1 .ptable-price h2 span {
+    margin-left: 3px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.pricing-table.table-1 .ptable-body {
+    padding: 30px 0;
+    background: #f7f7f7;
+    border: 1px solid #eeeeee;
+}
+
+.pricing-table.table-1 .ptable-description ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-table.table-1 .ptable-description ul li {
+    color: #2A293E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 7px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.pricing-table.table-1 .ptable-description ul li:last-child {
+    border: none;
+}
+
+.pricing-table.table-1 .ptable-action a {
+    display: block;
+    padding: 15px;
+    color: #FF6F61;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    background: #2A293E;
+}
+
+.pricing-table.table-1 .ptable-action a i {
+    margin-right: 5px;
+}
+
+.pricing-table.table-1 .ptable-action a:hover {
+    color: #2A293E;
+    background: #FF6F61;
+}
+
+.pricing-table.table-1 .ptable-item.featured-item .ptable-action a {
+    color: #2A293E;
+    background: #FF6F61;
+}
+
+.pricing-table.table-1 .ptable-item.featured-item .ptable-action a:hover {
+    color: #FF6F61;
+    background: #2A293E;
+}
+
+
+/* --- Pricing Table 2 --- */
+.pricing-table.table-2 .ptable-single:hover {
+    box-shadow: 0 0 10px #999999;
+}
+
+.pricing-table.table-2 .ptable-status span {
+    position: absolute;
+    display: inline-block;
+    width: 50px;
+    height: 60px;
+    right: 0;
+    padding: 23px 0;
+    text-align: center;
+    color: #FF6F61;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    background: #2A293E;
+    z-index: 1;
+}
+
+.pricing-table.table-2 .ptable-status span:before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    top: 0;
+    left: -60px;
+    border: 30px solid;
+    border-color: transparent #2A293E transparent transparent;
+    z-index: 2;
+}
+
+.pricing-table.table-2 .ptable-title {
+    height: 60px;
+    padding: 15px;
+    background: #2A293E;
+}
+
+.pricing-table.table-2 .ptable-item.featured-item .ptable-title {
+    background: #FF6F61;
+}
+
+.pricing-table.table-2 .ptable-title h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.pricing-table.table-2 .ptable-price {
+    padding: 25px;
+    background: #f2f2f2;
+}
+
+.pricing-table.table-2 .ptable-price h2 {
+    color: #2A293E;
+    font-size: 60px;
+    font-weight: 900;
+    margin-left: 15px;
+}
+
+.pricing-table.table-2 .ptable-price h2 small {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 16px;
+    margin-left: -15px;
+}
+
+.pricing-table.table-2 .ptable-price h2 span {
+    margin-left: 3px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.pricing-table.table-2 .ptable-item.featured-item .ptable-price h2 {
+    color: #FF6F61;
+}
+
+.pricing-table.table-2 .ptable-body {
+    background: #ffffff;
+    border-left: 15px solid #f2f2f2;
+    border-right: 15px solid #f2f2f2;
+}
+
+.pricing-table.table-2 .ptable-description ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-table.table-2 .ptable-description ul li {
+    color: #2A293E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 10px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.pricing-table.table-2 .ptable-description ul li:last-child {
+    border: none;
+}
+
+.pricing-table.table-2 .ptable-footer {
+    padding: 15px;
+    border: 15px solid #f2f2f2;
+}
+
+.pricing-table.table-2 .ptable-action a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #FF6F61;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    background: #2A293E;
+}
+
+.pricing-table.table-2 .ptable-action a i {
+    margin-right: 5px;
+}
+
+.pricing-table.table-2 .ptable-action a:hover {
+    color: #2A293E;
+    background: #FF6F61;
+}
+
+.pricing-table.table-2 .ptable-item.featured-item .ptable-action a {
+    color: #2A293E;
+    background: #FF6F61;
+}
+
+.pricing-table.table-2 .ptable-item.featured-item .ptable-action a:hover {
+    color: #FF6F61;
+    background: #2A293E;
+}
+
+
+/* --- Pricing Table 3 --- */
+.pricing-table.table-3 .ptable-single {
+    border-radius: 10px;
+}
+
+.pricing-table.table-3 .ptable-single:hover {
+    box-shadow: 0 0 10px #999999;
+}
+
+.pricing-table.table-3 .ptable-header {
+    padding: 30px 0 0 0;
+    background: #2A293E;
+    margin-bottom: -10px;
+}
+
+.pricing-table.table-3 .ptable-item.featured-item .ptable-header {
+    background: #FF6F61;
+}
+
+.pricing-table.table-3 .ptable-title h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.pricing-table.table-3 .ptable-price h2 {
+    color: #ffffff;
+    font-size: 60px;
+    font-weight: 900;
+    margin-left: 15px;
+}
+
+.pricing-table.table-3 .ptable-price h2 small {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 16px;
+    margin-left: -15px;
+}
+
+.pricing-table.table-3 .ptable-price h2 span {
+    margin-left: 3px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.pricing-table.table-3 .ptable-body {
+    padding: 60px 0;
+    background: #f7f7f7;
+}
+
+.pricing-table.table-3 .ptable-body::before {
+    position: absolute;
+    content: "";
+    width: 0; 
+    height: 0;
+    top: 0;
+    right: 0;
+    border-top: 100px solid #2A293E; 
+    border-right: 550px solid transparent;
+}
+
+.pricing-table.table-3 .ptable-body::after {
+    position: absolute;
+    content: "";
+    width: 0; 
+    height: 0;
+    bottom: 0;
+    left: 0;
+    border-bottom: 100px solid #2A293E; 
+    border-left: 550px solid transparent;
+}
+
+.pricing-table.table-3 .ptable-item.featured-item .ptable-body::before {
+    border-top: 100px solid #FF6F61;
+}
+
+.pricing-table.table-3 .ptable-item.featured-item .ptable-body::after {
+    border-bottom: 100px solid #FF6F61; 
+}
+
+.pricing-table.table-3 .ptable-description ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-table.table-3 .ptable-description ul li {
+    color: #2A293E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 7px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.pricing-table.table-3 .ptable-description ul li:last-child {
+    border: none;
+}
+
+.pricing-table.table-3 .ptable-footer {
+    background: #2A293E;
+    padding-bottom: 20px;
+}
+
+.pricing-table.table-3 .ptable-item.featured-item .ptable-footer {
+    background: #FF6F61;
+}
+
+.pricing-table.table-3 .ptable-action a {
+    display: inline-block;
+    padding: 10px 25px;
+    color: #2A293E;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    background: #FF6F61;
+    border-radius: 50px;
+}
+
+.pricing-table.table-3 .ptable-action a i {
+    margin-right: 5px;
+}
+
+.pricing-table.table-3 .ptable-action a:hover {
+    color: #FF6F61;
+    background: #ffffff;
+}
+
+.pricing-table.table-3 .ptable-item.featured-item .ptable-action a {
+    color: #FF6F61;
+    background: #2A293E;
+}
+
+.pricing-table.table-3 .ptable-item.featured-item .ptable-action a:hover {
+    color: #FF6F61;
+    background: #ffffff;
+}
+
+
+/* --- Pricing Table 4 --- */
+.pricing-table.table-4 .ptable-single:hover {
+    box-shadow: 0 0 10px #999999;
+}
+
+.pricing-table.table-4 .ptable-header {
+    padding: 30px 0 50px 0;
+    background: #2A293E;
+}
+
+.pricing-table.table-4 .ptable-item.featured-item .ptable-header {
+    background: #FF6F61;
+}
+
+.pricing-table.table-4 .ptable-icon {
+    margin-bottom: 15px;
+}
+
+.pricing-table.table-4 .ptable-icon i {
+    display: inline-block;
+    color: #ffffff;
+    font-size: 45px;
+}
+
+.pricing-table.table-4 .ptable-title h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.pricing-table.table-4 .ptable-price h2 {
+    color: #ffffff;
+    font-size: 60px;
+    font-weight: 900;
+    margin-left: 15px;
+}
+
+.pricing-table.table-4 .ptable-price h2 small {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 16px;
+    margin-left: -15px;
+}
+
+.pricing-table.table-4 .ptable-price h2 span {
+    margin-left: 3px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.pricing-table.table-4 .ptable-body {
+    padding: 30px 0;
+    background: #f7f7f7;
+    border-radius: 30px 30px 0 0;
+    margin-top: -30px;
+}
+
+.pricing-table.table-4 .ptable-description ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-table.table-4 .ptable-description ul li {
+    color: #2A293E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 7px;
+}
+
+.pricing-table.table-4 .ptable-description ul li:last-child {
+    border: none;
+}
+
+.pricing-table.table-4 .ptable-footer {
+    padding-bottom: 30px;
+    background: #f7f7f7;
+}
+
+
+.pricing-table.table-4 .ptable-action a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #FF6F61;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    background: #2A293E;
+    border-radius: 50px;
+}
+
+.pricing-table.table-4 .ptable-action a i {
+    margin-right: 5px;
+}
+
+.pricing-table.table-4 .ptable-action a:hover {
+    color: #2A293E;
+    background: #FF6F61;
+}
+
+.pricing-table.table-4 .ptable-item.featured-item .ptable-action a {
+    color: #2A293E;
+    background: #FF6F61;
+}
+
+.pricing-table.table-4 .ptable-item.featured-item .ptable-action a:hover {
+    color: #FF6F61;
+    background: #2A293E;
+}
+
+
+/* --- Pricing Table 5 --- */
+.pricing-table.table-5 .ptable-single {
+    background: #f7f7f7;
+}
+
+.pricing-table.table-5 .ptable-single:hover {
+    box-shadow: 0 0 10px #999999;
+}
+
+.pricing-table.table-5 .ptable-header {
+    margin: 0 30px;
+    padding: 30px 0 45px 0;
+    width: auto;
+    background: #2A293E;
+}
+
+.pricing-table.table-5 .ptable-header::before {
+    content: "";
+    position: absolute;
+    right: 50%;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 100px solid #f7f7f7;
+    border-right: 250px solid transparent;
+}
+
+.pricing-table.table-5 .ptable-header::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 100px solid #f7f7f7;
+    border-left: 250px solid transparent;
+}
+
+.pricing-table.table-5 .ptable-item.featured-item .ptable-header {
+    background: #FF6F61;
+}
+
+.pricing-table.table-5 .ptable-status {
+    margin-top: -30px;
+}
+
+.pricing-table.table-5 .ptable-status span {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    padding: 5px 0;
+    text-align: center;
+    color: #FF6F61;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    background: #2A293E;
+}
+
+.pricing-table.table-5 .ptable-status span::before {
+    content: "";
+    position: absolute;
+    right: 50%;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid #FF6F61;
+    border-right: 25px solid transparent;
+}
+
+.pricing-table.table-5 .ptable-status span::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid #FF6F61;
+    border-left: 25px solid transparent;
+}
+
+.pricing-table.table-5 .ptable-title h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.pricing-table.table-5 .ptable-price h2 {
+    color: #ffffff;
+    font-size: 60px;
+    font-weight: 900;
+    margin-left: 15px;
+}
+
+.pricing-table.table-5 .ptable-price h2 small {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 16px;
+    margin-left: -15px;
+}
+
+.pricing-table.table-5 .ptable-price h2 span {
+    margin-left: 3px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.pricing-table.table-5 .ptable-body {
+    padding: 30px 0;
+    background: #f7f7f7;
+}
+
+.pricing-table.table-5 .ptable-description ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pricing-table.table-5 .ptable-description ul li {
+    color: #2A293E;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 7px;
+    border-bottom: 1px solid #ffffff;
+}
+
+.pricing-table.table-5 .ptable-description ul li:last-child {
+    border: none;
+}
+
+.pricing-table.table-5 .ptable-footer {
+    padding-bottom: 30px;
+    background: #f7f7f7;
+}
+
+.pricing-table.table-5 .ptable-action a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #FF6F61;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    background: #2A293E;
+}
+
+.pricing-table.table-5 .ptable-action a i {
+    margin-right: 5px;
+}
+
+.pricing-table.table-5 .ptable-action a:hover {
+    color: #2A293E;
+    background: #FF6F61;
+}
+
+.pricing-table.table-5 .ptable-item.featured-item .ptable-action a {
+    color: #2A293E;
+    background: #FF6F61;
+}
+
+.pricing-table.table-5 .ptable-item.featured-item .ptable-action a:hover {
+    color: #FF6F61;
+    background: #2A293E;
+}

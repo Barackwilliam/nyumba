@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L8FYVV0MZV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mkataba wa chumba cha biashara</title>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/fontawesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body { padding-top: 90px; }
+        .bg-p { background-color: #0cbfec; }
+        .fa { color: #FF745C; }
+        .bg-s { background-color: #e2e2e2; }
+        .bg-i { background-color: #f8f9fa!important; }
+        .text-receive { color: #676463; }
+        .text-small { font-size: 1rem; }
+        .text-muted { color: #e2e2e2; }
+        .btn-outline-primary { color: #676463; border-color: #676463; }
+        #id_message_send_input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .messages-box, .chat-box {
+            overflow-y: scroll;
+            margin: 10px 16px;
+            height: 100%;
+            padding-bottom: 40px !important;
+            overflow: auto;
+        }
+        .rounded-lg { border-radius: 0.5rem; }
+        input::placeholder { font-size: 1rem; color: #999; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light fixed-top shadow-sm">
+        <a class="navbar-brand" href="#">
+            <img src="https://i.ibb.co/M5YdtLy/logo.png" width="150px" border="0"/>
+            <a href="#"><button type="button" class="btn btn-outline-primary btn-sm">Reset Chat</button></a>
+        </a>
+    </nav>
+    
+    <div class="px-0 py-0 chat-box bg-white" id="id_chat_item_container">
+        <!-- Messages will be displayed here -->
+
+        <!-- chat.html -->
+<div class="px-0 py-0 chat-box bg-white" id="id_chat_item_container">
+  {% for message in messages %}
+      <div class="media my-3 w-75 {% if message.sender == user %} ml-auto{% else %} mr-auto{% endif %}">
+          <div class="media-body">
+              <div class="bg-{% if message.sender == user %} p {% else %} s {% endif %} rounded py-3 px-3 mb-0">
+                  <p class="text-small mb-0 text-receive {% if message.sender == user %}  text-white {% else %} text-receive {% endif %}">{{ message.message }}</p>
+              </div>
+              <p class="small mb-0 text-muted">{{ message.sender.username }} - {{ message.timestamp|date:"H:i" }}</p>
+          </div>
+      </div>
+  {% endfor %}
+</div>
+
+    </div>
+
+    <form id="chat-form" class="bg-light fixed-bottom shadow-lg">
+        <div class="input-group">
+            <input type="text" id="id_message_send_input" placeholder="Type a message" aria-describedby="button-addon2" class="form-control bg-i rounded-0 border-0 py-4 bg-s">
+            <div class="input-group-append">
+                <button id="button-addon2" type="button" class="btn btn-link bg-i"><i class="fa fa-paper-plane"></i> Send</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        const chatSocket = new WebSocket("ws://" + window.location.host + "/");
+
+        chatSocket.onopen = function (e) {
+            console.log("The connection was set up successfully!");
+        };
+
+        chatSocket.onclose = function (e) {
+            console.log("Something unexpected happened!");
+        };
+
+        document.querySelector("#id_message_send_input").focus();
+
+        document.querySelector("#id_message_send_input").onkeyup = function (e) {
+            if (e.keyCode === 13) {
+                sendMessage();
+            }
+        };
+
+        document.querySelector("#button-addon2").onclick = function (e) {
+            sendMessage();
+        };
+
+        function sendMessage() {
+            var messageInput = document.querySelector("#id_message_send_input").value;
+            if (messageInput.trim() === "") return; // Don't send empty messages
+
+            var currentTime = new Date();
+            var time = currentTime.toLocaleTimeString();
+
+            chatSocket.send(JSON.stringify({
+                message: messageInput,
+                username: "{{request.user.username}}",
+                time: time
+            }));
+
+            document.querySelector("#id_message_send_input").value = "";
+        }
+
+        chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            var messageContainer = document.querySelector("#id_chat_item_container");
+            var div = document.createElement("div");
+            div.className = (data.username === "{{request.user.username}}") ? "media my-3 w-75 ml-auto" : "media my-3 w-75";
+            div.innerHTML = `<div class="media-body">
+                <div class="bg-${data.username === "{{request.user.username}}" ? 'p' : 's'} rounded py-3 px-3 mb-0">
+                    <p class="text-small mb-0 text-receive ${data.username === "{{request.user.username}}" ? 'text-white' : ''}">${data.message}</p>
+                </div>
+                <p class="small mb-0 text-muted">${data.username.charAt(0).toUpperCase() + data.username.slice(1)} - ${data.time}</p>
+            </div>`;
+            messageContainer.appendChild(div);
+            // Scroll to the bottom of the chat container
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        };
+    </script>
+</body>
+</html>
+
+
