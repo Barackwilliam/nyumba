@@ -259,6 +259,27 @@
         <script src="{% static 'revolution/js/jquery.themepunch.revolution.min.js'%}"></script>
 
         <script>
+
+          
+    // Fungua popup baada ya sekunde 3
+    window.onload = function () {
+      setTimeout(() => {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }, 3000);
+    };
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+
+
+ // Fungua popup end
+
+
+
             var typed = new Typed('.typed', {
                 strings: ["House ^2000", "Apartment ^2000", "Plaza ^4000"],
                 smartBackspace: false,

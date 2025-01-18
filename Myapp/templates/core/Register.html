@@ -22,8 +22,88 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="{% static 'css2/style.css' %}">
+    <style>
+        
+   /* Popup container */
+   #popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup content */
+#popupContent {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    color: #fff; /* White text */
+    max-width: 400px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Stylish shadow */
+    animation: fadeIn 0.8s ease-in-out; /* Animation */
+}
+
+/* Heading style */
+#popupContent h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Paragraph style */
+#popupContent p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Close button style */
+#closePopup {
+    background: #ff6b6b; /* Soft red color */
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+#closePopup:hover {
+    background: #ff3b3b; /* Darker red on hover */
+}
+
+/* Animation for popup */
+@keyframes fadeIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+    </style>
 </head>
 <body>
+  <!-- Popup container -->
+  <div id="popup">
+    <div id="popupContent">
+        <h2>👋 Karibu NyumbaChap!</h2>
+        <p style="color:white;">Je unafahamu kuwa kusajili Nyumba 3 Kwenye Tovuti hii Utalipwa Tsh 10000/=..?</p>
+        <button id="closePopup">Sawa..!</button>
+    </div>
+</div>
+
+
+  <!-- Popup container end -->
 
     <div class="main">
 
@@ -81,6 +161,25 @@
         </section>
 
     </div>
+
+
+
+    
+    <script>
+        // Show the popup after 5 seconds
+        window.onload = function () {
+            setTimeout(function () {
+                const popup = document.getElementById('popup');
+                popup.style.display = 'flex'; // Show the popup
+            }, 5000); // 5000ms = 5 seconds
+
+            // Close the popup when the close button is clicked
+            document.getElementById('closePopup').onclick = function () {
+                const popup = document.getElementById('popup');
+                popup.style.display = 'none'; // Hide the popup
+            };
+        };
+    </script>
 
     <!-- JS -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
