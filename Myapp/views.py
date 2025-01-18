@@ -253,10 +253,10 @@ def Register(request):
         password2 = request.POST['password2']
         if password == password2:
            if User.objects.filter(email=email).exists():
-               messages.error(request, 'Pole..! Email hii Tayari imesajiliwa kwetu')
+               messages.error(request, 'Pole..! Email hii Tayari imesajiliwa Tafadhari Tumia Email Nyingine.!')
                return redirect('Register')
            elif User.objects.filter(username=username).exists():
-               messages.error(request, 'Loh jina hili limesha chukuliwa')
+               messages.error(request, 'Loh Username uliyotumia ilisha sajiliwa Tafadhari Tumia Username Nyingine.!')
                return redirect('Register')
            else:
                user = User.objects.create_user(username=username, email=email, password=password2)
@@ -400,7 +400,7 @@ def login(request):
           auth.login(request, User) # type: ignore
           return redirect('/')
        else:
-        messages.error(request, 'Taarifa Sio Sahihi')
+        messages.error(request, 'Tafadhari ingiza Taarifa Sahihi na Ujaribu Tena au Jisajili Upya!')
         return redirect(login)
     else:
         return render(request, 'core/login.html')
@@ -416,7 +416,7 @@ def login_view(request):
           auth.login(request, User) # type: ignore
           return redirect('referral_dashboard')
        else:
-        messages.error(request, 'Taarifa Sio Sahihi')
+        messages.error(request, 'Taarifa Sio Sahihi Tafadhari Jaribu Tena!')
         return redirect(login_view)
     else:
         return render(request,'core/login.html')

@@ -62,7 +62,168 @@
         }
         </script>
         {% endfor %}
-    </head>
+    
+
+
+        <style>
+
+
+            /* Complete register profile*/
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #profile-completion-popup {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            text-align: center;
+            padding-top: 150px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        #profile-completion-popup div {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        #profile-completion-popup strong {
+            font-size: 22px;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #profile-completion-popup p {
+            font-size: 18px;
+            color: #e3e3e3;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        #profile-completion-popup a {
+            display: inline-block;
+            background-color: #ff7e5f;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        #profile-completion-popup a:hover {
+            background-color: #eb5757;
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+
+
+
+
+
+
+
+        
+            /* Popup container */
+            #popup {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+             display: none; /* Hidden by default */
+             justify-content: center;
+             align-items: center;
+             z-index: 1000;
+         }
+         
+         /* Popup content */
+         #popupContent {
+             background: linear-gradient(135deg, #115bcb, #50fc25); /* Gradient background */
+             padding: 30px;
+             border-radius: 15px;
+             text-align: center;
+             color: #fff; /* White text */
+             max-width: 400px;
+             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Stylish shadow */
+             animation: fadeIn 0.8s ease-in-out; /* Animation */
+         }
+         
+         /* Heading style */
+         #popupContent h2 {
+             font-size: 28px;
+             margin-bottom: 15px;
+             font-family: 'Arial', sans-serif;
+         }
+         
+         /* Paragraph style */
+         #popupContent p {
+             font-size: 18px;
+             margin-bottom: 20px;
+         }
+         
+         /* Close button style */
+         #closePopup {
+             background: #ff6b6b; /* Soft red color */
+             color: #fff;
+             border: none;
+             padding: 12px 20px;
+             border-radius: 8px;
+             cursor: pointer;
+             font-size: 16px;
+             transition: all 0.3s ease;
+         }
+         
+         #closePopup:hover {
+             background: #ff3b3b; /* Darker red on hover */
+         }
+         
+         /* Animation for popup */
+         @keyframes fadeIn {
+             from {
+                 transform: scale(0.8);
+                 opacity: 0;
+             }
+             to {
+                 transform: scale(1);
+                 opacity: 1;
+             }
+         }
+             </style>
     
 
 
@@ -104,6 +265,19 @@
 
 
 <body class="inner-pages homepage-4 agents hp-6 full hd-white">
+
+
+
+     <!-- Popup container -->
+ <div id="popup">
+    <div id="popupContent">
+        <h2 style="color: yellow;">👋 Tahadhari!</h2>
+        <p style="color:white;">Hello {{user.username}} Unakumbushwa kuzingatia usalama wa pesa yako Usitoe pesa ya Awali Bila kuona Nyumba na kusaini nyalaka za Mkataba kutoka serikali ya mtaa husika. <br>NyumbaChap tunazingatia usalama wa pesa zako. </p>
+        <button id="closePopup">Sawa..!</button>
+    </div>
+</div>
+
+
     <!-- Wrapper -->
     <div id="wrapper">
         <!-- START SECTION HEADINGS -->
@@ -175,15 +349,11 @@
 
 
     {% if not user.profile.profile_picture %}
-    <!-- Popup Modal -->
-    <div id="profile-completion-popup" style="display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 9999; text-align: center; padding-top: 150px; animation: fadeIn 0.5s ease;">
-        <div style="background-color: #fbff008e; padding: 20px; border-radius: 8px; width: 300px; text-align: center; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); animation: slideUp 0.5s ease;">
-            <strong style="font-size: 18px; color: #e40000;">Profile Incomplete</strong>
-            <p style="font-size: 16px; color: #000000;">Kamilisha Usajili.</p>
-            <!-- Button with link to the profile update page -->
-            <a href="{% url 'edit_profile' %}" style="display: inline-block; background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; cursor: pointer; transition: background-color 0.3s;">
-                Sawa
-            </a>
+    <div id="profile-completion-popup">
+        <div>
+            <strong><h2 style="color: red;">Profile Incomplete</h2></strong>
+            <p>Mpendwa </p><h2 style="color: rgb(217, 255, 0);">{{user.username}}</h2> <p>Unaombwa Kamilisha Usajili wa Taarifa Zako ili uendelee kufurahia huduma zetu.</p>
+            <a href="{% url 'edit_profile' %}">Kamilisha Sasa</a>
         </div>
     </div>
 {% endif %}
@@ -557,6 +727,25 @@ page_obj.previous_page_number }}">Previous</a>
 
     </div>
     <!-- Wrapper / End -->
+
+
+
+    
+    <script>
+        // Show the popup after 5 seconds
+        window.onload = function () {
+            setTimeout(function () {
+                const popup = document.getElementById('popup');
+                popup.style.display = 'flex'; // Show the popup
+            }, 20000); // 20000ms = 20 seconds
+
+            // Close the popup when the close button is clicked
+            document.getElementById('closePopup').onclick = function () {
+                const popup = document.getElementById('popup');
+                popup.style.display = 'none'; // Hide the popup
+            };
+        };
+    </script>
 </body>
 
 
