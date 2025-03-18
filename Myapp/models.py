@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 
 # from django.contrib.auth import get_user_model
 from cloudinary.models import CloudinaryField
+from datetime import timedelta
+from django.utils.timezone import now
+
+
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
@@ -126,10 +130,37 @@ class Profile(models.Model):
     phone = models.CharField(max_length=20, blank=True)
     bio = models.TextField(max_length=250, blank=True)
     profile_picture = CloudinaryField('image', blank=True, null=True)  # Profile picture as optional
+    verified_at = models.DateTimeField(null=True, blank=True)  # Tarehe ya kuthibitishwa
+
+    is_verified = models.BooleanField(default=False)  # Field mpya ya verification
+    subscription_plan = models.CharField(
+        max_length=10,
+        choices=[('silver', 'Silver'), ('gold', 'Gold'), ('platinum', 'Platinum')],
+        default='silver') # Default ni Silver
     # profile_completed = models.BooleanField(default=False)  # Field to check if profile is complete
+
+
+    
+    def days_remaining(self):
+        """Hesabu siku zilizobaki kabla ya verification ku-expire"""
+        if self.is_verified and self.verified_at:
+            expiry_date = self.verified_at + timedelta(days=30)
+            remaining = (expiry_date - now()).days
+            return max(0, remaining)  
+        return 0
+
+
+    
+    def save(self, *args, **kwargs):
+        """ Ikiwa is_verified inakuwa True, hifadhi tarehe ya sasa """
+        if self.is_verified and not self.verified_at:
+            self.verified_at = datetime.now()
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f'{self.user.username} Profile'
+
 
 
 

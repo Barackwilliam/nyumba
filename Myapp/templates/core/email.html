@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Actions - NyumbaChap</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #4b79a1, #283e51);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .button {
+            display: block;
+            padding: 12px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 8px;
+            transition: 0.3s ease-in-out;
+            margin: 10px 0;
+            font-weight: bold;
+            border: none;
+            width: 90%;
+            text-align: center;
+        }
+
+        .send-selected {
+            background: #007bff;
+        }
+
+        .send-selected:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .send-all {
+            background: #28a745;
+        }
+
+        .send-all:hover {
+            background: #1e7e34;
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+            
+            h2 {
+                font-size: 22px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>NyumbaChap Email Actions</h2>
+        <p>Hapa unaweza kuchagua kutuma barua pepe kwa watumiaji wa NyumbaChap. Tafadhali chagua moja kati ya chaguzi mbili hapa chini:</p>
+
+        <a href="{% url 'send_email_selected' %}" class="button send-selected">
+            📩 Select Users
+        </a>
+        <p>Hii itakuruhusu kuchagua baadhi ya watumiaji na kuwatumia ujumbe maalum.</p>
+
+        <a href="{% url 'send_email_all' %}" class="button send-all">
+            🚀 All Users
+        </a>
+        <p>Chaguo hili litawatumiwa barua pepe watumiaji wote waliojisajili kwenye mfumo.</p>
+    </div>
+
+</body>
+</html>
