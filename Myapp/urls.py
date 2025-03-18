@@ -12,7 +12,12 @@ urlpatterns = [
     path('jihudumie/', views.jihudumie, name='jihudumie'),
     path('complete/', views.complete, name='complete'),
     #path('toggle_bookmark/<int:property_id>/', views.toggle_bookmark, name='toggle_bookmark'),
+    
     path('Register/', views.Register, name='Register'),
+    path('send-email-selected/', views.send_email_to_selected, name='send_email_selected'),
+    path('send-email-all/', views.send_email_to_all, name='send_email_all'),
+    path('email/', views.email, name='email'),
+
     path('submit_inquiry/<int:property_id>/', views.submit_inquiry, name='submit_inquiry'),
     path('delete_inquiry/<int:id>/', views.delete_inquiry, name='delete_inquiry'),
     path('dashboard/', views.dashboard, name='dashboard'),

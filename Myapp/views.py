@@ -261,6 +261,8 @@ def Register(request):
            else:
                user = User.objects.create_user(username=username, email=email, password=password2)
                user.save()
+                # Tuma email ya ukaribisho
+               send_welcome_email(user.email, user.username)
                messages.success(request,'Your Account created Successfully login below')
                return redirect('login')
             # #redirect usert to setting
@@ -276,6 +278,7 @@ def Register(request):
             return render(request,'core/login.html')
     else:
         return render(request, 'core/Register.html')
+
 
 
 
@@ -433,5 +436,128 @@ def referral_copy_link(request):
 def invite_friend(request):
     return render(request, "core/invite_friend.html")
 
+
+
+ ############33#####33###33######33
+#######333##3####333####3######333##
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+
+
+
+def send_welcome_email(to_email, user_name):
+    subject = "Welcome to NyumbaChap!"
+    context = {
+        'user_name': user_name,
+        'subject': subject,
+    }
+    message = render_to_string('core/welcome.html', context)  # Load the email template
+    send_mail(
+        subject,
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [to_email],
+        html_message=message,  # Ensures it is sent as an HTML email
+    )
+
+
+
+
+def send_custom_email(to_email, user_name, subject, message_content):
+    """Function ya kutuma email na ujumbe wa mfumo"""
+    context = {
+        'user_name': user_name,
+        'subject': subject,
+        'message_content': message_content
+    }
+    message = render_to_string('core/email_template.html', context)  
+    send_mail(
+        subject,
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [to_email],
+        html_message=message,
+    )
+
+
+
+def send_email_to_selected(request):
+    users = User.objects.all()  # Chukua watumiaji wote kwenye mfumo
+
+    if request.method == 'POST':
+        user_ids = request.POST.getlist('user_ids')  # Chagua watumiaji
+        subject = request.POST.get('subject')  # Pata kichwa cha email
+        message_content = request.POST.get('message')  # Pata ujumbe wa email
+
+        if not user_ids:
+            messages.error(request, "Tafadhali chagua angalau mtumiaji mmoja.")
+            return redirect('send_email_selected')
+
+        selected_users = User.objects.filter(id__in=user_ids)
+        for user in selected_users:
+            send_custom_email(user.email, user.username, subject, message_content)
+
+        messages.success(request, f'Email imetumwa kwa watu {len(selected_users)} !')
+        return redirect('send_email_selected')  # Rudi kwenye ukurasa wa send_email.html
+
+    return render(request, 'core/send_email.html', {'users': users})
+
+
+
+def send_email_to_all(request):
+    if request.method == 'POST':
+        subject = request.POST.get('subject')
+        message_content = request.POST.get('message')
+
+        users = User.objects.all()
+        for user in users:
+            send_custom_email(user.email, user.username, subject, message_content)
+
+        messages.success(request, f'Email sent to {users.count()} users successfully!')
+        return redirect('send_email_all')  # Hakikisha jina hili lipo kwenye `urls.py`
+
+    return render(request, 'core/send_email_all.html')
+
+
+
+
+from datetime import timedelta
+from django.utils.timezone import now
+from django.core.management.base import BaseCommand
+
+def remove_expired_verifications():
+    """ Hii function itaondoa verification kwa accounts zilizoisha muda """
+    expiry_date = now() - timedelta(days=30)
+    expired_profiles = Profile.objects.filter(is_verified=True, verified_at__lte=expiry_date)
+    
+    # Ondoa verification
+    for profile in expired_profiles:
+        profile.is_verified = False
+        profile.verified_at = None  # Reset tarehe
+        profile.save()
+        print(f"Verification removed for {profile.user.username}")
+
+# Run function kila siku
+class Command(BaseCommand):
+    help = "Disable expired verifications"
+
+    def handle(self, *args, **kwargs):
+        remove_expired_verifications()
+
+
+
+from . utils import remove_expired_verifications
+
+def dashboard_view(request):
+    remove_expired_verifications()  # Angalia ikiwa verification ime-expire
+    return render(request, "core/user_dashboard.html")
+
+
+def email(request):
+    return render(request,'core/email.html')
 
 

@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Email to All</title>
+    <style>
+        /* 🌟 Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .email-form-container {
+            max-width: 600px;
+            width: 100%;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .email-form-container h2 {
+            color: #0056b3;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .email-form-container label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .email-form-container input[type="text"],
+        .email-form-container textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #f9f9f9;
+            transition: 0.3s;
+        }
+
+        .email-form-container input:focus,
+        .email-form-container textarea:focus {
+            border-color: #007bff;
+            background: #ffffff;
+        }
+
+        .email-form-container textarea {
+            resize: vertical;
+        }
+
+        .email-form-container button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .email-form-container button:hover {
+            background: #0056b3;
+        }
+
+        /* 🌟 Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .email-form-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .email-form-container input,
+            .email-form-container textarea {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .email-form-container button {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="email-form-container">
+    <h2>Send Email to All Users</h2>
+    {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success">
+        <h3 style="color: green;">{{ message }}</h3>
+    </div>
+  {% endfor %}
+{% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="subject">📌 Subject:</label>
+        <input type="text" name="subject" required placeholder="Enter subject...">
+
+        <label for="message">✉️ Message:</label>
+        <textarea name="message" rows="5" required placeholder="Write your message here..."></textarea>
+
+        <button type="submit">🚀 Send Email to All</button>
+    </form>
+</div>
+
+</body>
+</html>

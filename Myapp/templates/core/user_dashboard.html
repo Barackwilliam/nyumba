@@ -6,6 +6,33 @@
 
 <!-- Mirrored from code-theme.com/html/findhouses/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 11 Aug 2024 13:00:39 GMT -->
 <head>
+
+    
+	<style>
+
+    
+        .verified-badge {
+            position: absolute;
+            bottom: -10px;  /* Kidogo chini ya profile picture */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;  /* Badge ndogo zaidi */
+            height: 65px;
+            animation: zoomEffect 0.4s infinite alternate ease-in-out;  /* Hii ni effect ya zoom */
+        }
+        
+        /* Animation Effect */
+        @keyframes zoomEffect {
+            from {
+                transform: translateX(-50%) scale(1);  /* Normal size */
+            }
+            to {
+                transform: translateX(-50%) scale(1.8);  /* Badge inapanuka kidogo tu */
+            }
+        }
+        
+        
+        </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
 <script>
@@ -82,6 +109,8 @@
                                     </li>
                               {% if user.is_staff %}      
                             <li><a href="{% url 'admin:index' %}">Admin</a>
+                            <li><a href="{% url 'email' %}">Send Email</a>
+
                            
                             </li>
                             {% endif %}
@@ -202,10 +231,91 @@
 
                         <div class="dashborad-box stat bg-white">
 
-                            <h4 class="title">Manage Dashboard</h4>
+                            <h4 class="title">My Dashboard</h4>
                             <div class="section-body">
 
                                 <div class="row">
+
+
+
+
+
+					 <!-- Badge info start demo -->
+                                     
+                                    {% if user.profile.is_verified %}
+                                    <div class="col-lg-3 col-md-6 col-xs-12 dar pro mr-3">
+                                        <div class="item">
+                                            <div class="icon">
+                                
+                                          {% if user.profile.subscription_plan == 'silver' %}
+                                              <img src="{% static 'images/silver.png' %}" class="verified-badge" alt="Verified Silver">
+                                                  {% elif user.profile.subscription_plan == 'gold' %}
+                                                   <img src="{% static 'images/gold.png' %}" class="verified-badge" alt="Verified Gold">
+                                                      {% elif user.profile.subscription_plan == 'platinum' %}
+                                                            <img src="{% static 'images/platnum.png' %}" class="verified-badge" alt="Verified Platinum">
+                                                       {% endif %}
+                      
+                                                <!-- <i class="fa fa-list" aria-hidden="true"></i> -->
+
+
+                                            </div>
+                                            <div class="info">
+                                               
+                                                {% if user.profile.subscription_plan == 'silver' %}
+                                                <h6 class="number">Tsh.0</h6>
+                                                <p class="type ml-1">You have not paid for any package at the moment</p>
+                                                   
+                                                   {% endif %}   
+                                                   
+
+                                                 
+                                                   {% if user.profile.subscription_plan == 'gold' %}
+                                                   <h6 class="number">Tsh.2950/=</h6>
+                                                   <p class="type ml-1">You have Gold package valid for one Month</p>
+                                                      
+                                                      {% endif %} 
+                                                      
+                                                      {% if user.profile.subscription_plan == 'platinum' %}
+                                                      <h6 class="number">Tsh.5999/=</h6>
+                                                      <p class="type ml-1">You have Platinum package Valid for one Month</p>
+                                                         
+                                                         {% endif %}  
+                                                      
+                                              
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    {% endif %}  
+                                 
+                           <!-- Badge info end demo -->
+
+                           {% if user.profile.is_verified %}
+
+                           <div class="col-lg-3 col-md-6 col-xs-12 dar rev mr-3">
+                            <div class="item">
+                                <div class="icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="info">
+                                    {% if user.profile.subscription_plan == 'gold' %}
+
+                                    <h6 class="number">{{ days_remaining }}</h6>
+                                    <p class="type ml-1"><strong>Days</strong> Remains for your package to expire</p>
+                        
+                                    {% elif user.profile.subscription_plan == 'platinum' %}
+                                    
+                                    <h6 class="number">{{ days_remaining }}</h6>
+                                    <p class="type ml-1"><strong>Days </strong>Remains for your package to expire</p>
+                                    {% else %}
+                                    <h6 class="number">Free</h6>
+                                    <p class="type ml-1">You are using the silver package, which is a free plan.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
 
                                     <div class="col-lg-3 col-md-6 col-xs-12 dar pro mr-3">
                                         <div class="item">

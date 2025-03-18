@@ -120,6 +120,15 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+
 
 
 # Password validation
@@ -227,6 +236,19 @@ DATABASES['default'] = dj_database_url.config(conn_max_age = 600)
 
 
 LOGIN_URL = '/login/'
+
+
+
+
+# email configurationss
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.zoho.com"  # SMTP server ya Zoho
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "support@nyumbachap.com"  # Badilisha na email yako ya Zoho
+EMAIL_HOST_PASSWORD = "Chipindi@123"  # Badilisha na password yako ya Zoho
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 
