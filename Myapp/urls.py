@@ -40,6 +40,8 @@ urlpatterns = [
 
     path('offers/', views.offer_list, name='offer_list'),
     path('offers/<slug:slug>/', views.offer_detail, name='offer_detail'),
+    #path('property/<int:property_id>/<slug:slug>/', views.property_detail, name='property_detail'),  # URL for property details with id and slug
+
 
 
     path('property/<int:property_id>/', views.property_detail, name='property_detail'),

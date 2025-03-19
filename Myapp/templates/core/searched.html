@@ -5,7 +5,36 @@
 
 
 <!-- Mirrored from code-theme.com/html/findhouses/properties-full-grid-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 11 Aug 2024 12:48:08 GMT -->
-<head>
+<head><style>
+        .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: #f54141; /* Rangi ya nyuma (njano) */
+    color: rgb(255, 255, 255); /* Rangi ya maandishi */
+    padding: 5px 0;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    white-space: nowrap;
+}
+
+.marquee-text {
+    display: inline-block;
+    position: relative;
+    animation: marquee 14s linear infinite;
+    font-size: 20px;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+       </style>
+    
 
       <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
@@ -50,7 +79,7 @@
     <meta name="description" content="NyumbaChap ni Jukwaa bora Tanzani la kukusaidia kutafuta nyumba za kupangisha au kununua , pamoja na mawasiliano ya wamiliki">
     <meta name="author" content="NyumbaChap Team">
     <meta name="Keywords" content="Nyumba Tanzania,vyumba vya kupangisha kigamboni,vyumba vya kupangisha Dodoma, vyumba vya kupangisha Lindi,vyumba vya kupangisha Mtwala,vyumba vya kupangisha zanzibar,vyumba vya kupangisha Mbeya mjini,vyumba vya kupangisha Tanga,vyumba vya kupangisha singida,vyumba vya kupangisha kigoma,vyumba vya kupangisha stend kuu,Nyumba za kupangisha songea, Nyumba za kuuza, Vyumba vya bei nafuu, Mali isiyohamishika, Nyumba Dar es salaam, Vyumbaa Dar es salaam, vyumba Temeke, Vyumba Ilala, vyumba kinondoni, Hostel kampala, hostel UDSM, hostel CBE, hostel NIT, NyumbaChap, Hostel Muhimbili, hostel chuo cha mwalimu Nyerere, vyumba Mwenge, vyumba Mwanza, Vyumba Arusha, Vyumba morogoro, Vyumba vya karibu na chuo, vyumba vya Mjini, vyumba vya biashara">
-    <title>NyumbaChap - Tafuta nyumba kwa Urahisi Tanzania</title>
+    <title>Natafuta nyumba ya kupanga</title>
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico'%}">
@@ -119,7 +148,7 @@
                                 {% endif %}
                             
                                        
-                                    </li> -->
+                                    </li>
                                     <li><a href="{% url 'Blog_post' %}">Pages</a>
                                        
                                     </li>
@@ -187,6 +216,40 @@
         <!-- END SECTION HEADINGS -->
 
         <!-- START SECTION PROPERTIES LISTING -->
+
+        
+  
+            
+        {% if user.profile.is_verified == False %}
+        <div class="marquee-container">
+            <p class="marquee-text">
+                🚀 Unataka kuona nyumba zote? Jiunge na kifurushi cha Gold au Platinum leo! Gusa <a href="{% url 'jihudumie' %}" style="color: green;"> hapa</a>  Kujiunga🏡🔑</p>
+            </div>
+        {% endif %}
+
+        {% if user.profile.is_verified %}
+        {% if user.profile.subscription_plan == 'silver' %}
+            <div class="marquee-container">
+                <p class="marquee-text">
+                     Unatumia Kifurushi cha Silver ambacho ni Bure na Hakina Nyumba zakutosha Jiunge na kifurushi cha Gold au Platinum leo! Gusa <a href="{% url 'jihudumie' %}" style="color: green;"> hapa</a>  Kujiunga🏡</p>
+                </div>
+
+        {% elif user.profile.subscription_plan == 'gold' %}
+        <div class="marquee-container">
+            <p class="marquee-text">
+                Una kifurushi Cha Gold kitakachodumu kwa Mwezi Mmoja Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa Au jiunge kifurushi cha Platinum <a href="{% url 'jihudumie' %}" style="color: green;">Hapa </a>ili ujulishwe kila nyumba inaposajiliwa kwasababu Nyumba Zilizochukuliwa Huondolewa kwenye Mfumo</p>  </div>
+                {% else %}
+
+
+                <div class="marquee-container">
+                    <p class="marquee-text">
+                        Nyumba Zilizochukuliwa huondolewa Kwenye Mfumo Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa</p>  </div>
+                    
+
+            {% endif %}
+            {% endif %}
+        
+        
         <section class="properties-list featured portfolio blog">
             <div class="container">
                 

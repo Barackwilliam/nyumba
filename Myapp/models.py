@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from datetime import timedelta
 from django.utils.timezone import now
+from django.utils.text import slugify
 
 
 from django.template.defaultfilters import slugify
@@ -43,6 +44,8 @@ class Property(models.Model):
     # name = models.CharField(max_length=10)
 
     title = models.CharField(max_length=255)
+    #slug = models.SlugField(unique=True, blank=True)  # Add slug field
+
     description = models.TextField()
     price = models.IntegerField()
     #bookmarks = models.ManyToManyField(User, related_name="bookmarked_properties", blank=True)
@@ -93,6 +96,13 @@ class Property(models.Model):
 
     def get_absolute_url(self):
         return f"/property/{self.id}/"
+    
+    
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = slugify(self.title)
+    #     super(Property, self).save(*args, **kwargs)
+
 
 
 

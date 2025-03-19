@@ -18,13 +18,6 @@
   gtag('js', new Date());
 
   gtag('config', 'G-L8FYVV0MZV');
-
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const text = document.querySelector(".marquee-text");
-    text.style.animationDuration = (text.clientWidth / 50) + "s"; // Adjust speed dynamically
-});
-
 </script>
 
 
@@ -164,100 +157,81 @@
             transform: translateY(-3px);
             box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
         }
+
+
+
+
+
+
+
+
         
             /* Popup container */
             #popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-    display: none; /* Hidden by default */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-#popupContent {
-    background: linear-gradient(135deg, #115bcb, #50fc25); /* Gradient background */
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    color: #fff;
-    max-width: 250px;  /* Smaller width */
-    width: 75%;  /* Responsive width */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.8s ease-in-out;
-}
-
-#popupContent h2 {
-    font-size: 20px;  /* Slightly smaller text size */
-    margin-bottom: 10px;
-    font-family: 'Arial', sans-serif;
-}
-
-#popupContent p {
-    font-size: 14px;  /* Adjust font size */
-    margin-bottom: 20px;
-}
-
-#closePopup {
-    background: #ff6b6b; /* Soft red color */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-#closePopup:hover {
-    background: #ff3b3b;
-}
-
-/* Animation for popup */
-@keyframes fadeIn {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-         .marquee-container {
-    width: 100%;
-    overflow: hidden;
-    background-color: #f54141; /* Rangi ya nyuma (njano) */
-    color: rgb(255, 255, 255); /* Rangi ya maandishi */
-    padding: 5px 0;
-    font-weight: bold;
-    text-align: center;
-    position: relative;
-    white-space: nowrap;
-}
-
-.marquee-text {
-    display: inline-block;
-    position: relative;
-    animation: marquee 14s linear infinite;
-    font-size: 20px;
-}
-
-@keyframes marquee {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
-
-
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+             display: none; /* Hidden by default */
+             justify-content: center;
+             align-items: center;
+             z-index: 1000;
+         }
+         
+         /* Popup content */
+         #popupContent {
+             background: linear-gradient(135deg, #115bcb, #50fc25); /* Gradient background */
+             padding: 30px;
+             border-radius: 15px;
+             text-align: center;
+             color: #fff; /* White text */
+             max-width: 400px;
+             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Stylish shadow */
+             animation: fadeIn 0.8s ease-in-out; /* Animation */
+         }
+         
+         /* Heading style */
+         #popupContent h2 {
+             font-size: 28px;
+             margin-bottom: 15px;
+             font-family: 'Arial', sans-serif;
+         }
+         
+         /* Paragraph style */
+         #popupContent p {
+             font-size: 18px;
+             margin-bottom: 20px;
+         }
+         
+         /* Close button style */
+         #closePopup {
+             background: #ff6b6b; /* Soft red color */
+             color: #fff;
+             border: none;
+             padding: 12px 20px;
+             border-radius: 8px;
+             cursor: pointer;
+             font-size: 16px;
+             transition: all 0.3s ease;
+         }
+         
+         #closePopup:hover {
+             background: #ff3b3b; /* Darker red on hover */
+         }
+         
+         /* Animation for popup */
+         @keyframes fadeIn {
+             from {
+                 transform: scale(0.8);
+                 opacity: 0;
+             }
+             to {
+                 transform: scale(1);
+                 opacity: 1;
+             }
+         }
              </style>
     
 
@@ -304,14 +278,13 @@
 
 
      <!-- Popup container -->
-     <div id="popup">
-        <div id="popupContent">
-            <h2>👋 Tahadhari!</h2>
-            <p>Hello {{user.username}} Unakumbushwa kuzingatia usalama wa pesa yako. Usitoe pesa ya Awali Bila kuona Nyumba na kusaini nyaraka za Mkataba kutoka serikali ya mtaa husika. <br>NyumbaChap tunazingatia usalama wa pesa zako.</p>
-            <button id="closePopup">Sawa..!</button>
-        </div>
+ <div id="popup">
+    <div id="popupContent">
+        <h2 style="color: yellow;">👋 Tahadhari!</h2>
+        <p style="color:white;">Hello {{user.username}} Unakumbushwa kuzingatia usalama wa pesa yako Usitoe pesa ya Awali Bila kuona Nyumba na kusaini nyalaka za Mkataba kutoka serikali ya mtaa husika. <br>NyumbaChap tunazingatia usalama wa pesa zako. </p>
+        <button id="closePopup">Sawa..!</button>
     </div>
-    
+</div>
 
 
     <!-- Wrapper -->
@@ -436,39 +409,6 @@
         <!-- END SECTION HEADINGS -->
 
         <!-- START SECTION PROPERTIES LISTING -->
-
-  
-            
-        {% if user.profile.is_verified == False %}
-        <div class="marquee-container">
-            <p class="marquee-text">
-                🚀 Unataka kuona nyumba zote? Jiunge na kifurushi cha Gold au Platinum leo! Gusa <a href="{% url 'jihudumie' %}" style="color: green;"> hapa</a>  Kujiunga🏡🔑</p>
-            </div>
-        {% endif %}
-
-        {% if user.profile.is_verified %}
-        {% if user.profile.subscription_plan == 'silver' %}
-            <div class="marquee-container">
-                <p class="marquee-text">
-                     Unatumia Kifurushi cha Silver ambacho ni Bure na Hakina Nyumba zakutosha Jiunge na kifurushi cha Gold au Platinum leo! Gusa <a href="{% url 'jihudumie' %}" style="color: green;"> hapa</a>  Kujiunga🏡</p>
-                </div>
-
-        {% elif user.profile.subscription_plan == 'gold' %}
-        <div class="marquee-container">
-            <p class="marquee-text">
-                Una kifurushi Cha Gold kitakachodumu kwa Mwezi Mmoja Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa Au jiunge kifurushi cha Platinum <a href="{% url 'jihudumie' %}" style="color: green;">Hapa </a>ili ujulishwe kila nyumba inaposajiliwa</p>  </div>
-                {% else %}
-
-
-                <div class="marquee-container">
-                    <p class="marquee-text">
-                        Una kifurushi Cha Platinum kitakachodumu kwa Mwezi Mmoja Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa</p>  </div>
-                    
-
-            {% endif %}
-            {% endif %}
-        
-        
         <section class="properties-list featured portfolio blog">
             <div class="container">
                 
@@ -485,9 +425,7 @@
                                     </div>
                                    
                                     <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                        <!-- <a class="btn btn-yellow" href="#"><button type="submit"> Search Now </button> </a>  -->
-                                        <button type="submit" class="btn btn-yellow">Search Now</button>
-
+                                        <a class="btn btn-yellow" href="#"><button type="submit"> Search Now </button> </a> 
                                     </div>
                                 </form>
 

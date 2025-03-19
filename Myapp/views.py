@@ -23,7 +23,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-PROPERTIES_PER_PAGE = 20
+PROPERTIES_PER_PAGE = 25
 
 
 
@@ -175,43 +175,48 @@ def dashboard(request):
 def property_list(request):
     prop_list = Property.objects.all().order_by('-date_posted')
 
-    #paginator
-    page = request.GET.get('page',1)
-    property_paginator = Paginator(prop_list, PROPERTIES_PER_PAGE)
+    # **Chukua title za nyumba chache kwa ajili ya SEO**
+    property_titles = ", ".join(prop_list.values_list('title', flat=True)[:3])  
+    page_title = f"{property_titles} - Nyumba za Kupanga na Kuuza Tanzania" if property_titles else "NyumbaChap - Tafuta Nyumba"
 
+    # **Pagination**
+    page = request.GET.get('page', 1)
+    property_paginator = Paginator(prop_list, PROPERTIES_PER_PAGE)
 
     try:
         prop_list = property_paginator.page(page)
     except PageNotAnInteger:
         prop_list = property_paginator.page(1)
-
     except EmptyPage:
-        pro_list = property_paginator.page(property_paginator.num_pages)
-    except:
-        prop_list = property_paginator.page(PROPERTIES_PER_PAGE)
+        prop_list = property_paginator.page(property_paginator.num_pages)
+
     context = {
-        "page_obj":prop_list,
-       "prop_list":prop_list,
-      'is_paginated': True,
-      'paginator': property_paginator,
+        "page_obj": prop_list,
+        "prop_list": prop_list,
+        "is_paginated": property_paginator.num_pages > 1,
+        "paginator": property_paginator,
+        "page_title": page_title  # **Title ya ukurasa**
     }
 
+    return render(request, 'core/property_list.html', context)
 
-    return render(request,'core/property_list.html',context)
-
+# @login_required(login_url='login')
+# def property_detail(request, property_id):
+#     property = get_object_or_404(Property, id=property_id)
+#     property.add_view(request.user) 
+#     return render(request, 'core/single_property.html',{'property': property,})
 
 @login_required(login_url='login')
 def property_detail(request, property_id):
-    property = get_object_or_404(Property, id=property_id)
-    property.add_view(request.user) 
-    return render(request, 'core/single_property.html',{'property': property,})
+    property = get_object_or_404(Property, id=property_id)  # Fetch property using id and slug
+    property.add_view(request.user)  # Increment view count and add viewer
+    return render(request, 'core/single_property.html', {'property': property})
 
-
-
+@login_required(login_url='login')
 def offer_list(request):
     offers = Offer.objects.all()
     return render(request, 'core/offer_list.html', {'offers': offers})
-
+@login_required(login_url='login')
 def offer_detail(request, slug):
     offer = get_object_or_404(Offer, slug=slug)
     return render(request, 'core/offer_detail.html', {'offer': offer})
@@ -427,12 +432,12 @@ def login_view(request):
 
 
 
-
+@login_required(login_url='login')
 def referral_copy_link(request):
     return render(request, "core/referral_copy_link.html")
 
 
-
+@login_required(login_url='login')
 def invite_friend(request):
     return render(request, "core/invite_friend.html")
 
@@ -448,7 +453,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 
-
+@login_required(login_url='login')
 def send_welcome_email(to_email, user_name):
     subject = "Welcome to NyumbaChap!"
     context = {
@@ -466,7 +471,7 @@ def send_welcome_email(to_email, user_name):
 
 
 
-
+@login_required(login_url='login')
 def send_custom_email(to_email, user_name, subject, message_content):
     """Function ya kutuma email na ujumbe wa mfumo"""
     context = {
@@ -484,7 +489,7 @@ def send_custom_email(to_email, user_name, subject, message_content):
     )
 
 
-
+@login_required(login_url='login')
 def send_email_to_selected(request):
     users = User.objects.all()  # Chukua watumiaji wote kwenye mfumo
 
@@ -507,7 +512,7 @@ def send_email_to_selected(request):
     return render(request, 'core/send_email.html', {'users': users})
 
 
-
+@login_required(login_url='login')
 def send_email_to_all(request):
     if request.method == 'POST':
         subject = request.POST.get('subject')
@@ -528,7 +533,7 @@ def send_email_to_all(request):
 from datetime import timedelta
 from django.utils.timezone import now
 from django.core.management.base import BaseCommand
-
+@login_required(login_url='login')
 def remove_expired_verifications():
     """ Hii function itaondoa verification kwa accounts zilizoisha muda """
     expiry_date = now() - timedelta(days=30)
@@ -551,7 +556,7 @@ class Command(BaseCommand):
 
 
 from . utils import remove_expired_verifications
-
+@login_required(login_url='login')
 def dashboard_view(request):
     remove_expired_verifications()  # Angalia ikiwa verification ime-expire
     return render(request, "core/user_dashboard.html")
