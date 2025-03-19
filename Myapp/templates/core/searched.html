@@ -33,6 +33,40 @@
         transform: translateX(-100%);
     }
 }
+
+/* Styling for the button */
+.btn-unique {
+    background: linear-gradient(45deg, #ff9a8b, #fad0c4); /* Gradient background for a unique look */
+    color: white; /* White text color */
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    border-radius: 25px; /* Rounded corners for a smooth look */
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Soft shadow with slight blur */
+    animation: zoomInOut 2s infinite ease-in-out; /* Apply animation */
+    transition: transform 0.3s ease-in-out; /* Smooth scaling transition */
+}
+
+/* Hover effect */
+.btn-unique:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Keyframes for continuous zoom-in and zoom-out */
+@keyframes zoomInOut {
+    0% {
+        transform: scale(1); /* Initial size */
+    }
+    50% {
+        transform: scale(1.2); /* Zoom in to 120% */
+    }
+    100% {
+        transform: scale(1); /* Zoom back to original size */
+    }
+}
+
        </style>
     
 
@@ -223,7 +257,7 @@
         {% if user.profile.is_verified == False %}
         <div class="marquee-container">
             <p class="marquee-text">
-                🚀 Unataka kuona nyumba zote? Jiunge na kifurushi cha Gold au Platinum leo! Gusa <a href="{% url 'jihudumie' %}" style="color: green;"> hapa</a>  Kujiunga🏡🔑</p>
+                🚀 Unataka kuona nyumba zote? Jiunge na kifurushi cha Gold au Platinum leo! Gusa🔑</p>
             </div>
         {% endif %}
 
@@ -231,13 +265,13 @@
         {% if user.profile.subscription_plan == 'silver' %}
             <div class="marquee-container">
                 <p class="marquee-text">
-                     Unatumia Kifurushi cha Silver ambacho ni Bure na Hakina Nyumba zakutosha Jiunge na kifurushi cha Gold au Platinum leo! Gusa <a href="{% url 'jihudumie' %}" style="color: green;"> hapa</a>  Kujiunga🏡</p>
+                     Unatumia Kifurushi cha Silver ambacho ni Bure na Hakina Nyumba zakutosha Jiunge na kifurushi cha Gold au Platinum leo! 🏡</p>
                 </div>
 
         {% elif user.profile.subscription_plan == 'gold' %}
         <div class="marquee-container">
             <p class="marquee-text">
-                Una kifurushi Cha Gold kitakachodumu kwa Mwezi Mmoja Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa Au jiunge kifurushi cha Platinum <a href="{% url 'jihudumie' %}" style="color: green;">Hapa </a>ili ujulishwe kila nyumba inaposajiliwa kwasababu Nyumba Zilizochukuliwa Huondolewa kwenye Mfumo</p>  </div>
+                Una kifurushi Cha Gold kitakachodumu kwa Mwezi Mmoja Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa Au jiunge kifurushi cha Platinum ili ujulishwe kila nyumba inaposajiliwa kwasababu Nyumba Zilizochukuliwa Huondolewa kwenye Mfumo</p>  </div>
                 {% else %}
 
 
@@ -248,6 +282,12 @@
 
             {% endif %}
             {% endif %}
+
+
+            <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
+                <button type="submit" class="btn btn-unique" onclick="window.location.href='{% url 'jihudumie' %}'">Jiunge Hapa</button>
+            </div>
+            
         
         
         <section class="properties-list featured portfolio blog">
