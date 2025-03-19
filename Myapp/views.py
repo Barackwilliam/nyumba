@@ -453,7 +453,6 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 
-@login_required(login_url='login')
 def send_welcome_email(to_email, user_name):
     subject = "Welcome to NyumbaChap!"
     context = {
@@ -471,7 +470,7 @@ def send_welcome_email(to_email, user_name):
 
 
 
-@login_required(login_url='login')
+
 def send_custom_email(to_email, user_name, subject, message_content):
     """Function ya kutuma email na ujumbe wa mfumo"""
     context = {
@@ -488,8 +487,6 @@ def send_custom_email(to_email, user_name, subject, message_content):
         html_message=message,
     )
 
-
-@login_required(login_url='login')
 def send_email_to_selected(request):
     users = User.objects.all()  # Chukua watumiaji wote kwenye mfumo
 
@@ -512,7 +509,7 @@ def send_email_to_selected(request):
     return render(request, 'core/send_email.html', {'users': users})
 
 
-@login_required(login_url='login')
+
 def send_email_to_all(request):
     if request.method == 'POST':
         subject = request.POST.get('subject')
