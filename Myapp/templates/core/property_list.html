@@ -478,6 +478,10 @@
             <p class="marquee-text">
                 🚀 Unataka kuona nyumba zote? Jiunge na kifurushi cha Gold au Platinum leo! 🔑</p>
             </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
+                <button type="submit" class="btn btn-unique" onclick="window.location.href='{% url 'jihudumie' %}'">Jiunge Hapa</button>
+            </div>
+            
         {% endif %}
 
         {% if user.profile.is_verified %}
@@ -486,11 +490,20 @@
                 <p class="marquee-text">
                      Unatumia Kifurushi cha Silver ambacho ni Bure na Hakina Nyumba zakutosha Jiunge na kifurushi cha Gold au Platinum leo! 🏡</p>
                 </div>
+                <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
+                    <button type="submit" class="btn btn-unique" onclick="window.location.href='{% url 'jihudumie' %}'">Jiunge Hapa</button>
+                </div>
+                
 
         {% elif user.profile.subscription_plan == 'gold' %}
         <div class="marquee-container">
             <p class="marquee-text">
-                Una kifurushi Cha Gold kitakachodumu kwa Mwezi Mmoja Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa Au jiunge kifurushi cha Platinum ili ujulishwe kila nyumba inaposajiliwa</p>  </div>
+                Una kifurushi Cha Gold kitakachodumu kwa Mwezi Mmoja Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa Au jiunge kifurushi cha Platinum ili ujulishwe kila nyumba inaposajiliwa</p> 
+             </div>
+                <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
+                    <button type="submit" class="btn btn-unique" onclick="window.location.href='{% url 'jihudumie' %}'">Jiunge Hapa</button>
+                </div>
+                
                 {% else %}
 
 
@@ -502,9 +515,6 @@
             {% endif %}
             {% endif %}
         
-            <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                <button type="submit" class="btn btn-unique" onclick="window.location.href='{% url 'jihudumie' %}'">Jiunge Hapa</button>
-            </div>
             
         
         <section class="properties-list featured portfolio blog">
