@@ -296,13 +296,13 @@ class Inquiry(models.Model):
 
 
 
-class PropertyLocation(models.Model):
-    property = models.OneToOneField('Property', on_delete=models.CASCADE, related_name='location')
-    lat = models.FloatField()
-    lon = models.FloatField()
+# class PropertyLocation(models.Model):
+#     property = models.OneToOneField('Property', on_delete=models.CASCADE, related_name='location')
+#     lat = models.FloatField()
+#     lon = models.FloatField()
 
-    def __str__(self):
-        return f"{self.property.title} - ({self.lat}, {self.lon})"
+#     def __str__(self):
+#         return f"{self.property.title} - ({self.lat}, {self.lon})"
     
     
 

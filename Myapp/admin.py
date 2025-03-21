@@ -3,7 +3,7 @@ from .models import Profile
 from .models import Property
 from .models import Featured
 from .models import Inquiry, Agent,Client,Partner, Offer,Payment
-from .models import PopularPlace, PopularProperty,ChatMessage,Referral
+from .models import PopularPlace, PopularProperty,ChatMessage,Referral,PropertyLocation
 # from . models import Notification
 # from chat.models import ChatRoom
 # from chat.models import Message
@@ -14,6 +14,7 @@ from .models import PopularPlace, PopularProperty,ChatMessage,Referral
 
 # admin.site.register(Message)
 admin.site.register(Referral)
+admin.site.register(PropertyLocation)
 admin.site.register(Offer)
 admin.site.register(Partner)
 admin.site.register(Client)
