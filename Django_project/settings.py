@@ -109,24 +109,24 @@ CHANNEL_LAYERS = {
 
 
 # supabase database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',  # Jina la database
-#         'USER': 'postgres.pwztkimkloomauuuzvhx',  # Jina la mtumiaji
-#         'PASSWORD': 'NyumbaChap',  # Badilisha kwa password yako halisi
-#         'HOST': 'aws-0-us-west-1.pooler.supabase.com',  # URL ya server ya database
-#         'PORT': '5432',  # Port ya PostgreSQL (default ni 5432)
-#     }
-# }
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',  # Jina la database
+        'USER': 'postgres.pwztkimkloomauuuzvhx',  # Jina la mtumiaji
+        'PASSWORD': 'NyumbaChap',  # Badilisha kwa password yako halisi
+        'HOST': 'aws-0-us-west-1.pooler.supabase.com',  # URL ya server ya database
+        'PORT': '5432',  # Port ya PostgreSQL (default ni 5432)
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 
