@@ -39,7 +39,7 @@ class Referral(models.Model):
 class Property(models.Model):
     STATUS_CHOICES =('For Rent','For Rent'),('For Sale','For Sale')
     P_STATUS_CHOICES =('Active','Active'),('Sold','Sold')
-    MKOA = [('ARS','Arusha'), ('DSM','Dar es salaam'), ('DDM','Dodoma'), ('RVM','Ruvuma'), ('TBR','Tabora'), ('MBY','Mbeya'), ('MRG','Morogoro'), ('LND','Lindi'), ('KGM','Kigoma'),( 'KTV','Katavi'),('GIT','Geita'), ('MNR','Manyara'), ('KLR','Kilimanjaro'), ('MR','Mara'), ('MTR','Mtwara'), ('MZ','Mwanza'), ('NB','Njombe'), ('SNG','Songwe'), ('TNG','Tanga'), ('SNG','Shinyanga'), ('IRN','Iringa'), ('KGR','Kagera'), ('PMB','Pemba Kaskazini'), ('PK','Pemba Kusini'), ('PN','Pwani'),('RK','Rukwa'),('SGD','Singida'),('SMY','Simiyu'), ('ZKA','Zanzibar Kaskazini'), ('ZKU','Zanzibar Kusini'),('ZMG','Zanzibar Mjini Magharibi')]
+    MKOA = [('Arusha','Arusha'), ('Dar es salaam','Dar es salaam'), ('Dooma','Dodoma'), ('Ruvuma','Ruvuma'), ('Tabora','Tabora'), ('Mbeya','Mbeya'), ('Morogoro','Morogoro'), ('Lindi','Lindi'), ('Kigoma','Kigoma'),( 'Katavi','Katavi'),('Geita','Geita'), ('Manyara','Manyara'), ('Kilimanjaro','Kilimanjaro'), ('Mara','Mara'), ('Mtwara','Mtwara'), ('Mwanza','Mwanza'), ('Njombe','Njombe'), ('Songwe','Songwe'), ('Tanga','Tanga'), ('Shinyanga','Shinyanga'), ('Iringa','Iringa'), ('Kagera','Kagera'), ('Pemba Kaskazini','Pemba Kaskazini'), ('Pemba Kusini','Pemba Kusini'), ('Pwani','Pwani'),('Rukwa','Rukwa'),('Singida','Singida'),('Simiyu','Simiyu'), ('Zanzibar Kaskazini','Zanzibar Kaskazini'), ('Zanzibar Kusini','Zanzibar Kusini'),('Zanzibar Mjini Magharibi','Zanzibar Mjini Magharibi')]
     PROPERTY_TYPES = [('Apartment','Apartment'), ('House','House'),('Commercial','Commercial')]
     # name = models.CharField(max_length=10)
 

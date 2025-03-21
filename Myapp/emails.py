@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> 9a563f54a18e7ea910e6fda73fe30b911fe79bbe
 from django.shortcuts import render, redirect
 
 
