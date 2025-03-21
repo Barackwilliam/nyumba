@@ -13,3 +13,24 @@ def remove_expired_verifications():
         profile.verified_at = None
         profile.save()
         print(f"Verification removed for {profile.user.username}")
+
+
+
+
+from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut
+
+def get_lat_lon(location_name):
+    """
+    Use Geopy to get latitude and longitude for the location name.
+    """
+    geolocator = Nominatim(user_agent="myGeocoder")
+    
+    try:
+        location = geolocator.geocode(location_name)
+        if location:
+            return location.latitude, location.longitude
+        else:
+            return None, None  # Location not found
+    except GeocoderTimedOut:
+        return None, None  # Handle timeout, return None

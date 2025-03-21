@@ -1,6 +1,9 @@
 from django.urls import path 
 from .views import referral_dashboard,register_view,login_view, offer_list, offer_detail
 
+from .views import property_map
+
+
 from . import views 
 
 urlpatterns = [
@@ -47,5 +50,13 @@ urlpatterns = [
     path('property/<int:property_id>/', views.property_detail, name='property_detail'),
     path('add_property/', views.add_property, name='add_property'),
     path('search_property/', views.search_property, name='search_property'),
+
+
+    path('map/', property_map, name='property_map'),
+    path('api/properties/', views.property_list_view, name='property_list_api'),  # API endpoint for property data
+
+
+
+
 ]
 

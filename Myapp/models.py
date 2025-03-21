@@ -78,7 +78,7 @@ class Property(models.Model):
     property_owner = CloudinaryField('image')
     # video = models.FileField(upload_to='property_video/',validators=[validate_video_size], blank=True, null=True default=)
     video_link = models.URLField(max_length=300, blank=True, null=True)
-
+   
 
 
 
@@ -97,14 +97,6 @@ class Property(models.Model):
     def get_absolute_url(self):
         return f"/property/{self.id}/"
     
-    
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         self.slug = slugify(self.title)
-    #     super(Property, self).save(*args, **kwargs)
-
-
-
 
 class ChatMessage(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
@@ -299,4 +291,40 @@ class Inquiry(models.Model):
 
     def __str__(self):
         return f'Inquiry from {self.full_name} for {self.property.title}'
+    
 
+
+
+
+class PropertyLocation(models.Model):
+    property = models.OneToOneField('Property', on_delete=models.CASCADE, related_name='location')
+    lat = models.FloatField()
+    lon = models.FloatField()
+
+    def __str__(self):
+        return f"{self.property.title} - ({self.lat}, {self.lon})"
+    
+    
+
+from .utils import get_lat_lon  # Import the function
+
+class PropertyLocation(models.Model):
+    property = models.OneToOneField('Property', on_delete=models.CASCADE, related_name='location')
+    lat = models.FloatField(null=True, blank=True)  # Add null=True and blank=True for optional lat/lon
+    lon = models.FloatField(null=True, blank=True)  # Add null=True and blank=True for optional lat/lon
+
+    def save(self, *args, **kwargs):
+        # Fetch lat/lon based on region, district, or ward
+        if not self.lat or not self.lon:
+            # Get latitude and longitude based on region name, district name, or ward name
+            location_name = f"{self.property.region}, {self.property.district}, {self.property.ward}"
+            lat, lon = get_lat_lon(location_name)  # Fetch lat, lon from geocoding API
+            
+            if lat and lon:  # If geocoding is successful, set the lat/lon
+                self.lat = lat
+                self.lon = lon
+        
+        super().save(*args, **kwargs)  # Save the object after updating lat/lon
+
+    def __str__(self):
+        return f"{self.property.title} - ({self.lat}, {self.lon})"

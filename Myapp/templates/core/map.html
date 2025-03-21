@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyumba kwenye Ramani</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: #1d1f22;
+            padding: 20px;
+            color: #fff;
+            margin: 0;
+        }
+
+        /* Heading style */
+        h2 {
+            text-align: center;
+            color: #00e5ff;
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+
+        /* Search bar container styling */
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Input styling */
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #00e5ff;
+            background: #333;
+            color: #fff;
+            width: 80%;
+            max-width: 300px;
+            box-sizing: border-box;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Input focus state */
+        input:focus {
+            border-color: #ff4081;
+            background: #444;
+            outline: none;
+        }
+
+        /* Button styling */
+        button {
+            padding: 10px 25px;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            font-size: 18px;
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #00e5ff;
+        }
+
+        /* Map styling */
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Loading animation and progress bar */
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 22px;
+            color: #00e5ff;
+            display: none;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #00e5ff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1.5s linear infinite;
+            margin: 20px auto;
+        }
+
+        /* Loader spin animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Wave animation for the loading bar */
+        .wave {
+            width: 100px;
+            height: 10px;
+            background: linear-gradient(90deg, rgba(0, 229, 255, 0.7) 25%, rgba(255, 64, 129, 0.7) 75%);
+            animation: wave-animation 1.5s ease-in-out infinite;
+            border-radius: 5px;
+            margin: 20px auto;
+        }
+
+        /* Wave animation */
+        @keyframes wave-animation {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Progress bar smooth transition */
+        #progressBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            background: #ff4081;
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Responsive Design for smaller screens */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 24px;
+            }
+
+            /* Stack inputs vertically on smaller screens */
+            .search-container {
+                gap: 10px;
+            }
+
+            input, button {
+                width: 90%; /* Full width on small screens */
+            }
+
+            /* Resize map on small devices */
+            #map {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Further adjust layout for very small screens */
+            h2 {
+                font-size: 20px;
+            }
+
+            .search-container {
+                gap: 5px;
+            }
+
+            input, button {
+                width: 100%; /* Full width on very small screens */
+            }
+
+            #map {
+                height: 300px;
+            }
+        }
+
+        .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: #1d1f22;
+    color: rgb(255, 255, 255); /* Rangi ya maandishi */
+    padding: 5px 0;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    white-space: nowrap;
+}
+
+.marquee-text {
+    display: inline-block;
+    position: relative;
+    animation: marquee 14s linear infinite;
+    font-size: 20px;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <h2>NyumbaChap Map System</h2>
+    
+  
+            
+    {% if user.profile.is_verified == False %}
+    <div class="marquee-container">
+        <p class="marquee-text">
+            🚀 Unataka kuona nyumba zote? Jiunge na kifurushi cha Gold au Platinum leo!</p>
+        </div>
+        
+    {% endif %}
+
+    {% if user.profile.is_verified %}
+    {% if user.profile.subscription_plan == 'silver' %}
+        <div class="marquee-container">
+            <p class="marquee-text">
+                 Unatumia Kifurushi cha Silver ambacho ni Bure na Hakina Nyumba zakutosha Jiunge na kifurushi cha Gold au Platinum leo! 🏡</p>
+            </div>
+
+    {% elif user.profile.subscription_plan == 'gold' %}
+    <div class="marquee-container">
+        <p class="marquee-text">
+            Una kifurushi Cha Gold kitakachodumu kwa Mwezi Mmoja Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa Au jiunge kifurushi cha Platinum ili ujulishwe kila nyumba inaposajiliwa kwasababu Nyumba Zilizochukuliwa Huondolewa kwenye Mfumo</p> 
+
+             </div>
+            {% else %}
+
+
+            <div class="marquee-container">
+                <p class="marquee-text">
+                    Nyumba Zilizochukuliwa huondolewa Kwenye Mfumo Tafadhari Tembelea Mara kwa Mara Ili upate Nyumba mpya Kila zinaposajiliwa</p>  </div>
+                
+
+        {% endif %}
+        {% endif %}
+
+
+    
+
+    <div class="search-container">
+        <label for="region">Region:</label>
+        <input type="text" id="region">
+
+        <label for="district">District:</label>
+        <input type="text" id="district">
+
+        <!-- <label for="ward">Ward:</label>
+        <input type="text" id="ward"> -->
+
+        <button onclick="loadProperties()">Tafuta</button>
+    </div>
+
+    <div id="progressBar"></div>
+
+    <div id="loading">
+        <div class="loader"></div>
+        <div class="wave"></div>
+        <p>Connecting to Database...</p>
+    </div>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([-6.369028, 34.888822], 6); // Tanzania Coordinates
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        function loadProperties() {
+            let region = document.getElementById('region').value;
+            let district = document.getElementById('district').value;
+            let ward = document.getElementById('ward').value;
+
+            // Show loading animations and progress bar
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('progressBar').style.width = '50%'; // Start progress bar
+
+            let url = `/api/properties/?region=${encodeURIComponent(region)}&district=${encodeURIComponent(district)}&ward=${encodeURIComponent(ward)}`;
+
+            console.log("Fetching data from:", url);
+
+            fetch(url)
+                .then(response => {
+                    console.log("Response received:", response);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Data received:", data);
+
+                    // Update progress bar to 100% after data is loaded
+                    document.getElementById('progressBar').style.width = '100%';
+
+                    // Hide loading animations once data is fetched
+                    setTimeout(() => {
+                        document.getElementById('loading').style.display = 'none';
+                    }, 500); // Delay to allow progress bar to fill
+
+                    if (data.length === 0) {
+                        alert("Hakuna nyumba zilizopatikana kwenye eneo hilo!");
+                        return;
+                    }
+
+                    // If properties found, center map on the first one
+                    let firstProperty = data[0];
+                    if (firstProperty.location && firstProperty.location.lat != null && firstProperty.location.lon != null) {
+                        let firstLat = firstProperty.location.lat;
+                        let firstLon = firstProperty.location.lon;
+                        map.setView([firstLat, firstLon], 12); // Center the map to the first property
+                    }
+
+                    data.forEach(property => {
+                        if (property.location && property.location.lat && property.location.lon) {
+                            let lat = property.location.lat;
+                            let lon = property.location.lon;
+                            let title = property.title;
+
+                            L.marker([lat, lon]).addTo(map)
+                                .bindPopup(`<b>${title}</b><br>${property.region}, ${property.district}, ${property.ward}<br>Price: ${property.price}`);
+                        } else {
+                            console.warn("Property does not have latitude/longitude:", property);
+                        }
+                    });
+
+                    // Add fake markers (Red dots)
+                    addFakeMarkers(100); // Add 100 fake markers within Tanzania Mainland
+                })
+                .catch(error => console.error("Error fetching properties:", error));
+        }
+
+        // Function to add random fake markers within Tanzania Mainland only
+        function addFakeMarkers(count) {
+            for (let i = 0; i < count; i++) {
+                // Ensure markers stay within Tanzania's mainland bounds (not including Zanzibar)
+                let lat = (Math.random() * (6.5 - -12.5)) + -12.5; // Random latitude for Tanzania Mainland
+                let lon = (Math.random() * (41.5 - 29.5)) + 29.5; // Random longitude for Tanzania Mainland
+
+                // Use a red circle for fake houses
+                let fakeHouseId = `T${(i+1).toString().padStart(4, '0')}`; // Generate fake house ID like T0001, T0002, ...
+
+                L.circleMarker([lat, lon], {
+                    color: 'red',
+                    fillColor: 'red',
+                    fillOpacity: 0.7,
+                    radius: 8 // Adjust the size of the circle
+                })
+                .addTo(map)
+                .bindPopup(`<b>Nyumba ID: ${fakeHouseId}</b><br><button onclick="takeFakeHouse('${fakeHouseId}')">Take this House</button>`);
+            }
+        }
+
+        // Function to simulate "Take this House"
+        function takeFakeHouse(fakeHouseId) {
+            alert(`Nyumba ${fakeHouseId} imechukuliwa na kuondolewa kwenye mfumo!`);
+            // Here you can update your backend or show more feedback if needed.
+        }
+    </script>
+</body>
+</html>

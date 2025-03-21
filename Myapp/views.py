@@ -562,4 +562,87 @@ def dashboard_view(request):
 def email(request):
     return render(request,'core/email.html')
 
+from django.http import JsonResponse
+from .models import Property
+from .serializers import PropertySerializer
 
+
+from django.http import JsonResponse
+from .models import Property
+from .serializers import PropertySerializer
+
+def property_list_view(request):
+    region = request.GET.get('region')
+    district = request.GET.get('district')
+    ward = request.GET.get('ward')
+
+    properties = Property.objects.all()
+
+    if region:
+        properties = properties.filter(region=region)
+    if district:
+        properties = properties.filter(district=district)
+    if ward:
+        properties = properties.filter(ward=ward)
+
+    serializer = PropertySerializer(properties, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+
+
+
+from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut
+
+def get_lat_lon(location_name):
+    """
+    Use Geopy to get latitude and longitude for the location name.
+    """
+    geolocator = Nominatim(user_agent="myGeocoder")
+    
+    try:
+        location = geolocator.geocode(location_name)
+        if location:
+            return location.latitude, location.longitude
+        else:
+            return None, None  # Location not found
+    except GeocoderTimedOut:
+        return None, None  # Handle timeout, return None
+
+
+
+
+
+def property_map(request):
+    return render(request, 'core/map.html')
+
+
+
+from .models import Property, PropertyLocation
+
+def update_property_locations():
+    """
+    Loop through all properties, fetch their location name (region, district, ward),
+    and update the PropertyLocation with lat and lon using geocoding.
+    """
+    properties = Property.objects.all()
+    
+    for property in properties:
+        location_name = f"{property.region}, {property.district}, {property.ward}"
+        lat, lon = get_lat_lon(location_name)  # Use geocoding to get lat/lon
+        
+        if lat and lon:
+            # Check if PropertyLocation already exists
+            property_location, created = PropertyLocation.objects.get_or_create(property=property)
+            
+            # Update or set lat/lon values
+            property_location.lat = lat
+            property_location.lon = lon
+            property_location.save()  # Save the updated PropertyLocation
+            
+            print(f"Updated {property.title} with coordinates: ({lat}, {lon})")
+        else:
+            print(f"Failed to update coordinates for {property.title} (Location not found)")
+
+# Run this function once to update the properties with lat/lon
+update_property_locations()

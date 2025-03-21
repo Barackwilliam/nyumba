@@ -176,6 +176,8 @@
                                     <li><a href="{% url 'property_list' %}">Orodha ya Nyumba</a>
                                        
                                     </li>
+                                    <li><a href="{% url 'property_map' %}">Search Via Map</a>
+
 
                                 {% if request.user.is_authenticated and request.user.referrals.exists %}
                                     <li><a href="{% url 'referral_dashboard' %}">Get Money</a></li>
