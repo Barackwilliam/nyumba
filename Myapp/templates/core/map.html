@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #1d1f22;
+            background: #860f7c;
             padding: 20px;
             color: #fff;
             margin: 0;
@@ -59,7 +59,7 @@
         .marquee-container {
             width: 100%;
             overflow: hidden;
-            background-color: #1d1f22;
+            background-color: #860f7c;
             color: white;
             padding: 5px 0;
             font-weight: bold;
@@ -138,6 +138,52 @@
             background: #ff4081;
             transition: width 0.5s ease-in-out;
         }
+
+        /* Custom Alerts Style */
+        .custom-alert {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff4081; /* Default background */
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            display: none; /* Initially hidden */
+            animation: slideIn 0.5s ease-out;
+        }
+
+        /* Success Alert */
+        .alert-success {
+            background-color: #4caf50; /* Green background */
+        }
+
+        /* Error Alert */
+        .alert-error {
+            background-color: #f44336; /* Red background */
+        }
+
+        /* Info Alert */
+        .alert-info {
+            background-color: #2196f3; /* Blue background */
+        }
+
+        /* Slide-in animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -187,7 +233,7 @@
     <div id="loading">
         <div class="loader"></div>
         <div class="wave"></div>
-        <div>Inapakia nyumba...</div>
+        <div>Inatafuta nyumba...</div>
     </div>
 
     <div id="progressBar"></div>
@@ -219,7 +265,7 @@
                     document.getElementById('progressBar').style.width = '0%'; // Reset progress bar
 
                     if (data.length === 0) {
-                        alert("Hakuna nyumba zilizopatikana kwenye eneo hilo!");
+                        showAlert("Eneo hilo Halipo kwenye kifurushi cha Bure!", 'error');
                         return;
                     }
 
@@ -235,12 +281,12 @@
                             let title = property.title;
                             let propertyUrl = `/property/${property.id}/`; 
 
-                            let popupContent = `
+                            let popupContent = ` 
                                 <b>${title}</b><br>
                                 ${property.region}, ${property.district}<br>
                                 Price: ${property.price}<br>
                                 <a href="${propertyUrl}" target="_blank" style="color: blue; text-decoration: underline;">
-                                    🏡 Nenda kwenye Nyumba
+                                    🏡 Tazama Nyumba
                                 </a>
                             `;
 
@@ -279,7 +325,22 @@
         }
 
         function takeFakeHouse(fakeHouseId) {
-            alert(`Nyumba ${fakeHouseId} imechukuliwa na kuondolewa kwenye mfumo!`);
+            showAlert(`Nyumba ${fakeHouseId} imepangishwa na kuondolewa kwenye Mfumo!`, 'success');
+        }
+
+        function showAlert(message, type = 'info') {
+            const alertBox = document.createElement('div');
+            alertBox.classList.add('custom-alert', `alert-${type}`);
+            alertBox.textContent = message;
+
+            document.body.appendChild(alertBox);
+
+            // Show the alert and automatically remove it after 4 seconds
+            alertBox.style.display = 'block';
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+                alertBox.remove();
+            }, 4000);
         }
     </script>
 
