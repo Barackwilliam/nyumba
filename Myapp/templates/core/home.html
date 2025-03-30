@@ -11,6 +11,21 @@
 
 
 <body class="homepage-9 hp-6 homepage-1 mh">
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var protectedText = 'This text is protected.';
+            var encodedText = btoa(protectedText); // Encode text to base64
+            document.getElementById('protectedContent').innerText = atob(encodedText); // Decode back to original text
+        });
+    </script>
+    
+
+
+
+
     <!-- Wrapper -->
     <div id="wrapper">
         <!-- START SECTION HEADINGS -->

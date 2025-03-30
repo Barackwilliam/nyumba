@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'Django_project.middleware.MethodNotAllowedMiddleware',
+     'Django_project.middleware.BlockScrapersMiddleware',  # Ongeza hapa
     
 ]
 
@@ -253,6 +254,14 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 
+# RECAPTCHA_PUBLIC_KEY = '6LfuUAQrAAAAAIopNWeR-dfvr9-9MVE9IMoDG5BL'
+# RECAPTCHA_PRIVATE_KEY = '6LfuUAQrAAAAALQ8np7CXxpyFOMzIOTKdiUgjbKi'
+
+
+
+
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = "DENY"
 
 
 

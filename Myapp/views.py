@@ -1,3 +1,5 @@
+
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProfileForm, InquiryForm
 from django.http import JsonResponse
@@ -283,6 +285,67 @@ def Register(request):
             return render(request,'core/login.html')
     else:
         return render(request, 'core/Register.html')
+
+
+
+
+
+# def Register(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         email = request.POST['email']
+#         password = request.POST['password']
+#         password2 = request.POST['password2']
+
+#         # Validate reCAPTCHA
+#         captcha_response = request.POST.get('g-recaptcha-response')
+#         payload = {
+#             'secret': settings.RECAPTCHA_PRIVATE_KEY,
+#             'response': captcha_response
+#         }
+#         verify_url = 'https://www.google.com/recaptcha/api/siteverify'
+#         verify_response = requests.post(verify_url, data=payload)
+#         result = verify_response.json()
+
+#         if result['success']:
+#             if password == password2:
+#                 if User.objects.filter(email=email).exists():
+#                     messages.error(request, 'Pole..! Email hii Tayari imesajiliwa Tafadhari Tumia Email Nyingine.!')
+#                     return redirect('Register')
+#                 elif User.objects.filter(username=username).exists():
+#                     messages.error(request, 'Loh Username uliyotumia ilisha sajiliwa Tafadhari Tumia Username Nyingine.!')
+#                     return redirect('Register')
+#                 else:
+#                     user = User.objects.create_user(username=username, email=email, password=password2)
+#                     user.save()
+
+#                     # Send welcome email
+#                     send_welcome_email(user.email, user.username)
+
+#                     messages.success(request, 'Your Account created Successfully. Please login below.')
+#                     user_login = auth.authenticate(username=username, password=password)
+#                     auth.login(request, user_login)
+
+#                     # Create profile object for new user
+#                     new_profile = Profile.objects.create(
+#                         user=user,
+#                         role=user,
+#                         address=user,
+#                         phone=user,
+#                         email=user,
+#                         picture=user,
+#                         bio=user
+#                     )
+#                     new_profile.save()
+#                     return redirect('login')
+#             else:
+#                 messages.error(request, 'Passwords do not match!')
+#                 return render(request, 'core/Register.html')
+#         else:
+#             messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+#             return render(request, 'core/Register.html')
+
+#     return render(request, 'core/Register.html')
 
 
 
@@ -671,3 +734,22 @@ def update_property_locations():
             print(f"Updated {property.title} with coordinates: ({lat}, {lon})")
         else:
             print(f"Failed to update coordinates for {property.title} (Location not found)")
+
+
+
+def policy(request):
+    return render(request,"core/policy.html")
+
+
+
+
+def custom_404(request, exception):
+    return render(request, 'core/404.html', status=404)
+
+
+from django.http import HttpResponse
+
+def my_view(request):
+    response = HttpResponse("Hello, Nyumbachap Does not Accept iframe")
+    response["X-Frame-Options"] = "DENY"
+    return response
