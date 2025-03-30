@@ -4,10 +4,6 @@ from .models import Property
 from .models import Featured
 from .models import Inquiry, Agent,Client,Partner, Offer,Payment
 from .models import PopularPlace, PopularProperty,ChatMessage,Referral,PropertyLocation
-# from . models import Notification
-# from chat.models import ChatRoom
-# from chat.models import Message
-
 # Register your models here.
 
 # admin.site.register(ChatRoom)

@@ -1,6 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+  <script>
+    var a=10,b=20;console.log(a+b);
+</script>
+
+  <script>
+    // Kuzuia Right Click
+    document.addEventListener("contextmenu", function(event) {
+        event.preventDefault();
+        alert("🚫 Sorry, Right Click is Disabled! Wasiliana na Developer No: 0629712678");
+    });
+
+    // Kuzuia DevTools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+    document.addEventListener("keydown", function(event) {
+        if (event.keyCode == 123) {  // F12
+            event.preventDefault();
+            alert("🚫 Sorry, Inspect Element is Disabled! Wasiliana na Developer No: 0629712678");
+        }
+        if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) {  // Ctrl+Shift+I or Ctrl+Shift+J
+            event.preventDefault();
+            alert("🚫 Sorry, Developer Tools is Disabled! Wasiliana na Developer No: 0629712678");
+        }
+        if (event.ctrlKey && event.keyCode == 85) {  // Ctrl+U
+            event.preventDefault();
+            alert("🚫 Sorry, View Source is Disabled! Wasiliana na Developer No: 0629712678");
+        }
+    });
+</script>
+
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Referral Page - Responsive Sign up/Login Form</title>
@@ -107,6 +138,11 @@
         <input type="text" name="username" placeholder="Enter your Name" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
+
+
+        <div class="g-recaptcha" data-sitekey="6LfuUAQrAAAAAIopNWeR-dfvr9-9MVE9IMoDG5BL"></div>
+
+        
         <button>Jisajili</button>
       </form>
     </div>
@@ -115,6 +151,9 @@
       <a href="{% url 'Register' %}"><button>Fungua Akaunt ya Mpangaji</button></a>
     </div>
   </div>
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </body>
 </html>
 

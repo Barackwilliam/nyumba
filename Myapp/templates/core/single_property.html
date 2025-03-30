@@ -534,6 +534,14 @@
     <!-- Wrapper / End -->
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var protectedText = 'This text is protected.';
+            var encodedText = btoa(protectedText); // Encode text to base64
+            document.getElementById('protectedContent').innerText = atob(encodedText); // Decode back to original text
+        });
+    </script>
+    
 
 </body>
 

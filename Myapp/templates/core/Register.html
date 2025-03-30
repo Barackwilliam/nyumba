@@ -3,6 +3,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <script>
+        var a=10,b=20;console.log(a+b);
+    </script>
+
+    <script>
+        // Kuzuia Right Click
+        document.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+            alert("🚫 Sorry, Right Click is Disabled! Wasiliana na Developer No: 0629712678");
+        });
+    
+        // Kuzuia DevTools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+        document.addEventListener("keydown", function(event) {
+            if (event.keyCode == 123) {  // F12
+                event.preventDefault();
+                alert("🚫 Sorry, Inspect Element is Disabled! Wasiliana na Developer No: 0629712678");
+            }
+            if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) {  // Ctrl+Shift+I or Ctrl+Shift+J
+                event.preventDefault();
+                alert("🚫 Sorry, Developer Tools is Disabled! Wasiliana na Developer No: 0629712678");
+            }
+            if (event.ctrlKey && event.keyCode == 85) {  // Ctrl+U
+                event.preventDefault();
+                alert("🚫 Sorry, View Source is Disabled! Wasiliana na Developer No: 0629712678");
+            }
+        });
+    </script>
+    
+
+
+
+<!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+
+
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
 <script>
@@ -24,8 +59,8 @@
     <link rel="stylesheet" href="{% static 'css2/style.css' %}">
     <style>
         
-   /* Popup container */
-   #popup {
+  /* Popup container */
+#popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -41,26 +76,27 @@
 /* Popup content */
 #popupContent {
     background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
-    padding: 30px;
-    border-radius: 15px;
+    padding: 20px;  /* Reduce padding to make popup smaller */
+    border-radius: 10px;  /* Slightly smaller border radius */
     text-align: center;
     color: #fff; /* White text */
-    max-width: 400px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Stylish shadow */
+    max-width: 300px;  /* Smaller max-width */
+    width: 80%;  /* Ensure it takes up most of the viewport */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Stylish shadow */
     animation: fadeIn 0.8s ease-in-out; /* Animation */
 }
 
 /* Heading style */
 #popupContent h2 {
-    font-size: 28px;
-    margin-bottom: 15px;
+    font-size: 24px;  /* Smaller font size for heading */
+    margin-bottom: 10px;  /* Reduced space below the heading */
     font-family: 'Arial', sans-serif;
 }
 
 /* Paragraph style */
 #popupContent p {
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 16px;  /* Smaller font size for paragraph */
+    margin-bottom: 15px;  /* Reduced space below paragraph */
 }
 
 /* Close button style */
@@ -68,10 +104,10 @@
     background: #ff6b6b; /* Soft red color */
     color: #fff;
     border: none;
-    padding: 12px 20px;
+    padding: 10px 18px;  /* Smaller padding for the button */
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;  /* Smaller button text */
     transition: all 0.3s ease;
 }
 
@@ -90,6 +126,7 @@
         opacity: 1;
     }
 }
+
     </style>
 </head>
 <body>
@@ -148,8 +185,14 @@
 
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href=" {% url 'policy' %}" class="term-service">Terms of service</a></label>
                         </div>
+
+                      <!-- Google reCAPTCHA -->
+        <!-- <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div><br> -->
+
+
+
                         <div class="form-group">
                             <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
                         </div>
@@ -163,7 +206,6 @@
         </section>
 
     </div>
-
 
 
     
@@ -186,5 +228,5 @@
     <!-- JS -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 </html>

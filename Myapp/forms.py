@@ -1,4 +1,5 @@
 from django import forms 
+
 from django.core.exceptions import ValidationError
 from .models import Profile, Property, Inquiry, Payment
 
@@ -54,3 +55,11 @@ class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
         fields = ['Transaction_image']
+
+
+
+
+# class MyForm(forms.Form):
+#     name = forms.CharField()
+#     email = forms.EmailField()
+#     captcha = ReCaptchaField()

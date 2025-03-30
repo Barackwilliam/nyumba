@@ -1,0 +1,31 @@
+User-agent: HTTrack
+Disallow: /
+
+User-agent: WebCopier
+Disallow: /
+
+User-agent: Teleport
+Disallow: /
+
+User-agent: wget
+Disallow: /
+
+User-agent: curl
+Disallow: /
+
+User-agent: *
+Disallow: /private/
+
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Zuia bots zingine
+User-agent: *
+Disallow: /admin/
+Disallow: /user-data/
+Disallow: /dashboard/
+Disallow: /private/

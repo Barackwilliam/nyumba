@@ -12,6 +12,14 @@ urlpatterns = [
     path('Blog/', include('Blog.urls')),
     
 ]
+
+
+
+from django.conf.urls import handler404
+from Myapp.views import custom_404
+
+handler404 = 'Myapp.views.custom_404'
+
 #urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # if settings.DEBUG:
 #     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

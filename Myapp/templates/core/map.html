@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
+
+    <script>
+        var a=10,b=20;console.log(a+b);
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nyumba kwenye Ramani</title>
@@ -345,6 +350,16 @@
             }, 4000);
         }
     </script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var protectedText = 'This text is protected.';
+        var encodedText = btoa(protectedText); // Encode text to base64
+        document.getElementById('protectedContent').innerText = atob(encodedText); // Decode back to original text
+    });
+</script>
 
 </body>
 </html>

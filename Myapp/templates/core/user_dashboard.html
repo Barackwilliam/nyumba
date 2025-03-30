@@ -7,6 +7,48 @@
 <!-- Mirrored from code-theme.com/html/findhouses/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 11 Aug 2024 13:00:39 GMT -->
 <head>
 
+
+    <script>
+        if (!navigator.userAgent.includes("Mozilla")) {
+            document.body.innerHTML = "Bots not allowed!";
+        }
+    </script>
+    
+
+    <meta name="monetag" content="d73f0efb5d369d24830f6c46b1316c00">
+
+
+    <script>
+        var a=10,b=20;console.log(a+b);
+    </script>
+
+    
+    <script>
+        // Kuzuia Right Click
+        document.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+            alert("🚫 Sorry, Right Click is Disabled! Wasiliana na Developer No: 0629712678");
+        });
+    
+        // Kuzuia DevTools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+        document.addEventListener("keydown", function(event) {
+            if (event.keyCode == 123) {  // F12
+                event.preventDefault();
+                alert("🚫 Sorry, Inspect Element is Disabled! Wasiliana na Developer No: 0629712678");
+            }
+            if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) {  // Ctrl+Shift+I or Ctrl+Shift+J
+                event.preventDefault();
+                alert("🚫 Sorry, Developer Tools is Disabled! Wasiliana na Developer No: 0629712678");
+            }
+            if (event.ctrlKey && event.keyCode == 85) {  // Ctrl+U
+                event.preventDefault();
+                alert("🚫 Sorry, View Source is Disabled! Wasiliana na Developer No: 0629712678");
+            }
+        });
+    </script>
+    
+    
+
     
 	<style>
 
@@ -456,7 +498,7 @@
                         <div class="second-footer">
                             <div class="container">
                                 <p>2025 © Copyright - All Rights Reserved.</p>
-                                <p>Made With <i class="fa fa-heart" aria-hidden="true"></i> NyumbaChap</p>
+                                <p>Made With <i class="fa fa-heart" aria-hidden="true"></i> NyumbaChap | <a href=" {% url 'policy' %}">Privacy Policy</a></p>
                             </div>
                         </div>
                     </div>
@@ -646,6 +688,15 @@
 
     </div>
     <!-- Wrapper / End -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var protectedText = 'This text is protected.';
+            var encodedText = btoa(protectedText); // Encode text to base64
+            document.getElementById('protectedContent').innerText = atob(encodedText); // Decode back to original text
+        });
+    </script>
+    
 </body>
 
 
