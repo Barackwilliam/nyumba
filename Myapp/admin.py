@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Profile
 from .models import Property
 from .models import Featured
+from .models import Help_Question
 from .models import Inquiry, Agent,Client,Partner, Offer,Payment
 from .models import PopularPlace, PopularProperty,ChatMessage,Referral,PropertyLocation
 # Register your models here.
@@ -24,6 +25,7 @@ admin.site.register(Property)
 admin.site.register(Payment)
 admin.site.register(PopularPlace)
 admin.site.register(PopularProperty)
+admin.site.register(Help_Question)
 
 
 # @admin.register(Property)

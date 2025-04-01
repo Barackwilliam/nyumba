@@ -51,6 +51,7 @@ urlpatterns = [
     path('add_property/', views.add_property, name='add_property'),
     path('search_property/', views.search_property, name='search_property'),
     path('policy/', views.policy, name='policy'),
+    path('help/', views.help_center, name='help_center'),
 
 
 

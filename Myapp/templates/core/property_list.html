@@ -431,6 +431,8 @@
                                     <li><a href="{% url 'dashboard' %}">Dashboard</a>
                                
                                     </li>
+                                    <li><a href="{% url 'help_center' %}">Help Center</a>
+                                    </li>
                                     
                                 {% if request.user.is_authenticated and request.user.referrals.exists %}
                                 <li><a href="{% url 'referral_dashboard' %}">Get Money</a></li>
