@@ -328,3 +328,14 @@ class PropertyLocation(models.Model):
 
     def __str__(self):
         return f"{self.property.title} - ({self.lat}, {self.lon})"
+
+
+
+class Help_Question(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)  # Hii itaongeza timestamp kwa rekodi mpya
+
+
+    def __str__(self):
+        return self.question
