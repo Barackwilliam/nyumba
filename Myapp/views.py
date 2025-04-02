@@ -758,16 +758,39 @@ def my_view(request):
 
 
 
+# from .models import Help_Question
+# from django.db.models import Q
+
+# def help_center(request):
+#     query = request.GET.get('q', '')  # Search query
+#     if query:
+#         # Filter FAQs by search query
+#         questions = Help_Question.objects.filter(Q(question__icontains=query) | Q(answer__icontains=query))
+#     else:
+#         # Show all FAQs if no search query is provided
+#         questions = Help_Question.objects.all()
+    
+#     return render(request, 'core/help_center.html', {'questions': questions, 'query': query})
+
+
+
 from .models import Help_Question
 from django.db.models import Q
 
 def help_center(request):
-    query = request.GET.get('q', '')  # Search query
-    if query:
-        # Filter FAQs by search query
-        questions = Help_Question.objects.filter(Q(question__icontains=query) | Q(answer__icontains=query))
-    else:
-        # Show all FAQs if no search query is provided
-        questions = Help_Question.objects.all()
+    query = request.GET.get('q', '')  # Pata neno la utafutaji
+    questions = Help_Question.objects.all()
     
-    return render(request, 'core/help_center.html', {'questions': questions, 'query': query})
+    if query:
+        questions = questions.filter(Q(question__icontains=query) | Q(answer__icontains=query))
+        if not questions.exists():
+            return render(request, 'core/help_center.html', {
+                'questions': questions,
+                'query': query,
+                'no_results': True  # Tuma flag ya "hakuna matokeo"
+            })
+    
+    return render(request, 'core/help_center.html', {
+        'questions': questions,
+        'query': query
+    })
