@@ -383,7 +383,7 @@
 
 
 <body class="inner-pages homepage-4 agents hp-6 full hd-white">
-    
+
     <script defer src="https://static.getbutton.io/widget/bundle.js?id=UaD5Y"></script>
 
 
@@ -931,6 +931,36 @@ page_obj.previous_page_number }}">Previous</a>
         var encodedText = btoa(protectedText); // Encode text to base64
         document.getElementById('protectedContent').innerText = atob(encodedText); // Decode back to original text
     });
+</script>
+
+
+<script>
+    // Zuia matumizi ya Print Screen (PrtSc)
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'PrintScreen') {
+        event.preventDefault();
+        alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+    }
+});
+
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'PrintScreen') {
+        navigator.clipboard.writeText('Screenshots is Disable.').then(function() {
+            alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+        });
+    }
+});
+
+// Zuia Developer Tools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'F12' || 
+        (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
+        (event.ctrlKey && event.key === 'U')) {
+        event.preventDefault();
+        alert('Developer tools Haziruhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+    }
+});
+
 </script>
 
 </body>
