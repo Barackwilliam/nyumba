@@ -469,6 +469,36 @@
     <!-- Wrapper / End -->
 
 
+
+<script>
+    // Zuia matumizi ya Print Screen (PrtSc)
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'PrintScreen') {
+        event.preventDefault();
+        alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+    }
+});
+
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'PrintScreen') {
+        navigator.clipboard.writeText('Screenshots is Disable.').then(function() {
+            alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+        });
+    }
+});
+
+// Zuia Developer Tools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'F12' || 
+        (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
+        (event.ctrlKey && event.key === 'U')) {
+        event.preventDefault();
+        alert('Developer tools Haziruhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+    }
+});
+
+</script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var protectedText = 'This text is protected.';
