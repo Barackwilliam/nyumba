@@ -252,98 +252,98 @@ def search_property(request):
     return render(request,'core/searched.html',{'results':results})
 
 
-# def Register(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         email = request.POST['email']
-#         password = request.POST['password']
-#         password2 = request.POST['password2']
-#         if password == password2:
-#            if User.objects.filter(email=email).exists():
-#                messages.error(request, 'Pole..! Email hii Tayari imesajiliwa Tafadhari Tumia Email Nyingine.!')
-#                return redirect('Register')
-#            elif User.objects.filter(username=username).exists():
-#                messages.error(request, 'Loh Username uliyotumia ilisha sajiliwa Tafadhari Tumia Username Nyingine.!')
-#                return redirect('Register')
-#            else:
-#                user = User.objects.create_user(username=username, email=email, password=password2)
-#                user.save()
-#                 # Tuma email ya ukaribisho
-#                send_welcome_email(user.email, user.username)
-#                messages.success(request,'Your Account created Successfully login below')
-#                return redirect('login')
-#             # #redirect usert to setting
-#                user_login = auth.authenticate(username=username, password=password)
-#                auth.login(request, user_login)
-#             #create a profile object for new user
-#                user_model = User.objects.get(username=username)
-#                new_profile = Profile.objects.create(user=user_model,role=user_model,address=user_model,phone=user_model,email=user_model,picture=user_model, bio=user_model)
-#                new_profile.save()
-#                return redirect('login')
-#         else:
-#             messages.error(request, 'password Not Matching')
-#             return render(request,'core/login.html')
-#     else:
-#         return render(request, 'core/Register.html')
-
-
-import requests  # kwa kuverify reCAPTCHA
-from django.conf import settings  # kupata SECRET_KEY ya reCAPTCHA
-
 def Register(request):
     if request.method == 'POST':
-        # Verify reCAPTCHA
-        recaptcha_response = request.POST.get('g-recaptcha-response')
-        data = {
-            'secret': settings.RECAPTCHA_PRIVATE_KEY,  # key yako ya siri
-            'response': recaptcha_response
-        }
-        r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-        result = r.json()
-
-        if not result.get('success'):
-            messages.error(request, 'Tafadhari thibitisha kuwa wewe si roboti.')
-            return redirect('Register')
-
-        # Proceed na usajili kama kawaida
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
         password2 = request.POST['password2']
-
         if password == password2:
-            if User.objects.filter(email=email).exists():
-                messages.error(request, 'Pole..! Email hii Tayari imesajiliwa Tafadhari Tumia Email Nyingine.!')
-                return redirect('Register')
-            elif User.objects.filter(username=username).exists():
-                messages.error(request, 'Loh Username uliyotumia ilisha sajiliwa Tafadhari Tumia Username Nyingine.!')
-                return redirect('Register')
-            else:
-                user = User.objects.create_user(username=username, email=email, password=password2)
-                user.save()
-                send_welcome_email(user.email, user.username)
-                messages.success(request, 'Your Account created Successfully login below')
-
-                user_login = auth.authenticate(username=username, password=password)
-                auth.login(request, user_login)
-
-                user_model = User.objects.get(username=username)
-                new_profile = Profile.objects.create(
-                    user=user_model,
-                    # role=user_model,
-                    # address=user_model,
-                    # phone=user_model,
-                     email=user_model,
-                    # picture=user_model,
-                    # bio=user_model
-                )
-                new_profile.save()
-                return redirect('login')
+           if User.objects.filter(email=email).exists():
+               messages.error(request, 'Pole..! Email hii Tayari imesajiliwa Tafadhari Tumia Email Nyingine.!')
+               return redirect('Register')
+           elif User.objects.filter(username=username).exists():
+               messages.error(request, 'Loh Username uliyotumia ilisha sajiliwa Tafadhari Tumia Username Nyingine.!')
+               return redirect('Register')
+           else:
+               user = User.objects.create_user(username=username, email=email, password=password2)
+               user.save()
+                # Tuma email ya ukaribisho
+               send_welcome_email(user.email, user.username)
+               messages.success(request,'Your Account created Successfully login below')
+               return redirect('login')
+            # #redirect usert to setting
+               user_login = auth.authenticate(username=username, password=password)
+               auth.login(request, user_login)
+            #create a profile object for new user
+               user_model = User.objects.get(username=username)
+               new_profile = Profile.objects.create(user=user_model,role=user_model,address=user_model,phone=user_model,email=user_model,picture=user_model, bio=user_model)
+               new_profile.save()
+               return redirect('login')
         else:
             messages.error(request, 'password Not Matching')
-            return render(request, 'core/login.html')
+            return render(request,'core/login.html')
     else:
         return render(request, 'core/Register.html')
+
+
+# import requests  # kwa kuverify reCAPTCHA
+# from django.conf import settings  # kupata SECRET_KEY ya reCAPTCHA
+
+# def Register(request):
+#     if request.method == 'POST':
+#         # Verify reCAPTCHA
+#         recaptcha_response = request.POST.get('g-recaptcha-response')
+#         data = {
+#             'secret': settings.RECAPTCHA_PRIVATE_KEY,  # key yako ya siri
+#             'response': recaptcha_response
+#         }
+#         r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+#         result = r.json()
+
+#         if not result.get('success'):
+#             messages.error(request, 'Tafadhari thibitisha kuwa wewe si roboti.')
+#             return redirect('Register')
+
+#         # Proceed na usajili kama kawaida
+#         username = request.POST['username']
+#         email = request.POST['email']
+#         password = request.POST['password']
+#         password2 = request.POST['password2']
+
+#         if password == password2:
+#             if User.objects.filter(email=email).exists():
+#                 messages.error(request, 'Pole..! Email hii Tayari imesajiliwa Tafadhari Tumia Email Nyingine.!')
+#                 return redirect('Register')
+#             elif User.objects.filter(username=username).exists():
+#                 messages.error(request, 'Loh Username uliyotumia ilisha sajiliwa Tafadhari Tumia Username Nyingine.!')
+#                 return redirect('Register')
+#             else:
+#                 user = User.objects.create_user(username=username, email=email, password=password2)
+#                 user.save()
+#                 send_welcome_email(user.email, user.username)
+#                 messages.success(request, 'Your Account created Successfully login below')
+
+#                 user_login = auth.authenticate(username=username, password=password)
+#                 auth.login(request, user_login)
+
+#                 user_model = User.objects.get(username=username)
+#                 new_profile = Profile.objects.create(
+#                     user=user_model,
+#                     # role=user_model,
+#                     # address=user_model,
+#                     # phone=user_model,
+#                      email=user_model,
+#                     # picture=user_model,
+#                     # bio=user_model
+#                 )
+#                 new_profile.save()
+#                 return redirect('login')
+#         else:
+#             messages.error(request, 'password Not Matching')
+#             return render(request, 'core/login.html')
+#     else:
+#         return render(request, 'core/Register.html')
 
 
 
