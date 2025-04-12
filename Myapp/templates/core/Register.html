@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -135,13 +136,13 @@
     <script defer src="https://static.getbutton.io/widget/bundle.js?id=UaD5Y"></script>
 
   <!-- Popup container -->
-  <div id="popup">
+  <!-- <div id="popup">
     <div id="popupContent">
         <h2>👋 Karibu NyumbaChap!</h2>
         <p style="color:white;">Je unafahamu kuwa kusajili Nyumba 3 Kwenye Tovuti hii Utalipwa Tsh 9000/=..?</p>
         <button id="closePopup">Sawa..!</button>
     </div>
-</div>
+</div> -->
 
 
   <!-- Popup container end -->
@@ -185,6 +186,10 @@
                             <i class="icon_lock_alt"></i>
                         </div>
 
+                        <!-- reCAPTCHA hapa -->
+                        <div class="g-recaptcha" data-sitekey="6Lfr4xUrAAAAACmeCbB_ii2950eZIQBfWUfOX0Kc"></div><br>
+                    
+
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                             <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href=" {% url 'policy' %}" class="term-service">Terms of service</a></label>
@@ -199,6 +204,9 @@
                             <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
                         </div>
                     </form>
+
+                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
                     <div>
                     <p class="loginhere">
                         Je Tayari Una account ? <a href="{% url 'login' %}" class="loginhere-link">Ingia Hapa</a>
@@ -232,3 +240,5 @@
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
+
+
