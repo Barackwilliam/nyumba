@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'Blog',
     'django_filters',
     'storages',
+   
 ]
 
 MIDDLEWARE = [
@@ -271,3 +272,5 @@ X_FRAME_OPTIONS = "DENY"
 
 
 
+RECAPTCHA_PUBLIC_KEY = '6Lfr4xUrAAAAACmeCbB_ii2950eZIQBfWUfOX0Kc'
+RECAPTCHA_PRIVATE_KEY = '6Lfr4xUrAAAAAHJxI7wm4xFza7BTBYotysJocKbn'
