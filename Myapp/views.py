@@ -330,12 +330,12 @@ def Register(request):
                 user_model = User.objects.get(username=username)
                 new_profile = Profile.objects.create(
                     user=user_model,
-                    role=user_model,
-                    address=user_model,
-                    phone=user_model,
-                    email=user_model,
-                    picture=user_model,
-                    bio=user_model
+                    # role=user_model,
+                    # address=user_model,
+                    # phone=user_model,
+                     email=user_model,
+                    # picture=user_model,
+                    # bio=user_model
                 )
                 new_profile.save()
                 return redirect('login')
