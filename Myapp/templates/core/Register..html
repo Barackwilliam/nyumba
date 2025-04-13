@@ -1,0 +1,251 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script>
+        var a=10,b=20;console.log(a+b);
+    </script>
+
+    <script>
+        // Kuzuia Right Click
+        document.addEventListener("contextmenu", function(event) {
+            event.preventDefault();
+            alert("🚫 Sorry, Right Click is Disabled! Wasiliana na Developer No: 0629712678");
+        });
+    
+        // Kuzuia DevTools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+        document.addEventListener("keydown", function(event) {
+            if (event.keyCode == 123) {  // F12
+                event.preventDefault();
+                alert("🚫 Sorry, Inspect Element is Disabled! Wasiliana na Developer No: 0629712678");
+            }
+            if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) {  // Ctrl+Shift+I or Ctrl+Shift+J
+                event.preventDefault();
+                alert("🚫 Sorry, Developer Tools is Disabled! Wasiliana na Developer No: 0629712678");
+            }
+            if (event.ctrlKey && event.keyCode == 85) {  // Ctrl+U
+                event.preventDefault();
+                alert("🚫 Sorry, View Source is Disabled! Wasiliana na Developer No: 0629712678");
+            }
+        });
+    </script>
+    
+
+
+
+<!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L8FYVV0MZV');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jisajili bure</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css2/style.css' %}">
+    <style>
+        .recaptcha-wrapper {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+  /* Popup container */
+#popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup content */
+#popupContent {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+    padding: 20px;  /* Reduce padding to make popup smaller */
+    border-radius: 10px;  /* Slightly smaller border radius */
+    text-align: center;
+    color: #fff; /* White text */
+    max-width: 300px;  /* Smaller max-width */
+    width: 80%;  /* Ensure it takes up most of the viewport */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Stylish shadow */
+    animation: fadeIn 0.8s ease-in-out; /* Animation */
+}
+
+/* Heading style */
+#popupContent h2 {
+    font-size: 24px;  /* Smaller font size for heading */
+    margin-bottom: 10px;  /* Reduced space below the heading */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Paragraph style */
+#popupContent p {
+    font-size: 16px;  /* Smaller font size for paragraph */
+    margin-bottom: 15px;  /* Reduced space below paragraph */
+}
+
+/* Close button style */
+#closePopup {
+    background: #ff6b6b; /* Soft red color */
+    color: #fff;
+    border: none;
+    padding: 10px 18px;  /* Smaller padding for the button */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;  /* Smaller button text */
+    transition: all 0.3s ease;
+}
+
+#closePopup:hover {
+    background: #ff3b3b; /* Darker red on hover */
+}
+
+/* Animation for popup */
+@keyframes fadeIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- <script defer src="https://static.getbutton.io/widget/bundle.js?id=2zrH8" ></script> -->
+    <script defer src="https://static.getbutton.io/widget/bundle.js?id=UaD5Y"></script>
+
+  <!-- Popup container -->
+  <!-- <div id="popup">
+    <div id="popupContent">
+        <h2>👋 Karibu NyumbaChap!</h2>
+        <p style="color:white;">Je unafahamu kuwa kusajili Nyumba 3 Kwenye Tovuti hii Utalipwa Tsh 9000/=..?</p>
+        <button id="closePopup">Sawa..!</button>
+    </div>
+</div> -->
+
+
+  <!-- Popup container end -->
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                
+                <div class="signup-content">
+                   
+                    <form method="POST" id="signup-form" class="signup-form">
+                        {% csrf_token %}
+                        <h2 class="form-title">Unda Akaunti</h2>
+                        {% for message in messages %}
+                        <h3 style="text-align: center; color: red">{{message}}</h3>
+                            {% endfor %}
+                        <div class="form-group">
+                            <label>Username</label>
+                            <i class="ti-user"></i>
+                            <input type="text" class="form-input" name="username" id="username" placeholder='Jaza jina lako' required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Your Email</label>
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Jaza Email Yako"  required/>
+                            <i class="icon_mail_alt"></i>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Your password</label>
+                            <input type="password" class="form-input" name="password" id="password" placeholder="Weka Neno Siri" required/>
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span> 
+                            <i class="icon_lock_alt"></i>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm password</label>
+                            <input type="password" class="form-input" name="password2" id="password2" placeholder='Thibitisha Neno Siri' required/>
+                            <i class="icon_lock_alt"></i>
+                        </div>
+
+                        <!-- reCAPTCHA hapa -->
+                        <div class="recaptcha-wrapper">
+                            <div class="g-recaptcha" data-sitekey="6Lfr4xUrAAAAACmeCbB_ii2950eZIQBfWUfOX0Kc"></div>
+                        </div>
+                                            
+
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href=" {% url 'policy' %}" class="term-service">Terms of service</a></label>
+                        </div>
+
+                      <!-- Google reCAPTCHA -->
+        <!-- <div class="g-recaptcha" data-sitekey="{{ RECAPTCHA_PUBLIC_KEY }}"></div><br> -->
+
+
+
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                        </div>
+                    </form>
+
+                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+                    <div>
+                    <p class="loginhere">
+                        Je Tayari Una account ? <a href="{% url 'login' %}" class="loginhere-link">Ingia Hapa</a>
+                    </p></div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    
+    <script>
+        // Show the popup after 5 seconds
+        window.onload = function () {
+            setTimeout(function () {
+                const popup = document.getElementById('popup');
+                popup.style.display = 'flex'; // Show the popup
+            }, 5000); // 5000ms = 5 seconds
+
+            // Close the popup when the close button is clicked
+            document.getElementById('closePopup').onclick = function () {
+                const popup = document.getElementById('popup');
+                popup.style.display = 'none'; // Hide the popup
+            };
+        };
+    </script>
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+
+
