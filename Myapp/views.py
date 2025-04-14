@@ -304,7 +304,7 @@ def Register(request):
             # reCAPTCHA verification
             recaptcha_response = request.POST.get('g-recaptcha-response')
             recaptcha_data = {
-                'secret': '6Lfr4xUrAAAAAHJxI7wm4xFza7BTBYotysJocKbn',  # server-side secret
+                'secret': '6Lfr4xUrAAAAAHJxI7wm4xFza7BTBYotysJocKbn',
                 'response': recaptcha_response
             }
             recaptcha_verify = requests.post('https://www.google.com/recaptcha/api/siteverify', data=recaptcha_data)
@@ -320,12 +320,10 @@ def Register(request):
             password = request.POST['password']
             password2 = request.POST['password2']
 
-            # validate password match
             if password != password2:
                 messages.error(request, 'Nenosiri halilingani. Tafadhari jaribu tena.')
                 return redirect('Register')
 
-            # check if email or username exists
             if User.objects.filter(email=email).exists():
                 messages.error(request, 'Email hii tayari imesajiliwa. Tafadhari tumia nyingine.')
                 return redirect('Register')
@@ -338,9 +336,6 @@ def Register(request):
             user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
 
-            # send welcome email
-            send_welcome_email(user.email, user.username)
-
             # authenticate and login user
             user_login = auth.authenticate(username=username, password=password)
             if user_login is not None:
@@ -349,27 +344,27 @@ def Register(request):
             # create profile
             Profile.objects.create(
                 user=user,
-                role=user,
-                address=user,
-                phone=user,
-                email=user,
-                picture=user,
-                bio=user
+                email=email,
+                role='customer',
+                profile_picture=None
             )
 
-            messages.success(request, 'Akaunti yako imefanikiwa kuundwa. Karibu Nyumbachap!')
-            return redirect('login')
+            # Optional: send welcome email
+            send_welcome_email(user.email, user.username)
+
+            messages.success(request, 'Akaunti yako imeundwa kikamilifu. Karibu Nyumbachap!')
+            return redirect('login')  # badilisha kwenye url unayotumia
 
         except requests.exceptions.RequestException:
-            messages.error(request, 'Tatizo la mtandao lilitokea wakati wa kuwasiliana na reCAPTCHA. Tafadhari jaribu tena.')
+            messages.error(request, 'Tatizo la mtandao lilitokea wakati wa reCAPTCHA. Tafadhari jaribu tena.')
             return redirect('Register')
 
         except Exception as e:
             messages.error(request, f"Hitilafu isiyotegemewa imetokea: {str(e)}")
             return redirect('Register')
 
-    else:
-        return render(request, 'core/Register.html')
+    return render(request, 'core/Register.html')
+
 
 
 
