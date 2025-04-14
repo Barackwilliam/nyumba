@@ -296,7 +296,7 @@ import requests
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 from .models import Profile
-from .utils import send_welcome_email  # ensure this exists
+# from .utils import send_welcome_email  # ensure this exists
 
 def Register(request):
     if request.method == 'POST':
