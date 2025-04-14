@@ -341,19 +341,17 @@ def Register(request):
             if user_login is not None:
                 auth.login(request, user_login)
 
-            # create profile
-            Profile.objects.create(
-                user=user,
-                email=email,
-                role='customer',
-                profile_picture=None
-            )
+            # update profile fields after it's auto-created by signal
+            profile = user.profile
+            profile.email = email
+            profile.role = 'customer'
+            profile.save()
 
-            # Optional: send welcome email
+            # send welcome email (optional)
             send_welcome_email(user.email, user.username)
 
             messages.success(request, 'Akaunti yako imeundwa kikamilifu. Karibu Nyumbachap!')
-            return redirect('login')  # badilisha kwenye url unayotumia
+            return redirect('login')
 
         except requests.exceptions.RequestException:
             messages.error(request, 'Tatizo la mtandao lilitokea wakati wa reCAPTCHA. Tafadhari jaribu tena.')
@@ -364,7 +362,6 @@ def Register(request):
             return redirect('Register')
 
     return render(request, 'core/Register.html')
-
 
 
 
