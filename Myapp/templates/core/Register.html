@@ -192,7 +192,7 @@
                         </div>
 
                         <!-- reCAPTCHA hapa -->
-                        <div class="recaptcha-wrapper">
+                       <div class="recaptcha-wrapper">
                             <div class="g-recaptcha" data-sitekey="6Lfr4xUrAAAAACmeCbB_ii2950eZIQBfWUfOX0Kc"></div>
                         </div>
                                             
@@ -217,9 +217,21 @@
                     <div>
                     <p class="loginhere">
                         Je Tayari Una account ? <a href="{% url 'login' %}" class="loginhere-link">Ingia Hapa</a>
-                    </p></div>
+                    </p>
+                </div>
                 </div>
             </div>
+
+                <!-- Google Login Button -->
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"
+                       style="display: inline-block; background: #4285F4; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+                       <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" style="width: 20px; vertical-align: middle; margin-right: 8px;">
+                       Sign Up with Google
+                     </a>
+                </div>
+
+
         </section>
 
     </div>

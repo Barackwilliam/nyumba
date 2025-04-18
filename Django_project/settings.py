@@ -29,7 +29,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = 'pvcPAFrkq9V6lgl_AIryxut9DrMRFA5b0L2gmmU_Ic5NCgf7Lk3Cqbp3xdvYyZhyLs8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'Blog',
     'django_filters',
     'storages',
+    'social_django',
    
 ]
 
@@ -259,13 +260,27 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # RECAPTCHA_PRIVATE_KEY = '6LfuUAQrAAAAALQ8np7CXxpyFOMzIOTKdiUgjbKi'
 
 
-
+# client_id: 27751749322-khts80a7a7bf7qdhr31aqlfticr7mraj.apps.googleusercontent.com
+# client_secret: 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
 
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
 
+# for google
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'property_list'  # au page yoyote baada ya login
+LOGOUT_REDIRECT_URL = 'popular_featured'
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '27751749322-khts80a7a7bf7qdhr31aqlfticr7mraj.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['picture', 'email']
 
 
 
