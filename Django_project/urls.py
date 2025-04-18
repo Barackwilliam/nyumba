@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('Myapp.urls')),
     path('chat/', include('chat.urls')),
     path('Blog/', include('Blog.urls')),
+    path('auth/', include('social_django.urls', namespace='social')),
     
 ]
 
