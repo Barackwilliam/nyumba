@@ -266,16 +266,30 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
 
-# for google
+
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/'  # au page yoyote baada ya login
+LOGOUT_REDIRECT_URL = 'popular_featured'
+
+
+
+# Social Auth Settings
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'property_list'  # au page yoyote baada ya login
-LOGOUT_REDIRECT_URL = 'popular_featured'
+
+# Session Settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
+
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '27751749322-khts80a7a7bf7qdhr31aqlfticr7mraj.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
