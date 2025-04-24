@@ -432,7 +432,6 @@ def delete_inquiry(request,id):
 
 
 
-# #@login_required(login_url='login')
 def popular_featured(request):
 
     featured = Featured.objects.filter(f_property_name__is_available=True)#filter only available featured properties
@@ -840,3 +839,8 @@ def help_center(request):
         'questions': questions,
         'query': query
     })
+
+
+
+def loading_page(request):
+    return render(request, 'core/loading.html')

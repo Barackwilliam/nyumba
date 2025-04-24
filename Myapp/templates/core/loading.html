@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <title>Inapakia Taarifa Muhimu - NyumbaChap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon"> <!-- Badilisha path kama unavyotumia -->
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #141e30, #243b55);
+      color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #00ffd0;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .spinner {
+      margin: 20px auto;
+      border: 6px solid rgba(255,255,255,0.1);
+      border-top: 6px solid #00ffd0;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .info-box {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-left: 5px solid #00ffd0;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 700px;
+      margin-top: 30px;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+    }
+
+    .info-box h3 {
+      color: #00ffd0;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    .info-box p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .feature {
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid #00ffd0;
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      width: 230px;
+      box-shadow: 0 2px 5px rgba(0,255,204,0.1);
+    }
+
+    .error {
+      margin-top: 25px;
+      color: #ff6666;
+      display: none;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    a {
+      color: #00ffd0;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">NyumbaChap</div>
+  <h2>Tunatafuta Nyumba Mpya kwajili yako....</h2>
+  <p>Tafadhali subiri sekunde chache...</p>
+  <div class="spinner"></div>
+
+  <div class="info-box">
+    <h3>Kuhusu NyumbaChap</h3>
+    <p>
+      NyumbaChap ni Tovuti ya kutafuta na kutangaza nyumba nchini Tanzania. Iwe ni nyumba za kupanga au kununua, sisi tunakuwezesha kwa urahisi, kwa haraka na kwa teknolojia ya hali ya juu.
+    </p>
+    <div class="features">
+      <div class="feature">Tafuta nyumba kulingana na eneo, bei au aina</div>
+      <div class="feature">Wasiliana moja kwa moja na wamiliki au mawakala</div>
+      <div class="feature">Tumia AI kujibu maswali yako papo kwa hapo</div>
+      <div class="feature">Angalia picha, video na ramani za nyumba</div>
+      <div class="feature">Huduma bora kwa Watanzania popote walipo</div>
+    </div>
+  </div>
+
+  <p class="error" id="error-msg">Samahani, haikuweza kufunguka kwa sasa. Jaribu tena baada ya muda kidogo.</p>
+
+  <div class="footer">
+    Tembelea: <a href="https://nyumbachap.com">nyumbachap.com</a> | Huduma kwa Taifa zima
+  </div>
+
+  <noscript>
+    <p style="color: red; margin-top: 20px;">Tafadhali washa JavaScript ili kutumia huduma hii kikamilifu.</p>
+  </noscript>
+
+  <script>
+    const BACKEND_URL = "/app/";   // kisha JS itarudisha user hapa
+    const TIMEOUT_LIMIT = 2 * 60 * 1000;
+    let startTime = Date.now();
+  
+    async function checkApp() {
+      if (Date.now() - startTime > TIMEOUT_LIMIT) {
+        document.getElementById('error-msg').style.display = 'block';
+        return;
+      }
+      try {
+        await fetch(BACKEND_URL, { mode: 'no-cors' });
+        setTimeout(() => window.location.href = BACKEND_URL, 1000);
+      } catch {
+        setTimeout(checkApp, 5000);
+      }
+    }
+    checkApp();
+  </script>
+  
+</body>
+</html>
