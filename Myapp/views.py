@@ -842,5 +842,5 @@ def help_center(request):
 
 
 
-def loading_page(request):
-    return render(request, 'core/loading.html')
+# def loading_page(request):
+#     return render(request, 'core/loading.html')
