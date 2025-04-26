@@ -29,7 +29,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = 'pvcPAFrkq9V6lgl_AIryxut9DrMRFA5b0L2gmmU_Ic5NCgf7Lk3Cqbp3xdvYyZhyLs8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 
@@ -265,9 +265,6 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
-
-# settings.py
-HOLIDAY_API_KEY = 'LmjnS6npxiMR72JMe7jhdrRttVDsAOWS'
 
 
 LOGIN_URL = 'login'
