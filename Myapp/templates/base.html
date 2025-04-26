@@ -7,7 +7,37 @@
 
   <head>
         
-
+    
+<style>
+    .announcement-bar {
+      width: 100%;
+      overflow: hidden;
+      background: #00ffd0;
+      padding: 10px 0;
+      position: relative;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    
+    .announcement-text {
+      display: inline-block;
+      white-space: nowrap;
+      padding-left: 100%;
+      animation: scroll-left 15s linear infinite;
+      color: #141e30;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    </style>
 
     <script>
         if (!navigator.userAgent.includes("Mozilla")) {

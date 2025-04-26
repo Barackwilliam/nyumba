@@ -1,0 +1,115 @@
+[
+    {
+        "model": "Myapp.Holiday",
+        "pk": 1,
+        "fields": {
+            "name": "New Year's Day",
+            "date": "2025-01-01",
+            "type": "national",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 2,
+        "fields": {
+            "name": "Good Friday",
+            "date": "2025-04-18",
+            "type": "religious",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 3,
+        "fields": {
+            "name": "Easter Monday",
+            "date": "2025-04-21",
+            "type": "religious",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 4,
+        "fields": {
+            "name": "Labour Day",
+            "date": "2025-05-01",
+            "type": "national",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 5,
+        "fields": {
+            "name": "Siku ya Mashujaa",
+            "date": "2025-07-25",
+            "type": "national",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 6,
+        "fields": {
+            "name": "Nazi Day (Mungu wa Kiislamu)",
+            "date": "2025-07-20",
+            "type": "religious",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 7,
+        "fields": {
+            "name": "Eid al-Fitr",
+            "date": "2025-05-24",
+            "type": "religious",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 8,
+        "fields": {
+            "name": "Independence Day",
+            "date": "2025-12-09",
+            "type": "national",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 9,
+        "fields": {
+            "name": "Eid al-Adha",
+            "date": "2025-08-29",
+            "type": "religious",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 10,
+        "fields": {
+            "name": "Christmas Day",
+            "date": "2025-12-25",
+            "type": "religious",
+            "country": "Tanzania"
+        }
+    },
+    {
+        "model": "Myapp.Holiday",
+        "pk": 11,
+        "fields": {
+            "name": "Boxing Day",
+            "date": "2025-12-26",
+            "type": "religious",
+            "country": "Tanzania"
+        }
+    }
+]
+
+// command to add fixtures
+// python manage.py loaddata Myapp/fixtures/holidays_2025.json
