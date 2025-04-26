@@ -20,7 +20,7 @@ from .forms import CustomerPasswordChangeForm, PaymentForm
 # from . models import Notification
 from django.contrib import messages
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from.models import Profile, Featured,PopularPlace, PopularProperty, Inquiry, Agent, Client,Partner
+from.models import Profile, Featured,PopularPlace, PopularProperty, Inquiry, Agent, Client,Partner,Holiday
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -842,5 +842,27 @@ def help_center(request):
 
 
 
-# def loading_page(request):
-#     return render(request, 'core/loading.html')
+from datetime import date
+from django.urls import reverse
+from .models import Holiday
+
+def upcoming_holidays(request):
+    today = date.today()
+    holidays = Holiday.objects.filter(date__gte=today).order_by('date')
+
+    # Kuangalia kama leo ni sikukuu
+    todays_holiday = Holiday.objects.filter(date=today).first()
+
+    marquee_message = None
+    if todays_holiday:
+        holidays_url = reverse('upcoming_holidays')
+        marquee_message = (
+            f'Timu ya NyumbaChap inawatakia <strong>{todays_holiday.name}</strong> njema! '
+            f'Tuna matumaini mtafurahia siku hii maalum. '
+            f'<a href="{holidays_url}" style="color: #00ffd0; text-decoration: underline;">Tazama Sikukuu Zinazofuata</a>'
+        )
+
+    return render(request, 'core/upcoming.html', {
+        'holidays': holidays,
+        'marquee_message': marquee_message
+    })

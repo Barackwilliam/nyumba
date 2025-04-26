@@ -339,3 +339,29 @@ class Help_Question(models.Model):
 
     def __str__(self):
         return self.question
+
+
+
+
+
+class Holiday(models.Model):
+    HOLIDAY_TYPES = (
+        ('national', 'National'),
+        ('religious', 'Religious'),
+    )
+
+    name = models.CharField(max_length=255)
+    date = models.DateField()
+    type = models.CharField(max_length=20, choices=HOLIDAY_TYPES)
+    country = models.CharField(max_length=100, default='Tanzania')
+
+    def __str__(self):
+        return f"{self.name} - {self.date}"
+
+    @classmethod
+    def get_type(cls, types_list):
+        """Helper method to map Nager types to 'national' or 'religious'"""
+        if 'Public' in types_list or 'Bank' in types_list:
+            return 'national'
+        else:
+            return 'religious'

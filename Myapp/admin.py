@@ -31,3 +31,13 @@ admin.site.register(Help_Question)
 # @admin.register(Property)
 # class PropertyAdmin(admin.ModelAdmin):
 #     list_display = ('unique_id')
+
+
+
+from .models import Holiday
+
+@admin.register(Holiday)
+class HolidayAdmin(admin.ModelAdmin):
+    list_display = ('name', 'date', 'type', 'country')
+    list_filter = ('type', 'country')
+    search_fields = ('name',)

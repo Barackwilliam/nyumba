@@ -80,9 +80,19 @@
 
                                                         <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
                                                             <!-- <a class="btn btn-yellow" href="#"><button type="submit"> Search Now </button> </a>  -->
-                                                            <button type="submit" class="btn btn-yellow">Search Now</button>
+                                                            <button type="submit" class="btn btn-yellow">Tafuta</button>
 
                                                         </div>
+
+
+                                                        {% if marquee_message %}
+                                                        <div class="announcement-bar">
+                                                          <div class="announcement-text">
+                                                            {{ marquee_message }}
+                                                          </div>
+                                                        </div>
+                                                        {% endif %}
+
                                                         <div class="explore__form-checkbox-list full-filter">
                                                             <div class="row">
                                                                 <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0">

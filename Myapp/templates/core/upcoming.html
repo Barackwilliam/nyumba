@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <title>Sikukuu Zinazokuja - NyumbaChap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon">
+  <style>
+    /* Hapa naeka ile style yote uliyonipa */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #141e30, #243b55);
+      color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 30px;
+    }
+    .logo { font-size: 2.5rem; font-weight: 900; color: #00ffd0; margin-bottom: 15px; }
+    h2 { color: #fff; margin-bottom: 20px; }
+
+    /* Style ya info-box */
+    .info-box {
+      background-color: rgba(255,255,255,0.08);
+      border-left: 5px solid #00ffd0;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 800px;
+      width: 100%;
+      margin-top: 30px;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+    }
+
+    /* Table style */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table th, table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    table th {
+      background-color: #00ffd0;
+      color: #141e30;
+    }
+    table tr:hover {
+      background-color: #53800ca6;
+    }
+
+    /* Footer Style */
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    a { color: #00ffd0; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .logo {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .info-box {
+        padding: 15px;
+        margin-top: 20px;
+      }
+      table th, table td {
+        padding: 8px;
+      }
+      .footer {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1.8rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+      .info-box {
+        padding: 10px;
+        margin-top: 10px;
+      }
+      table th, table td {
+        padding: 6px;
+      }
+      .footer {
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">Sikukuu Zinazofuata Tanzania</div>
+
+  <div class="info-box">
+    <!-- <h3>Wahadhiri wa Huduma ya Msaada (Support Team)</h3> -->
+    <p>
+      Timu yetu ya usaidizi haitakuwa inapatikana kwa muda wakati wa sikukuu hizi. Hii ni kwa sababu ya kusherehekea sikukuu za kitaifa na kidini ambazo ni muhimu kwa jamii yetu.
+    </p>
+    <p>
+      Tutakuwa tena katika huduma baada ya sikukuu na tutajitahidi kutoa msaada kwa haraka iwezekanavyo. Tunathamini uvumilivu wako na tunakutakia sikukuu njema!
+    </p>
+  </div>
+
+  <div class="info-box">
+    <h3>Orodha ya Sikukuu:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Jina la Sikukuu</th>
+          <th>Tarehe</th>
+          <th>Aina ya Sikukuu</th>
+          <th>Siku Zilizobaki</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for holiday in holidays %}
+          <tr>
+            <td>{{ holiday.name }}</td>
+            <td>{{ holiday.date }}</td>
+            <td>{{ holiday.type }}</td>
+            <td>{{ holiday.days_left }} siku</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4">Hakuna sikukuu kwa sasa</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    Tembelea: <a href="https://nyumbachap.com">nyumbachap.com</a>
+  </div>
+</body>
+</html>

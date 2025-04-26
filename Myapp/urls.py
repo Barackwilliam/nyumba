@@ -9,6 +9,7 @@ from . import views
 urlpatterns = [
     path('', views.popular_featured, name='popular_featured'),
     # path('', views.loading_page, name='loading'),
+    path('holidays/', views.upcoming_holidays, name='upcoming_holidays'),
 
     path('chat', views.chat, name='chat'),
     path('final/', views.final, name='final'),
