@@ -85,14 +85,6 @@
                                                         </div>
 
 
-                                                        {% if marquee_message %}
-                                                        <div class="announcement-bar">
-                                                          <div class="announcement-text">
-                                                            {{ marquee_message }}
-                                                          </div>
-                                                        </div>
-                                                        {% endif %}
-
                                                         <div class="explore__form-checkbox-list full-filter">
                                                             <div class="row">
                                                                 <div class="col-lg-4 col-md-6 py-1 pr-30 pl-0">
@@ -143,6 +135,8 @@
                     <h2><span>Popular </span>Places</h2>
                     <p>Nyumba Maeneo Maarufu Tanzania</p>
                 </div>
+
+
                 <div class="row">
                 
                     {% for place in popular %}

@@ -4,7 +4,7 @@ from .models import Property
 from .models import Featured
 from .models import Help_Question
 from .models import Inquiry, Agent,Client,Partner, Offer,Payment
-from .models import PopularPlace, PopularProperty,ChatMessage,Referral,PropertyLocation
+from .models import PopularPlace, PopularProperty,ChatMessage,Referral,PropertyLocation,Feedback
 # Register your models here.
 
 # admin.site.register(ChatRoom)
@@ -41,3 +41,14 @@ class HolidayAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'type', 'country')
     list_filter = ('type', 'country')
     search_fields = ('name',)
+
+
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('user','name', 'comment', 'rating','created_at')
+    list_filter = ('user','name','created_at')
+    search_fields = ('user','name','created_at')
+
+
+
+

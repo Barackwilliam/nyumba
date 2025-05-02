@@ -861,8 +861,52 @@ def upcoming_holidays(request):
             f'Tuna matumaini mtafurahia siku hii maalum. '
             f'<a href="{holidays_url}" style="color: #00ffd0; text-decoration: underline;">Tazama Sikukuu Zinazofuata</a>'
         )
+        
 
     return render(request, 'core/upcoming.html', {
         'holidays': holidays,
         'marquee_message': marquee_message
+    })
+
+
+
+# views.py
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Avg, Count
+from .models import Feedback
+
+from django.core.paginator import Paginator
+
+def submit_feedback(request):
+    if request.method == 'POST':
+        comment = request.POST.get('comment')
+        rating = request.POST.get('rating')
+        name = request.POST.get('name', '')
+
+        if not comment or not rating:
+            return JsonResponse({'success': False})
+
+        feedback = Feedback.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            name=name if not request.user.is_authenticated else request.user.username,
+            comment=comment,
+            rating=int(rating),
+        )
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False})
+
+
+
+
+def feedback_dashboard(request):
+    feedbacks = Feedback.objects.all().order_by('-created_at')
+    stats = Feedback.objects.aggregate(avg_rating=Avg('rating'), total_feedback=Count('id'))
+    paginator = Paginator(feedbacks, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'core/feedbacks_dashboard.html', {
+        'page_obj': page_obj,
+        'stats': stats
     })
