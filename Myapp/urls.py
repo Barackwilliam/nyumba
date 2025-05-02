@@ -9,7 +9,10 @@ from . import views
 urlpatterns = [
     path('', views.popular_featured, name='popular_featured'),
     # path('', views.loading_page, name='loading'),
-    path('holidays/', views.upcoming_holidays, name='upcoming_holidays'),
+    path('upcoming_holidays', views.upcoming_holidays, name='upcoming_holidays'),
+    path('submit-feedback/', views.submit_feedback, name='submit_feedback'),
+    path('feedbacks/', views.feedback_dashboard, name='feedback_dashboard'),
+
 
     path('chat', views.chat, name='chat'),
     path('final/', views.final, name='final'),

@@ -6,6 +6,65 @@
 
 
   <head>
+
+
+
+<!-- CSS & JS (weka kwenye base.html au static) -->
+<style>
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-content { background: #fff; padding: 20px; border-radius: 10px; width: 90%; max-width: 500px; }
+    .close { float: right; font-size: 24px; cursor: pointer; }
+    input[type="text"], textarea { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background-color: #0d6efd; color: white; padding: 10px 15px; border: none; border-radius: 5px; margin-top: 15px; cursor: pointer; }
+    button:hover { background-color: #0b5ed7; }
+    .rating-stars input[type="radio"] { display: none; }
+    .rating-stars label { float: left; padding: 5px; font-size: 24px; color: #ccc; cursor: pointer; transition: 0.3s; }
+    .rating-stars input[type="radio"]:checked ~ label,
+    .rating-stars label:hover,
+    .rating-stars label:hover ~ label { color: #ffc107; }
+    @media (max-width: 600px) { .modal-content { width: 95%; } }
+    </style>
+    
+    <script>
+    let feedbackShown = localStorage.getItem("feedbackShown");
+    function openModal() {
+      if (!feedbackShown) {
+        document.getElementById("feedbackModal").style.display = "flex";
+        localStorage.setItem("feedbackShown", "true");
+      }
+    }
+    function closeModal() {
+      document.getElementById("feedbackModal").style.display = "none";
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      let clickCount = 0;
+      setTimeout(openModal, 45000);
+      document.addEventListener("scroll", () => openModal(), { once: true });
+      document.addEventListener("mouseleave", (e) => { if (e.clientY < 0) openModal(); });
+      document.addEventListener("click", () => { clickCount++; if (clickCount === 3) openModal(); });
+      const form = document.getElementById("feedbackForm");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        fetch("{% url 'submit_feedback' %}", {
+          method: "POST",
+          headers: { "X-CSRFToken": "{{ csrf_token }}" },
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            document.getElementById("feedbackResponse").innerHTML = "<p>Asante kwa maoni yako!</p>";
+            form.reset();
+            setTimeout(closeModal, 2000);
+          } else {
+            document.getElementById("feedbackResponse").innerHTML = "<p>Tafadhali jaza vizuri.</p>";
+          }
+        });
+      });
+    });
+    </script>
+    
         
     
 <style>
@@ -536,6 +595,10 @@ document.addEventListener('keydown', function(event) {
             document.getElementById('protectedContent').innerText = atob(encodedText); // Decode back to original text
         });
     </script>
+
+
+{% include 'core/feedback_modal.html' %}
+
 </body>
 
 
