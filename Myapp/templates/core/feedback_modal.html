@@ -1,132 +1,36 @@
+<!-- Button ya kufungua modal -->
+<button onclick="openModal()" style="background-color: #198754; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold;">
+  Tusaidie Kuboresha Mfumo Wetu
+</button>
+
+<!-- Modal ya feedback -->
 <div id="feedbackModal" class="modal" style="display:none;">
   <div class="modal-content">
-    <!-- Close button -->
     <span class="close" onclick="closeModal()">&times;</span>
+    <h3 style="color:#0d6efd;">Tusaidie Kuboresha Mfumo wetu kwa Maoni Yako Yenye Kujenga</h3>
+    <p>Tunathamini sana maoni yako. Tafadhali tujulishe namna ya kuboresha huduma hii ili ikufae zaidi.</p>
 
-    <!-- Title with attractive font style -->
-    <h3 class="modal-title text-2xl font-bold text-center mb-4">Tusaidie Kuboresha Huduma Zetu kwa Kutupa Maoni Yako</h3>
-
-    <!-- Form for feedback -->
-    <form id="feedbackForm" method="post" class="feedback-form space-y-4">
+    <form id="feedbackForm" method="post">
       {% csrf_token %}
-      
-      <!-- Name input field, optional -->
       {% if not request.user.is_authenticated %}
-        <div class="form-group">
-          <label for="id_name" class="block text-sm font-medium text-gray-700">Jina (hiari):</label>
-          <input type="text" name="name" id="id_name" class="input-field" placeholder="Andika jina lako">
-        </div>
+        <label for="id_name">Jina (si lazima):</label>
+        <input type="text" name="name" id="id_name">
       {% endif %}
 
-      <!-- Comment input field -->
-      <div class="form-group">
-        <label for="id_comment" class="block text-sm font-medium text-gray-700">Maoni:</label>
-        <textarea name="comment" id="id_comment" class="input-field" placeholder="Tafadhali andika maoni yako hapa..." required></textarea>
+      <label for="id_comment">Maoni Yako:</label>
+      <textarea name="comment" id="id_comment" required></textarea>
+
+      <label>Ukipenda, tupe alama ya huduma zetu:</label>
+      <div class="rating-stars">
+        {% for i in "54321" %}
+          <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" required>
+          <label for="star{{ i }}">★</label>
+        {% endfor %}
       </div>
 
-      <!-- Rating system (Stars) -->
-      <div class="form-group">
-        <label class="block text-sm font-medium text-gray-700">Tathmini:</label>
-        <div class="rating-stars">
-          {% for i in "54321" %}
-            <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" required class="rating-input">
-            <label for="star{{ i }}" class="rating-label">★</label>
-          {% endfor %}
-        </div>
-      </div>
-
-      <!-- Submit button -->
-      <div class="form-group text-center">
-        <button type="submit" class="submit-btn">Tuma Maoni</button>
-      </div>
+      <button type="submit">Tuma Maoni</button>
     </form>
 
-    <!-- Response area for feedback submission -->
-    <div id="feedbackResponse" class="mt-4 text-center"></div>
+    <div id="feedbackResponse"></div>
   </div>
 </div>
-
-<!-- Modal Styling (CSS) -->
-<style>
-  /* Basic modal style */
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    width: 400px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-
-  .modal-title {
-    color: #2b6cb0;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  .input-field {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #333;
-  }
-
-  .rating-stars {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-  }
-
-  .rating-input {
-    display: none;
-  }
-
-  .rating-label {
-    font-size: 1.5rem;
-    color: #ffd700;
-    cursor: pointer;
-  }
-
-  .submit-btn {
-    background-color: #2b6cb0;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .submit-btn:hover {
-    background-color: #1e4e92;
-  }
-
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 2rem;
-    color: #333;
-    cursor: pointer;
-  }
-</style>
