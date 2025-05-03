@@ -1,26 +1,30 @@
 <!-- Button ya kufungua modal -->
-<button onclick="openModal()" style="background-color: #198754; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold;">
-  Tusaidie Kuboresha Mfumo Wetu
+<button onclick="openModal()" style="
+  background-color: #198754; color: white; padding: 12px 25px;
+  border: none; border-radius: 8px; font-weight: bold;
+  font-size: 16px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s;">
+  💬 Toa Maoni Yako - Tusaidie Kuboresha Mfumo
 </button>
 
 <!-- Modal ya feedback -->
 <div id="feedbackModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    <h3 style="color:#0d6efd;">Tusaidie Kuboresha Mfumo wetu kwa Maoni Yako Yenye Kujenga</h3>
-    <p>Tunathamini sana maoni yako. Tafadhali tujulishe namna ya kuboresha huduma hii ili ikufae zaidi.</p>
+    <h3 style="color:#0d6efd; margin-bottom: 5px;">Tusaidie Kuboresha Mfumo wetu</h3>
+    <p style="margin-bottom: 15px;">Tunathamini sana mchango wako. Tafadhali tupe maoni yako ya kujenga ili tufanye huduma hii kuwa bora zaidi kwa ajili yako na wengine.</p>
 
     <form id="feedbackForm" method="post">
       {% csrf_token %}
       {% if not request.user.is_authenticated %}
         <label for="id_name">Jina (si lazima):</label>
-        <input type="text" name="name" id="id_name">
+        <input type="text" name="name" id="id_name" placeholder="Jina lako...">
       {% endif %}
 
       <label for="id_comment">Maoni Yako:</label>
-      <textarea name="comment" id="id_comment" required></textarea>
+      <textarea name="comment" id="id_comment" placeholder="Andika hapa..." required></textarea>
 
-      <label>Ukipenda, tupe alama ya huduma zetu:</label>
+      <label>Alama ya huduma zetu:</label>
       <div class="rating-stars">
         {% for i in "54321" %}
           <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" required>
@@ -28,9 +32,9 @@
         {% endfor %}
       </div>
 
-      <button type="submit">Tuma Maoni</button>
+      <button type="submit">🚀 Tuma Maoni Yako</button>
     </form>
 
-    <div id="feedbackResponse"></div>
+    <div id="feedbackResponse" style="margin-top: 15px;"></div>
   </div>
 </div>

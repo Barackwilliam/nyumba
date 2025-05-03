@@ -14,18 +14,22 @@
           align-items: center; z-index: 1000;
         }
         .modal-content {
-          background: #fff; padding: 20px; border-radius: 10px;
+          background: #fff; padding: 25px; border-radius: 12px;
           width: 90%; max-width: 500px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+          position: relative;
         }
         .close {
-          float: right; font-size: 24px; cursor: pointer; color: #dc3545;
+          position: absolute; top: 15px; right: 15px; font-size: 26px;
+          cursor: pointer; color: #dc3545;
         }
         input[type="text"], textarea {
-          width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc;
+          width: 100%; padding: 10px; margin-top: 6px; margin-bottom: 15px;
+          border-radius: 5px; border: 1px solid #ccc; font-size: 15px;
         }
         button {
-          background-color: #0d6efd; color: white; padding: 10px 15px;
-          border: none; border-radius: 5px; margin-top: 15px; cursor: pointer;
+          background-color: #0d6efd; color: white; padding: 10px 18px;
+          border: none; border-radius: 6px; font-weight: bold;
+          cursor: pointer; transition: background 0.3s;
         }
         button:hover {
           background-color: #0b5ed7;
@@ -44,8 +48,7 @@
         @media (max-width: 600px) {
           .modal-content { width: 95%; }
         }
-        </style>
-        
+      </style>
     
 <style>
     .announcement-bar {
@@ -579,16 +582,28 @@ document.addEventListener('keydown', function(event) {
 
 {% include 'core/feedback_modal.html' %}
 
-
 <script>
     function openModal() {
-      document.getElementById("feedbackModal").style.display = "flex";
+      if (!localStorage.getItem("feedbackShown")) {
+        document.getElementById("feedbackModal").style.display = "flex";
+        localStorage.setItem("feedbackShown", "true");
+      }
     }
+  
     function closeModal() {
       document.getElementById("feedbackModal").style.display = "none";
     }
-    
+  
     document.addEventListener("DOMContentLoaded", () => {
+      // Fungua modal baada ya dakika 1 (60000 ms)
+      setTimeout(openModal, 60000);
+  
+      // Fungua modal kama mtu anataka kuondoka (exit-intent)
+      document.addEventListener("mouseleave", (e) => {
+        if (e.clientY < 0) openModal();
+      });
+  
+      // Handle form submission
       const form = document.getElementById("feedbackForm");
       form.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -611,8 +626,8 @@ document.addEventListener('keydown', function(event) {
         });
       });
     });
-    </script>
-    
+  </script>
+  
 
 </body>
 
