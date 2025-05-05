@@ -896,6 +896,8 @@ def submit_feedback(request):
     return JsonResponse({'success': False, 'error': 'Invalid request'})
 
 
+from django.db.models import Avg, Count
+from django.core.paginator import Paginator
 
 def feedback_dashboard(request):
     feedbacks = Feedback.objects.all().order_by('-created_at')
@@ -908,3 +910,4 @@ def feedback_dashboard(request):
         'page_obj': page_obj,
         'stats': stats
     })
+
