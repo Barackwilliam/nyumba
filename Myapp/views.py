@@ -869,33 +869,31 @@ def upcoming_holidays(request):
     })
 
 
-
-# views.py
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Avg, Count
 from .models import Feedback
 
-from django.core.paginator import Paginator
-
+@csrf_exempt  # tumia hii kwa majaribio tu
 def submit_feedback(request):
     if request.method == 'POST':
         comment = request.POST.get('comment')
         rating = request.POST.get('rating')
         name = request.POST.get('name', '')
+        user = request.user if request.user.is_authenticated else None
 
         if not comment or not rating:
-            return JsonResponse({'success': False})
+            return JsonResponse({'success': False, 'error': 'Missing fields'})
 
-        feedback = Feedback.objects.create(
-            user=request.user if request.user.is_authenticated else None,
-            name=name if not request.user.is_authenticated else request.user.username,
+        Feedback.objects.create(
+            user=user,
+            name=name if not user else user.username,
             comment=comment,
-            rating=int(rating),
+            rating=int(rating)
         )
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False})
 
+        return JsonResponse({'success': True})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
 
 
 
