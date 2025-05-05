@@ -5,6 +5,147 @@
 
 
 <head>
+
+
+    {% csrf_token %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    
+    
+    <style>
+        :root {
+          --bg-light: #fff;
+          --bg-dark: #1e1e1e;
+          --text-light: #333;
+          --text-dark: #eee;
+          --input-bg-light: #f9f9f9;
+          --input-bg-dark: #2b2b2b;
+          --border-color: #ccc;
+          --green: #4CAF50;
+        }
+      
+        @media (prefers-color-scheme: dark) {
+          :root {
+            --bg-light: var(--bg-dark);
+            --text-light: var(--text-dark);
+            --input-bg-light: var(--input-bg-dark);
+            --border-color: #444;
+          }
+        }
+      
+        #feedback-modal {
+          display: none;
+          position: fixed;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background: rgba(0, 0, 0, 0.6);
+          z-index: 1000;
+          justify-content: center;
+          align-items: center;
+          font-family: 'Segoe UI', sans-serif;
+          padding: 20px;
+        }
+      
+        .modal-content {
+          background: var(--bg-light);
+          padding: 25px;
+          border-radius: 20px;
+          width: 100%;
+          max-width: 450px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+          position: relative;
+          animation: fadeIn 0.3s ease-in-out;
+          color: var(--text-light);
+        }
+      
+        .modal-content h3 {
+          margin-top: 0;
+          font-size: 22px;
+        }
+      
+        .modal-content input,
+        .modal-content textarea,
+        .modal-content select {
+          width: 100%;
+          padding: 12px 14px;
+          margin-bottom: 15px;
+          border: 1px solid var(--border-color);
+          border-radius: 10px;
+          font-size: 15px;
+          background-color: var(--input-bg-light);
+          color: var(--text-light);
+        }
+      
+        .modal-content button[type="submit"] {
+          background-color: var(--green);
+          color: white;
+          padding: 12px;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          font-size: 16px;
+          width: 100%;
+        }
+      
+        #feedback-message {
+          color: limegreen;
+          margin-top: 10px;
+          display: none;
+        }
+      
+        .close-btn {
+          position: absolute;
+          top: 12px;
+          right: 16px;
+          font-size: 22px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #999;
+        }
+      
+        .close-btn:hover {
+          color: #333;
+        }
+      
+        @keyframes fadeIn {
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+      
+        /* Floating button */
+        .floating-btn {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: var(--green);
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 55px;
+          height: 55px;
+          font-size: 26px;
+          cursor: pointer;
+          z-index: 1001;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+      
+        .floating-btn:hover {
+          transform: scale(1.1);
+        }
+      
+        @media (max-width: 480px) {
+          .modal-content {
+            padding: 20px;
+            border-radius: 15px;
+          }
+      
+          .floating-btn {
+            width: 45px;
+            height: 45px;
+            font-size: 22px;
+          }
+        }
+      </style>
     
     <script>
         if (!navigator.userAgent.includes("Mozilla")) {
@@ -740,6 +881,86 @@ document.addEventListener('keydown', function(event) {
 });
 
 </script>
+
+
+
+
+
+
+    
+<!-- Feedback Modal -->
+<div id="feedback-modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeFeedbackModal()">×</button>
+      <h3>📝 We'd love your feedback</h3>
+      <form id="feedback-form">
+        {% csrf_token %}
+        <input type="text" id="name" name="name" placeholder="Your Name (optional)">
+        <textarea id="comment" name="comment" required placeholder="Write your feedback..."></textarea>
+        <select id="rating" name="rating" required>
+          <option value="">Rate our service</option>
+          <option value="1">★☆☆☆☆ - Poor</option>
+          <option value="2">★★☆☆☆ - Fair</option>
+          <option value="3">★★★☆☆ - Good</option>
+          <option value="4">★★★★☆ - Very good</option>
+          <option value="5">★★★★★ - Excellent</option>
+        </select>
+        <button type="submit">Send Feedback</button>
+      </form>
+      <p id="feedback-message"></p>
+    </div>
+  </div>
+  
+  <!-- Floating Button -->
+  <button class="floating-btn" onclick="showFeedbackModal()">💬</button>
+  <script>
+    const feedbackModal = document.getElementById("feedback-modal");
+    const feedbackForm = document.getElementById("feedback-form");
+    const feedbackMessage = document.getElementById("feedback-message");
+  
+    setTimeout(() => {
+      if (!localStorage.getItem("feedbackGiven")) {
+        showFeedbackModal();
+      }
+    }, 40000);
+  
+    function showFeedbackModal() {
+      feedbackModal.style.display = "flex";
+    }
+  
+    function closeFeedbackModal() {
+      feedbackModal.style.display = "none";
+    }
+  
+    feedbackForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(feedbackForm);
+  
+      fetch("{% url 'submit_feedback' %}", {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": getCSRFToken()
+        },
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          feedbackMessage.textContent = "✅ Thank you for your feedback!";
+          feedbackMessage.style.display = "block";
+          localStorage.setItem("feedbackGiven", "true");
+          setTimeout(() => {
+            closeFeedbackModal();
+          }, 3000);
+        }
+      });
+    });
+  
+    function getCSRFToken() {
+      return document.querySelector("[name=csrfmiddlewaretoken]")?.value ||
+             document.querySelector("meta[name='csrf-token']")?.getAttribute("content");
+    }
+  </script>
 </body>
 
 
