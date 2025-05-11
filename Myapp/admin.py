@@ -1,54 +1,111 @@
+# admin.py
 from django.contrib import admin
-from .models import Profile
-from .models import Property
-from .models import Featured
-from .models import Help_Question
-from .models import Inquiry, Agent,Client,Partner, Offer,Payment
-from .models import PopularPlace, PopularProperty,ChatMessage,Referral,PropertyLocation,Feedback
-# Register your models here.
+from .models import (
+    Referral, Property, ChatMessage, Review, Profile,
+    PopularPlace, Offer, Payment, Featured,
+    PopularProperty, Agent, Partner, Client, Inquiry,
+    PropertyLocation,
+    Help_Question,
+    Holiday,
+    Feedback,
+    Scraped_MakaziListing
+)
 
-# admin.site.register(ChatRoom)
+from django.contrib import admin
+from .models import (
+    Referral, Property, ChatMessage, Review, Profile, PopularPlace, Offer,
+    Payment, Featured, PopularProperty, Agent, Partner, Client
+)
 
-# admin.site.register(Message)
-admin.site.register(Referral)
-admin.site.register(PropertyLocation)
-admin.site.register(Offer)
-admin.site.register(Partner)
-admin.site.register(Client)
-admin.site.register(Agent)
-admin.site.register(Inquiry)
-# admin.site.register( Notification)
-admin.site.register(ChatMessage)
-admin.site.register(Featured)
-admin.site.register(Profile)
-admin.site.register(Property)
-admin.site.register(Payment)
-admin.site.register(PopularPlace)
-admin.site.register(PopularProperty)
-admin.site.register(Help_Question)
+@admin.register(Referral)
+class ReferralAdmin(admin.ModelAdmin):
+    list_display = ['referrer', 'referred_user', 'referral_code', 'status', 'rewarded', 'created_at']
+    search_fields = ['referral_code', 'referrer__username']
+
+@admin.register(Property)
+class PropertyAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price', 'status', 'region', 'owner', 'is_available']
+    list_filter = ['status', 'region', 'is_available']
+    search_fields = ['title', 'district', 'ward']
+
+@admin.register(ChatMessage)
+class ChatMessageAdmin(admin.ModelAdmin):
+    list_display = ['sender', 'receiver', 'timestamp']
+    search_fields = ['sender__username', 'receiver__username']
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['user', 'rating']
+    search_fields = ['user__username']
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'role', 'is_verified', 'subscription_plan']
+    list_filter = ['role', 'is_verified']
+    search_fields = ['user__username', 'phone']
+
+@admin.register(PopularPlace)
+class PopularPlaceAdmin(admin.ModelAdmin):
+    list_display = ['name_of_place', 'number_of_property']
+
+@admin.register(Offer)
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ['title', 'slug']
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ['user', 'timestamp']
+
+@admin.register(Featured)
+class FeaturedAdmin(admin.ModelAdmin):
+    list_display = ['f_property_name', 'is_available']
+
+@admin.register(PopularProperty)
+class PopularPropertyAdmin(admin.ModelAdmin):
+    list_display = ['p_property_name', 'is_available']
+
+@admin.register(Agent)
+class AgentAdmin(admin.ModelAdmin):
+    list_display = ['jina', 'Cheo']
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ['jina', 'image_of_partners']
+
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ['name','client_image','location','comment']
 
 
-# @admin.register(Property)
-# class PropertyAdmin(admin.ModelAdmin):
-#     list_display = ('unique_id')
+@admin.register(Inquiry)
+class InquiryAdmin(admin.ModelAdmin):
+    list_display = ['full_name', 'phone_number', 'email', 'property', 'owner', 'date_sent']
+    search_fields = ['full_name', 'phone_number', 'email', 'property__title']
 
+@admin.register(PropertyLocation)
+class PropertyLocationAdmin(admin.ModelAdmin):
+    list_display = ['property', 'lat', 'lon']
+    search_fields = ['property__title']
 
-
-from .models import Holiday
+@admin.register(Help_Question)
+class HelpQuestionAdmin(admin.ModelAdmin):
+    list_display = ['question', 'created_at']
+    search_fields = ['question']
 
 @admin.register(Holiday)
 class HolidayAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'type', 'country')
-    list_filter = ('type', 'country')
-    search_fields = ('name',)
-
+    list_display = ['name', 'date', 'type', 'country']
+    list_filter = ['type', 'country']
+    search_fields = ['name']
 
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ('user','name', 'comment', 'rating','created_at')
-    list_filter = ('user','name','created_at')
-    search_fields = ('user','name','created_at')
+    list_display = ['user', 'name', 'rating', 'created_at']
+    search_fields = ['name', 'user__username']
 
-
-
-
+# Scraped_MakaziListing
+class ScrapedMakaziListingAdmin(admin.ModelAdmin):
+    list_display = ('title', 'price', 'location', 'scraped_at')
+    search_fields = ('title', 'location')
+    list_filter = ('scraped_at',)
+admin.site.register(Scraped_MakaziListing, ScrapedMakaziListingAdmin)
