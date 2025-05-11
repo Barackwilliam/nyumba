@@ -911,3 +911,53 @@ def feedback_dashboard(request):
         'stats': stats
     })
 
+
+
+# myapp/views.py
+from django.http import JsonResponse
+from django.conf import settings
+from django.utils.translation import activate
+
+def set_language(request):
+    if request.method == 'POST':
+        lang = request.POST.get('language')
+        if lang in dict(settings.LANGUAGES):
+            activate(lang)
+            response = JsonResponse({'status': 'success'})
+            response.set_cookie('django_language', lang, max_age=315360000)
+            return response
+    return JsonResponse({'status': 'error'}, status=400)
+
+
+
+    # API endpoint
+# views.py
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Scraped_MakaziListing
+
+@api_view(['POST'])
+def receive_scraped_data(request):
+    if request.headers.get('Authorization') != 'Token 7d9a3f905bf0c9fa46147447226d966d82f2ddf6':
+        return Response({'error': 'Unauthorized'}, status=401)
+
+    data = request.data
+    try:
+        obj, created = Scraped_MakaziListing.objects.get_or_create(
+            link=data['link'],
+            defaults={
+                'title': data['title'],
+                'price': data['price'],
+                'location': data['location'],
+                'description': data.get('description', ''),
+                'main_image_url': data.get('main_image_url', None),
+            }
+        )
+        return Response(
+            {"message": "Created" if created else "Already exists"},
+            status=status.HTTP_201_CREATED if created else status.HTTP_200_OK
+        )
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+

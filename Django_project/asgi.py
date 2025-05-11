@@ -16,17 +16,3 @@ application = ProtocolTypeRouter(
         )
     }
 )
-
-
-# application = ProtocolTypeRouter(     
-#     {
-#         "http": get_asgi_application(),
-#         "websocket": AuthMiddlewareStack(             
-#             URLRouter([
-#                path('ws/notifications/',consumers.NotificationConsumer.as_asgi()),           
-#                  ])
-#         )
-#     }
-# )
-
-
