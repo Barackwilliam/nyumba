@@ -393,7 +393,7 @@ class Scrape_MakaziListing(models.Model):
         return self.title
 
 
-class BeforwardListing(models.Model):
+class Scrape_BeforwardListing(models.Model):
     title = models.CharField(max_length=255)
     link = models.URLField(unique=True)
     price = models.CharField(max_length=100)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Property, PropertyLocation, Scrape_MakaziListing
+from .models import Property, PropertyLocation, Scrape_MakaziListing,Scrape_BeforwardListing
 
 class PropertyLocationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,4 +23,11 @@ class PropertySerializer(serializers.ModelSerializer):
 class ScrapeMakaziListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scrape_MakaziListing
+        fields = '__all__'
+
+
+
+class ScrapeBeforwardListingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Scrape_BeforwardListing
         fields = '__all__'

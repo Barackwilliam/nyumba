@@ -933,3 +933,15 @@ def receive_listing(request):
 
 
 # 'Token 7d9a3f905bf0c9fa46147447226d966d82f2ddf6'
+
+
+from .models import Scrape_BeforwardListing
+from .serializers import ScrapeBeforwardListingSerializer
+
+@api_view(['POST'])
+def receive_beforward_listing(request):
+    serializer = ScrapeBeforwardListingSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message': 'Listing saved successfully'}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
