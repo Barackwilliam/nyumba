@@ -8,13 +8,7 @@ from .models import (
     Help_Question,
     Holiday,
     Feedback,
-    Scrape_MakaziListing
-)
-
-from django.contrib import admin
-from .models import (
-    Referral, Property, ChatMessage, Review, Profile, PopularPlace, Offer,
-    Payment, Featured, PopularProperty, Agent, Partner, Client
+    Scrape_MakaziListing,Scrape_BeforwardListing
 )
 
 @admin.register(Referral)
@@ -109,3 +103,13 @@ class ScrapeMakaziListingAdmin(admin.ModelAdmin):
     search_fields = ('title', 'location')
     list_filter = ('scraped_at',)
 admin.site.register(Scrape_MakaziListing, ScrapeMakaziListingAdmin)
+
+
+
+
+class ScrapeBeforwardListingAdmin(admin.ModelAdmin):
+    list_display = ('title', 'link','price', 'city','agent_name','agent_phones','image_urls', 'scraped_at')
+    search_fields = ('title', 'city','price','agent_name','agent_phones')
+    list_filter = ('scraped_at',)
+admin.site.register(Scrape_BeforwardListing, ScrapeBeforwardListingAdmin)
+
