@@ -913,21 +913,6 @@ def feedback_dashboard(request):
 
 
 
-# myapp/views.py
-from django.http import JsonResponse
-from django.conf import settings
-from django.utils.translation import activate
-
-def set_language(request):
-    if request.method == 'POST':
-        lang = request.POST.get('language')
-        if lang in dict(settings.LANGUAGES):
-            activate(lang)
-            response = JsonResponse({'status': 'success'})
-            response.set_cookie('django_language', lang, max_age=315360000)
-            return response
-    return JsonResponse({'status': 'error'}, status=400)
-
 
 
     # API endpoint
