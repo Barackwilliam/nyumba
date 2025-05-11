@@ -1,7 +1,6 @@
 from django.urls import path 
 from .views import referral_dashboard,register_view,login_view, offer_list, offer_detail
 from .views import property_map
-from .views import set_language
 from .views import receive_scraped_data #API urls
 
 
@@ -13,8 +12,6 @@ urlpatterns = [
     path('upcoming_holidays', views.upcoming_holidays, name='upcoming_holidays'),
     path('submit-feedback/', views.submit_feedback, name='submit_feedback'),
     path('feedbacks/', views.feedback_dashboard, name='feedback_dashboard'),
-    path('set-language/', set_language, name='set_language'),
-    path('set-language/', set_language, name='set_language'),
 
     path('api/receive-scraped/', receive_scraped_data),# API url
 
