@@ -376,7 +376,9 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.user.username if self.user else "Anonymous"
-class Scraped_MakaziListing(models.Model):
+
+
+class Scrape_MakaziListing(models.Model):
     title = models.CharField(max_length=255)
     link = models.URLField(unique=True)
     price = models.CharField(max_length=100)
@@ -390,3 +392,17 @@ class Scraped_MakaziListing(models.Model):
     def __str__(self):
         return self.title
 
+
+class BeforwardListing(models.Model):
+    title = models.CharField(max_length=255)
+    link = models.URLField(unique=True)
+    price = models.CharField(max_length=100)
+    city = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    agent_name = models.CharField(max_length=255, blank=True)
+    agent_phones = models.JSONField(blank=True, null=True)
+    image_urls = models.JSONField(blank=True, null=True)
+    scraped_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

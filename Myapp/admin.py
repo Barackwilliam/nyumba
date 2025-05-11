@@ -8,7 +8,7 @@ from .models import (
     Help_Question,
     Holiday,
     Feedback,
-    Scraped_MakaziListing
+    Scrape_MakaziListing
 )
 
 from django.contrib import admin
@@ -104,8 +104,8 @@ class FeedbackAdmin(admin.ModelAdmin):
     search_fields = ['name', 'user__username']
 
 # Scraped_MakaziListing
-class ScrapedMakaziListingAdmin(admin.ModelAdmin):
+class ScrapeMakaziListingAdmin(admin.ModelAdmin):
     list_display = ('title', 'price', 'location', 'scraped_at')
     search_fields = ('title', 'location')
     list_filter = ('scraped_at',)
-admin.site.register(Scraped_MakaziListing, ScrapedMakaziListingAdmin)
+admin.site.register(Scrape_MakaziListing, ScrapeMakaziListingAdmin)

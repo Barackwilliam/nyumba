@@ -920,7 +920,7 @@ def feedback_dashboard(request):
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Scraped_MakaziListing
+from .models import Scrape_MakaziListing
 
 @api_view(['POST'])
 def receive_scraped_data(request):
@@ -929,7 +929,7 @@ def receive_scraped_data(request):
 
     data = request.data
     try:
-        obj, created = Scraped_MakaziListing.objects.get_or_create(
+        obj, created = Scrape_MakaziListing.objects.get_or_create(
             link=data['link'],
             defaults={
                 'title': data['title'],
