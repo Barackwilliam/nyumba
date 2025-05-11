@@ -1,7 +1,7 @@
 from django.urls import path 
 from .views import referral_dashboard,register_view,login_view, offer_list, offer_detail
 from .views import property_map
-from .views import receive_scraped_data #API urls
+from .views import receive_listing #API urls
 
 
 from . import views 
@@ -13,7 +13,7 @@ urlpatterns = [
     path('submit-feedback/', views.submit_feedback, name='submit_feedback'),
     path('feedbacks/', views.feedback_dashboard, name='feedback_dashboard'),
 
-    path('api/receive-scraped/', receive_scraped_data),# API url
+    path('api/receive-listing/', receive_listing, name='receive_listing'),# API url
 
 
     path('chat', views.chat, name='chat'),

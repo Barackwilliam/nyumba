@@ -921,28 +921,15 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Scrape_MakaziListing
+from .serializers import ScrapeMakaziListingSerializer
 
 @api_view(['POST'])
-def receive_scraped_data(request):
-    if request.headers.get('Authorization') != 'Token 7d9a3f905bf0c9fa46147447226d966d82f2ddf6':
-        return Response({'error': 'Unauthorized'}, status=401)
+def receive_listing(request):
+    serializer = ScrapeMakaziListingSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message': 'Listing saved successfully'}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    data = request.data
-    try:
-        obj, created = Scrape_MakaziListing.objects.get_or_create(
-            link=data['link'],
-            defaults={
-                'title': data['title'],
-                'price': data['price'],
-                'location': data['location'],
-                'description': data.get('description', ''),
-                'main_image_url': data.get('main_image_url', None),
-            }
-        )
-        return Response(
-            {"message": "Created" if created else "Already exists"},
-            status=status.HTTP_201_CREATED if created else status.HTTP_200_OK
-        )
-    except Exception as e:
-        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+# 'Token 7d9a3f905bf0c9fa46147447226d966d82f2ddf6'
