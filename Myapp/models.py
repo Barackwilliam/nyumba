@@ -377,6 +377,7 @@ class Feedback(models.Model):
     def __str__(self):
         return self.user.username if self.user else "Anonymous"
 
+from django.utils.text import slugify
 
 class Scrape_MakaziListing(models.Model):
     title = models.CharField(max_length=255)
@@ -384,13 +385,14 @@ class Scrape_MakaziListing(models.Model):
     price = models.CharField(max_length=100)
     location = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    main_image_url = models.URLField(blank=True, null=True)  # New field for the image URL
-
+    main_image_url = models.URLField(blank=True, null=True)
     scraped_at = models.DateTimeField(auto_now=True)
-
 
     def __str__(self):
         return self.title
+
+    def get_slug_id(self):
+        return f"{slugify(self.title)}-{self.id}"
 
 
 class Scrape_BeforwardListing(models.Model):
