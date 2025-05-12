@@ -13,8 +13,12 @@ urlpatterns = [
     path('submit-feedback/', views.submit_feedback, name='submit_feedback'),
     path('feedbacks/', views.feedback_dashboard, name='feedback_dashboard'),
 
+
+    # Scrapped details
     path('api/receive-listing/', receive_listing, name='receive_listing'),# API url
     path('api/receive-beforward-listing/', receive_beforward_listing, name='receive_beforward_listing'),# API url
+    path('makazi/', views.makazi_list, name='makazi_list'),
+    path('makazi/<slug:slug_id>/', views.makazi_detail, name='makazi_detail'),
 
 
 

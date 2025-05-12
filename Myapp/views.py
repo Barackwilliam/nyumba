@@ -945,3 +945,42 @@ def receive_beforward_listing(request):
         serializer.save()
         return Response({'message': 'Listing saved successfully'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# views.py
+from django.shortcuts import render, get_object_or_404
+from .models import Scrape_MakaziListing
+from django.utils.text import slugify
+from django.core.paginator import Paginator
+from django.db.models import Q
+
+
+
+
+
+def makazi_list(request):
+    search_query = request.GET.get('search', '')  # Hii inachukua maneno ya kutafuta kutoka kwa GET query string
+
+    # Tafuta nyumba kulingana na title, location, au description
+    listings = Scrape_MakaziListing.objects.all().order_by('-scraped_at')
+
+    if search_query:
+        listings = listings.filter(
+            Q(title__icontains=search_query) |
+            Q(location__icontains=search_query) |
+            Q(description__icontains=search_query)
+        )
+
+    # Pagination
+    paginator = Paginator(listings, 10)  # Kuonyesha nyumba 10 kwa kila ukurasa
+    page_number = request.GET.get('page')  # Hii itachukua namba ya ukurasa kutoka kwa query string
+    page_obj = paginator.get_page(page_number)
+
+    # Tuma data kwa template
+    return render(request, 'core/makazi_list.html', {'page_obj': page_obj, 'search_query': search_query})
+
+def makazi_detail(request, slug_id):
+    pk = slug_id.split('-')[-1]  # Extract ID from the slug
+    listing = get_object_or_404(Scrape_MakaziListing, pk=pk)
+    return render(request, 'core/makazi_detail.html', {'listing': listing})
