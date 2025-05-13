@@ -233,7 +233,7 @@ def popular_properties(request):
 
 
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def search_property(request):
     query = request.GET.get('q') #Fetching the user's input from the search box
 
