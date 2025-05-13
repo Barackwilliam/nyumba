@@ -395,6 +395,8 @@ class Scrape_MakaziListing(models.Model):
         return f"{slugify(self.title)}-{self.id}"
 
 
+from django.utils.text import slugify
+
 class Scrape_BeforwardListing(models.Model):
     title = models.CharField(max_length=255)
     link = models.URLField(unique=True)
@@ -408,3 +410,6 @@ class Scrape_BeforwardListing(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_slug_id(self):
+        return f"{slugify(self.title)}-{self.id}"

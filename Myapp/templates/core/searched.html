@@ -309,7 +309,7 @@
     <meta name="description" content="NyumbaChap ni Jukwaa bora Tanzani la kukusaidia kutafuta nyumba za kupangisha au kununua , pamoja na mawasiliano ya wamiliki">
     <meta name="author" content="NyumbaChap Team">
     <meta name="Keywords" content="Nyumba Tanzania,vyumba vya kupangisha kigamboni,vyumba vya kupangisha Dodoma, vyumba vya kupangisha Lindi,vyumba vya kupangisha Mtwala,vyumba vya kupangisha zanzibar,vyumba vya kupangisha Mbeya mjini,vyumba vya kupangisha Tanga,vyumba vya kupangisha singida,vyumba vya kupangisha kigoma,vyumba vya kupangisha stend kuu,Nyumba za kupangisha songea, Nyumba za kuuza, Vyumba vya bei nafuu, Mali isiyohamishika, Nyumba Dar es salaam, Vyumbaa Dar es salaam, vyumba Temeke, Vyumba Ilala, vyumba kinondoni, Hostel kampala, hostel UDSM, hostel CBE, hostel NIT, NyumbaChap, Hostel Muhimbili, hostel chuo cha mwalimu Nyerere, vyumba Mwenge, vyumba Mwanza, Vyumba Arusha, Vyumba morogoro, Vyumba vya karibu na chuo, vyumba vya Mjini, vyumba vya biashara">
-    <title>Natafuta nyumba ya kupanga</title>
+    <title>nyumba ya kupanga</title>
 
     <!-- FAVICON -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico'%}">
@@ -521,7 +521,7 @@
                                     <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
                                         <!-- <a class="btn btn-yellow" href="#"><button type="submit"> Search Now </button> </a>  -->
                                         
-                    <div style="text-align: center;"><button type="submit" style="background-color: #FF5B6C; color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer;">Search Now</button></div>
+                                      <div style="text-align: center;"><button type="submit" style="background-color: #FF5B6C; color: white; border: none; padding: 10px 25px; border-radius: 5px; cursor: pointer;">Tafuta Sasa</button></div>
 
                      
                                     </div>
@@ -547,11 +547,19 @@
                     </div>
                 </section>
             <!-- homes content -->
-
-            <h2>Searched results</h2>
-                              
+            <br><br><br>
+           
+            {% if results %}
+             <h2 style="text-align: center;">Matokeo ya Utafutaji</h2>
+                 {% else %}
+             <h2 style="text-align: center;">Hakuna Matokeo ya Ulichotafuta</h2>
+                  {% endif %}
+                        <div></div>  
+                        
+                        <br><br><br>
             <div class="row">
                 {% for property in results reversed %} 
+
                 <a href="{% url 'property_detail' property.id %}"></a>
                 
                 <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
@@ -609,9 +617,23 @@
                         </div>
                     </div>
                 </div>
+             
+
+
+                <br><br><br>
 
                 {% empty %}
                   <!-- START SECTION COUNTER UP -->
+                  <div><p style="text-align: center;">{{user.username}} Umekua Mtu wetu wa thamani sana Kwa kulitambua hilo tumeongeza vipengere hivi muhimu ili kuhakikisha haukosi makazi.
+                    Chagua vitufe hivyo viwili hapo chini (Makazi ya kifahari) au (Mchanganyiko) ili uendelee kutafuta Makazi ya Chaguo lako
+                  </p></div>
+    
+                       
+                  <div class="d-flex justify-content-center my-4">
+                    <a href="{% url 'Beforward_list' %}" class="btn btn-success mx-2">Makazi ya kifahari (VIP)</a>
+                    <a href="{% url 'makazi_list' %}" class="btn btn-success mx-2">Makazi Mchanganyiko</a>
+                </div>
+                <br><br><br> 
         <section class="counterup">
             <div class="container">
                 <div class="row">
@@ -620,7 +642,7 @@
                             <i class="fa fa-home" aria-hidden="true"></i>
                             <div class="count-me">
                                 <a href="{% url 'jihudumie' %}"> <p class="counter text-left">19760</p>
-                                <h3>Total</h3></a>
+                                <h3>Jumla ya Makazi</h3></a>
                             </div>
                         </div>
                     </div>
@@ -629,7 +651,7 @@
                             <i class="fa fa-list" aria-hidden="true"></i>
                             <div class="count-me">
                                 <a href="{% url 'jihudumie' %}"><p class="counter text-left">1250</p>
-                                <h3>sold</h3></a>
+                                <h3>Zilizouzwa</h3></a>
                             </div>
                         </div>
                     </div>
@@ -638,7 +660,7 @@
                             <i class="fa fa-users" aria-hidden="true"></i>
                             <div class="count-me">
                                 <a href="{% url 'jihudumie' %}"> <p class="counter text-left">12400</p>
-                                <h3>Rented</h3></a>
+                                <h3>Zilizopangishwa</h3></a>
                             </div>
                         </div>
                     </div>
@@ -647,7 +669,7 @@
                             <i class="fa fa-trophy" aria-hidden="true"></i>
                             <div class="count-me">
                                 <a href="{% url 'jihudumie' %}"> <p class="counter text-left">6110</p>
-                                <h3>Available</h3></a>
+                                <h3>Zilizopo</h3></a>
                             </div>
                         </div>
                     </div>
@@ -658,6 +680,21 @@
         
             
                 {% endfor %}
+
+
+
+                {% if results %}
+                <div><p style="text-align: center;">{{user.username}} Umekua Mtu wetu wa thamani sana Kwa kulitambua hilo tumeongeza vipengere hivi muhimu ili kuhakikisha haukosi makazi.
+                    Chagua vitufe hivyo viwili hapo chini (Makazi ya kifahari) au (Mchanganyiko) ili uendelee kutafuta Makazi ya Chaguo lako
+                  </p></div>
+    
+                       
+                  <div class="d-flex justify-content-center my-4">
+                    <a href="{% url 'Beforward_list' %}" class="btn btn-success mx-2">Makazi ya kifahari (VIP)</a>
+                    <a href="{% url 'makazi_list' %}" class="btn btn-success mx-2">Makazi Mchanganyiko</a>
+                </div>
+               
+                     {% endif %}
             </div>  
             </div>
         </section>
