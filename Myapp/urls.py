@@ -19,6 +19,11 @@ urlpatterns = [
     path('api/receive-beforward-listing/', receive_beforward_listing, name='receive_beforward_listing'),# API url
     path('makazi/', views.makazi_list, name='makazi_list'),
     path('makazi/<slug:slug_id>/', views.makazi_detail, name='makazi_detail'),
+    path('Beforward/', views.Beforward_list, name='Beforward_list'),
+    path('Beforward/<slug:slug_id>/', views.Beforward_detail, name='Beforward_detail'),
+
+
+
 
 
 

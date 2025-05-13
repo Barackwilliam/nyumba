@@ -270,16 +270,136 @@ button, a {
 .btn:active {
   transform: scale(0.98);
 }
-```
+
+
+
+header {
+      width: 100%;
+      background: linear-gradient(90deg, #e63946, #f1faee);
+      box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+      padding: 1rem 2rem;
+      user-select: none;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .btn-back {
+      background: #1d3557;
+      color: #f1faee;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(29, 53, 87, 0.6);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-back:hover {
+      background: #a4161a;
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(164, 22, 26, 0.8);
+    }
+
+    .site-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: #1d3557;
+      text-align: center;
+      flex-grow: 1;
+      user-select: text;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background: #f1faee;
+      color: #1d3557;
+      padding: 0.6rem 1.4rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(29, 53, 87, 0.2);
+      transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-btn:hover,
+    .nav-btn:focus {
+      background: #e63946;
+      color: #f1faee;
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(230, 57, 70, 0.8);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .site-title {
+        flex-basis: 100%;
+        order: 2;
+        font-size: 1.6rem;
+        margin: 0.5rem 0;
+      }
+
+      .btn-back {
+        order: 1;
+      }
+
+      .header-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 0.8rem;
+      }
+
+      .nav-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
 
   </style>
 </head>
 <body>
   <header>
-    <button class="back-btn" onclick="window.history.back()" aria-label="Rudi nyuma">
-      ← Rudi
-    </button>
-    <h1>Nyumba Zote Kiganjani kwako</h1>
+    <div class="header-container">
+      <button class="btn-back" aria-label="Rudi nyuma" onclick="window.history.back()">
+        ← Rudi
+      </button>
+  
+      <h1 class="site-title">Nyumba Zote Kiganjani Kwako</h1>
+  
+      <nav class="header-nav">
+        <a href="/" class="nav-btn">Nyumbani</a>
+        <a href="/orodha" class="nav-btn">Orodha</a>
+        <a href="/wasiliana" class="nav-btn">Wasiliana</a>
+      </nav>
+    </div>
+  
   </header>
 
   <div class="main-container">
@@ -298,7 +418,7 @@ button, a {
       </div>
       
       <div class="price-tag">
-        Tsh {{ listing.price|intcomma }}
+      {{ listing.price|intcomma }}
       </div>
       
       <div class="description">
@@ -307,11 +427,11 @@ button, a {
       
       <h2>Vipengele</h2>
       <div class="features-grid">
-        <div class="feature-item">🛏️ Chumba kimoja</div>
+        <div class="feature-item">🛏️ Chumba Safi</div>
         <div class="feature-item">🚿 Bafu ya ndani</div>
         <div class="feature-item">🍳 Jiko</div>
         <div class="feature-item">🅿️ Eneo la gari</div>
-        <div class="feature-item">🔒 Usalama</div>
+        <div class="feature-item">🔒 Usalama Wakutosha</div>
         <div class="feature-item">🌳 Bustani</div>
       </div>
       
@@ -329,7 +449,7 @@ button, a {
     </div>
     
     <div class="action-section">
-      <h2>Shughulikia Makazi</h2>
+      <h2>Mawasiliano</h2>
       <p>Piga simu au tuma ujumbe kwa mwenye nyumba:</p>
       
       <button class="btn btn-primary">

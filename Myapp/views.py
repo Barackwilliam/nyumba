@@ -233,7 +233,7 @@ def popular_properties(request):
 
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def search_property(request):
     query = request.GET.get('q') #Fetching the user's input from the search box
 
@@ -950,7 +950,7 @@ def receive_beforward_listing(request):
 
 # views.py
 from django.shortcuts import render, get_object_or_404
-from .models import Scrape_MakaziListing
+from .models import Scrape_MakaziListing,Scrape_BeforwardListing
 from django.utils.text import slugify
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -984,3 +984,42 @@ def makazi_detail(request, slug_id):
     pk = slug_id.split('-')[-1]  # Extract ID from the slug
     listing = get_object_or_404(Scrape_MakaziListing, pk=pk)
     return render(request, 'core/makazi_detail.html', {'listing': listing})
+
+
+
+
+
+
+
+def Beforward_list(request):
+    search_query = request.GET.get('search', '')
+    listings = Scrape_BeforwardListing.objects.all().order_by('-scraped_at')
+
+    if search_query:
+        listings = listings.filter(
+            Q(title__icontains=search_query) |
+            Q(city__icontains=search_query) |
+            Q(description__icontains=search_query)
+        )
+
+    paginator = Paginator(listings, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'core/Beforward_list.html', {
+        'page_obj': page_obj,
+        'search_query': search_query,
+    })
+
+
+def Beforward_detail(request, slug_id):
+    try:
+        obj_id = int(slug_id.split('-')[-1])
+    except (ValueError, IndexError):
+        return render(request, '404.html', status=404)
+
+    listing = get_object_or_404(Scrape_BeforwardListing, id=obj_id)
+
+    return render(request, 'core/Beforward_detail.html', {
+        'listing': listing
+    })
