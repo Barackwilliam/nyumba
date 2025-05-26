@@ -252,45 +252,6 @@ def search_property(request):
     return render(request,'core/searched.html',{'results':results})
 
 
-# def Register(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         email = request.POST['email']
-#         password = request.POST['password']
-#         password2 = request.POST['password2']
-#         if password == password2:
-#            if User.objects.filter(email=email).exists():
-#                messages.error(request, 'Pole..! Email hii Tayari imesajiliwa Tafadhari Tumia Email Nyingine.!')
-#                return redirect('Register')
-#            elif User.objects.filter(username=username).exists():
-#                messages.error(request, 'Loh Username uliyotumia ilisha sajiliwa Tafadhari Tumia Username Nyingine.!')
-#                return redirect('Register')
-#            else:
-#                user = User.objects.create_user(username=username, email=email, password=password2)
-#                user.save()
-#                 # Tuma email ya ukaribisho
-#                send_welcome_email(user.email, user.username)
-#                messages.success(request,'Your Account created Successfully login below')
-#                return redirect('login')
-#             # #redirect usert to setting
-#                user_login = auth.authenticate(username=username, password=password)
-#                auth.login(request, user_login)
-#             #create a profile object for new user
-#                user_model = User.objects.get(username=username)
-#                new_profile = Profile.objects.create(user=user_model,role=user_model,address=user_model,phone=user_model,email=user_model,picture=user_model, bio=user_model)
-#                new_profile.save()
-#                return redirect('login')
-#         else:
-#             messages.error(request, 'password Not Matching')
-#             return render(request,'core/login.html')
-#     else:
-#         return render(request, 'core/Register.html')
-
-
-
-
-
-
 
 import requests
 from django.contrib.auth.models import User
@@ -472,23 +433,6 @@ def edit_profile(request):
 def logout(request):
     auth.logout(request)
     return redirect('login')
-
-
-
-
-# def login(request):
-#     if request.method =='POST':
-#        username = request.POST['username']
-#        password = request.POST['password']
-#        User = auth.authenticate(username=username, password=password)
-#        if User is not None: # type: ignore
-#           auth.login(request, User) # type: ignore
-#           return redirect('/')
-#        else:
-#         messages.error(request, 'Tafadhari ingiza Taarifa Sahihi na Ujaribu Tena au Jisajili Upya!')
-#         return redirect(login)
-#     else:
-#         return render(request, 'core/login.html')
 
 
 
@@ -722,38 +666,6 @@ def property_map(request):
 
 
 
-# from .models import Property, PropertyLocation
-
-# def update_property_locations():
-#     """
-#     Loop through all properties, fetch their location name (region, district, ward),
-#     and update the PropertyLocation with lat and lon using geocoding.
-#     """
-#     properties = Property.objects.all()
-    
-#     for property in properties:
-#         location_name = f"{property.region}, {property.district}, {property.ward}"
-#         lat, lon = get_lat_lon(location_name)  # Use geocoding to get lat/lon
-        
-#         if lat and lon:
-#             # Check if PropertyLocation already exists
-#             property_location, created = PropertyLocation.objects.get_or_create(property=property)
-            
-#             # Update or set lat/lon values
-#             property_location.lat = lat
-#             property_location.lon = lon
-#             property_location.save()  # Save the updated PropertyLocation
-            
-#             print(f"Updated {property.title} with coordinates: ({lat}, {lon})")
-#         else:
-#             print(f"Failed to update coordinates for {property.title} (Location not found)")
-           
-
-# # Run this function once to update the properties with lat/lon
-# update_property_locations()
-
-
-
 from .models import Property, PropertyLocation
 
 def update_property_locations():
@@ -799,23 +711,6 @@ def my_view(request):
     response["X-Frame-Options"] = "DENY"
     return response
 
-
-
-
-
-# from .models import Help_Question
-# from django.db.models import Q
-
-# def help_center(request):
-#     query = request.GET.get('q', '')  # Search query
-#     if query:
-#         # Filter FAQs by search query
-#         questions = Help_Question.objects.filter(Q(question__icontains=query) | Q(answer__icontains=query))
-#     else:
-#         # Show all FAQs if no search query is provided
-#         questions = Help_Question.objects.all()
-    
-#     return render(request, 'core/help_center.html', {'questions': questions, 'query': query})
 
 
 
@@ -873,7 +768,6 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Feedback
 
-@csrf_exempt  # tumia hii kwa majaribio tu
 def submit_feedback(request):
     if request.method == 'POST':
         comment = request.POST.get('comment')
@@ -894,6 +788,51 @@ def submit_feedback(request):
         return JsonResponse({'success': True})
 
     return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+
+
+# Feedback ikiwa na recaptcha
+# Feedback ikiwa na recaptcha
+# Feedback ikiwa na recaptcha
+# Feedback ikiwa na recaptcha
+# Feedback ikiwa na recaptcha
+
+
+# def submit_feedback(request):
+#     if request.method == 'POST':
+#         recaptcha_response = request.POST.get('g-recaptcha-response')
+#         if not recaptcha_response:
+#             return JsonResponse({'success': False, 'error': 'Tafadhali thibitisha reCAPTCHA.'})
+
+#         # Thibitisha reCAPTCHA na Google
+#         data = {
+#             'secret': settings.RECAPTCHA_PRIVATE_KEY,
+#             'response': recaptcha_response
+#         }
+#         r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+#         result = r.json()
+
+#         if not result.get('success'):
+#             return JsonResponse({'success': False, 'error': 'reCAPTCHA haikuthibitishwa. Tafadhali jaribu tena.'})
+
+#         comment = request.POST.get('comment')
+#         rating = request.POST.get('rating')
+#         name = request.POST.get('name', '')
+#         user = request.user if request.user.is_authenticated else None
+
+#         if not comment or not rating:
+#             return JsonResponse({'success': False, 'error': 'Missing fields'})
+
+#         Feedback.objects.create(
+#             user=user,
+#             name=name if not user else user.username,
+#             comment=comment,
+#             rating=int(rating)
+#         )
+
+#         return JsonResponse({'success': True})
+
+#     return JsonResponse({'success': False, 'error': 'Invalid request'})
 
 
 from django.db.models import Avg, Count
