@@ -30,8 +30,10 @@ def create_referral_code(sender, instance, created, **kwargs):
         Referral.objects.create(referrer=instance, referral_code=referral_code)
 
 
-
-
-
-
-
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    try:
+        instance.profile.save()
+    except Profile.DoesNotExist:
+        # Kama profile haipo, tengeneza moja
+        Profile.objects.create(user=instance)
