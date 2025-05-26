@@ -5,4 +5,4 @@ class MyappConfig(AppConfig):
     name = 'Myapp'
 
     def ready(self):
-        import Myapp.signals  # Hii inahakikisha signals zinaanzishwa
+        import Myapp.signal  # Hii inahakikisha signals zinaanzishwa
