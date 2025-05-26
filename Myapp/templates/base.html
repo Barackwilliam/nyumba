@@ -694,7 +694,12 @@ document.addEventListener('keydown', function(event) {
           <option value="4">★★★★☆ - Very good</option>
           <option value="5">★★★★★ - Excellent</option>
         </select>
+         <div class="recaptcha-wrapper">
+                                    <div class="g-recaptcha" data-sitekey="6Lfr4xUrAAAAACmeCbB_ii2950eZIQBfWUfOX0Kc"></div>
+                                </div>
+                                
         <button type="submit">Send Feedback</button>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
       </form>
       <p id="feedback-message"></p>
     </div>
