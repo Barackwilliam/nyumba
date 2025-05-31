@@ -284,7 +284,7 @@
     <a href="{% url 'property_list' %}" class="nav-btn">mixed</a>
   </nav>
 </div>
-</header> <main class="container"> <form method="get" action="{% url 'Beforward_list' %}" class="search-container" role="search" aria-label="Tafuta makazi"> <div class="input-group shadow-sm rounded-pill overflow-hidden"> <input type="search" name="search" id="searchInput" class="form-control border-0" placeholder="Tafuta makazi kwa jina, eneo, au bei..." value="{{ search_query }}" autocomplete="off" aria-label="Tafuta makazi" /> <button type="submit" class="btn btn-success px-4" aria-label="Tafuta"> 🔍 </button> </div> </form>
+</header> <main class="container"> <form method="get" action="{% url 'Beforward_list' %}" class="search-container" role="search" aria-label="Tafuta makazi"> <div class="input-group shadow-sm rounded-pill overflow-hidden"> <input type="search" name="search" id="searchInput" class="form-control border-0" placeholder="Tafuta nyumba kwa eneo, au bei..." value="{{ search_query }}" autocomplete="off" aria-label="Tafuta makazi" /> <button type="submit" class="btn btn-success px-4" aria-label="Tafuta"> 🔍 </button> </div> </form>
 <div class="row row-cols-1 row-cols-md-3 g-4" aria-live="polite" aria-relevant="additions removals">
   {% if page_obj.object_list %}
     {% for listing in page_obj %}
