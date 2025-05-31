@@ -389,7 +389,7 @@
   <main class="container">
     <form method="get" action="{% url 'makazi_list' %}" class="search-container" role="search" aria-label="Tafuta makazi">
       <div class="input-group shadow-sm rounded-pill overflow-hidden">
-        <input type="search" name="search" id="searchInput" class="form-control border-0" placeholder="Tafuta makazi kwa jina, eneo, au bei..." value="{{ search_query }}" autocomplete="off" aria-label="Tafuta makazi" />
+        <input type="search" name="search" id="searchInput" class="form-control border-0" placeholder="Tafuta nyumba kwa eneo, au bei..." value="{{ search_query }}" autocomplete="off" aria-label="Tafuta makazi" />
         <button type="submit" class="btn btn-success px-4" aria-label="Tafuta">🔍</button>
       </div>
     </form>
@@ -434,7 +434,7 @@
       {% endif %}
     </div>
 
-    {%    <nav aria-label="Pagination" class="d-flex justify-content-center my-4">
+    <nav aria-label="Pagination" class="d-flex justify-content-center my-4">
       <ul class="pagination pagination-lg">
         {% if page_obj.has_previous %}
           <li class="page-item">
