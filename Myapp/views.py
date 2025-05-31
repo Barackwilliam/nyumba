@@ -915,16 +915,18 @@ def makazi_list(request):
     paginator = Paginator(listings, 10)  # Kuonyesha nyumba 10 kwa kila ukurasa
     page_number = request.GET.get('page')  # Hii itachukua namba ya ukurasa kutoka kwa query string
     page_obj = paginator.get_page(page_number)
+    default_listings = Scrape_MakaziListing.objects.all().order_by('-scraped_at')
+
+
 
     # Tuma data kwa template
-    return render(request, 'core/makazi_list.html', {'page_obj': page_obj, 'search_query': search_query})
+    return render(request, 'core/makazi_list.html', {'page_obj': page_obj, 'search_query': search_query,'default_listings': default_listings,
+})
 
 def makazi_detail(request, slug_id):
     pk = slug_id.split('-')[-1]  # Extract ID from the slug
     listing = get_object_or_404(Scrape_MakaziListing, pk=pk)
     return render(request, 'core/makazi_detail.html', {'listing': listing})
-
-
 
 
 
@@ -945,12 +947,14 @@ def Beforward_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    # Chukua makazi ya default (mfano 3 ya hivi karibuni)
+    default_listings = Scrape_BeforwardListing.objects.all().order_by('-scraped_at')
+
     return render(request, 'core/Beforward_list.html', {
         'page_obj': page_obj,
         'search_query': search_query,
+        'default_listings': default_listings,
     })
-
-
 def Beforward_detail(request, slug_id):
     try:
         obj_id = int(slug_id.split('-')[-1])
