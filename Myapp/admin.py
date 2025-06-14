@@ -113,3 +113,13 @@ class ScrapeBeforwardListingAdmin(admin.ModelAdmin):
     list_filter = ('scraped_at',)
 admin.site.register(Scrape_BeforwardListing, ScrapeBeforwardListingAdmin)
 
+
+# admin.py
+from django.contrib import admin
+from .models import VisitorInfo
+
+@admin.register(VisitorInfo)
+class VisitorInfoAdmin(admin.ModelAdmin):
+    list_display = ('ip_address', 'region', 'visit_count', 'first_visit', 'last_visit')
+    list_filter = ('region',)
+    search_fields = ('ip_address',)

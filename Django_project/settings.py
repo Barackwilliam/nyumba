@@ -70,7 +70,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'Django_project.middleware.MethodNotAllowedMiddleware',
-     'Django_project.middleware.BlockScrapersMiddleware',  # Ongeza hapa
+    'Django_project.middleware.BlockScrapersMiddleware',  # Ongeza hapa
+
     
 ]
 
@@ -160,11 +161,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
-
+TIME_ZONE = 'Africa/Dar_es_Salaam'
+USE_TZ = True
 USE_I18N = True
 
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
