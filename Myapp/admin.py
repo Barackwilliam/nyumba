@@ -120,6 +120,6 @@ from .models import VisitorInfo
 
 @admin.register(VisitorInfo)
 class VisitorInfoAdmin(admin.ModelAdmin):
-    list_display = ('ip_address', 'region', 'visit_count', 'first_visit', 'last_visit')
-    list_filter = ('region',)
-    search_fields = ('ip_address',)
+    list_display = ('user','ip_address', 'region', 'visit_count', 'first_visit', 'last_visit')
+    list_filter = ('user','region',)
+    search_fields = ('user','ip_address',)

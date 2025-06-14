@@ -37,7 +37,6 @@ def get_lat_lon(location_name):
 
 
 
-
 # Functions za kuchukua IP na Mkoa
 import requests
 

@@ -416,7 +416,9 @@ class Scrape_BeforwardListing(models.Model):
 
 
 
+
 class VisitorInfo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)  # 🔁 New
     ip_address = models.GenericIPAddressField()
     region = models.CharField(max_length=100, blank=True, null=True)
     visit_count = models.PositiveIntegerField(default=1)
@@ -424,4 +426,5 @@ class VisitorInfo(models.Model):
     last_visit = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.ip_address} ({self.region}) - Visits: {self.visit_count}"
+        user_str = self.user.username if self.user else "Anonymous"
+        return f"{user_str} - {self.ip_address} ({self.region}) - Visits: {self.visit_count}"
