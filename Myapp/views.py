@@ -415,21 +415,26 @@ def popular_featured(request):
         'clients':clients,
     }
 
-
     ip = get_client_ip(request)
     region = get_region_by_ip(ip)
+    user = request.user if request.user.is_authenticated else None
 
-    # Check kama visitor tayari yupo
-    visitor, created = VisitorInfo.objects.get_or_create(ip_address=ip, defaults={'region': region})
-    
+    # Angalia kama visitor tayari yupo kwa ip + user
+    visitor, created = VisitorInfo.objects.get_or_create(
+        ip_address=ip,
+        user=user,
+        defaults={'region': region}
+    )
+
     if not created:
-        # Kama visitor tayari yupo, update visit_count & region kama haipo
         visitor.visit_count += 1
-        if not visitor.region and region:
+
+        # Kama hatujaweka region awali au imebadilika, irekebishwe
+        if region and (not visitor.region or visitor.region != region):
             visitor.region = region
+
         visitor.last_visit = timezone.now()
         visitor.save()
-
     return render(request, 'core/home.html', context)
 
 
