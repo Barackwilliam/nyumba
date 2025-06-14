@@ -529,7 +529,7 @@
 
 
 
-
+ {% if request.user.is_authenticated %}
      <!-- Popup container -->
      <div id="popup">
         <div id="popupContent">
@@ -539,7 +539,7 @@
         </div>
     </div>
     
-
+  {% endif %}
 
     <!-- Wrapper -->
     <div id="wrapper">
