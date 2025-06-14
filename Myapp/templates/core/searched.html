@@ -692,15 +692,15 @@
      {% if request.user.is_authenticated %}
 
                 {% if results %}
-                <div><p style="text-align: center;">{{user.username}} Umekua Mtu wetu wa thamani sana Kwa kulitambua hilo tumeongeza vipengere hivi muhimu ili kuhakikisha haukosi makazi.
-                    Chagua vitufe hivyo viwili hapo chini (Makazi ya kifahari) au (Mchanganyiko) ili uendelee kutafuta Makazi ya Chaguo lako
+                <div><p style="text-align: center;">{{user.username}} Umekua Mtu wetu wa thamani sana Kwa kulitambua hilo tumeongeza vipengere hivi muhimu ili kuhakikisha haukosi Makazi.
+                   Gusa Maandishi ya blue kwa <a href="{% url 'Beforward_list' %}">(Makazi ya kifahari)</a> au <a href="{% url 'makazi_list' %}">(Mchanganyiko)</a> ili uendelee kutafuta Makazi ya Chaguo lako
                   </p></div>
     
-                       
+<!--                        
                         <div class="center-screen d-flex justify-content-center">
-            <a href="{% url 'Beforward_list' %}" class="btn btn-success mx-2">Makazi ya kifahari (VIP)</a>
-            <a href="{% url 'makazi_list' %}" class="btn btn-success mx-2">Makazi Mchanganyiko</a>
-        </div>
+            <a href="" class="btn btn-success mx-2">Makazi ya kifahari (VIP)</a>
+            <a href="" class="btn btn-success mx-2">Makazi Mchanganyiko</a>
+        </div> -->
 
                
                      {% endif %}
