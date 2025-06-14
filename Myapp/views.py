@@ -8,6 +8,13 @@ from django.db.models import Q
 from .models import Referral
 
 from django.core.files.storage import default_storage
+from django.db.models import Count
+from django.db.models.functions import TruncDate
+from django.template.loader import get_template
+from django.contrib.admin.views.decorators import staff_member_required
+from xhtml2pdf import pisa
+import openpyxl
+from .models import VisitorInfo
 
 
 from django.http import HttpResponse
@@ -386,6 +393,9 @@ def delete_inquiry(request,id):
 
 
 
+from .utils import *
+from django.utils import timezone
+
 
 
 def popular_featured(request):
@@ -404,6 +414,22 @@ def popular_featured(request):
         'partners':partners,
         'clients':clients,
     }
+
+
+    ip = get_client_ip(request)
+    region = get_region_by_ip(ip)
+
+    # Check kama visitor tayari yupo
+    visitor, created = VisitorInfo.objects.get_or_create(ip_address=ip, defaults={'region': region})
+    
+    if not created:
+        # Kama visitor tayari yupo, update visit_count & region kama haipo
+        visitor.visit_count += 1
+        if not visitor.region and region:
+            visitor.region = region
+        visitor.last_visit = timezone.now()
+        visitor.save()
+
     return render(request, 'core/home.html', context)
 
 

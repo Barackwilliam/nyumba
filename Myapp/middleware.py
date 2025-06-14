@@ -27,3 +27,6 @@ class PersistentLanguageMiddleware:
             response.set_cookie('django_language', lang, max_age=315360000)  # 10 years
         
         return response
+
+
+

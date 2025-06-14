@@ -413,3 +413,15 @@ class Scrape_BeforwardListing(models.Model):
 
     def get_slug_id(self):
         return f"{slugify(self.title)}-{self.id}"
+
+
+
+class VisitorInfo(models.Model):
+    ip_address = models.GenericIPAddressField()
+    region = models.CharField(max_length=100, blank=True, null=True)
+    visit_count = models.PositiveIntegerField(default=1)
+    first_visit = models.DateTimeField(auto_now_add=True)
+    last_visit = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.ip_address} ({self.region}) - Visits: {self.visit_count}"
