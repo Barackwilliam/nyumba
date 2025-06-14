@@ -173,7 +173,7 @@ def dashboard(request):
     return render(request, 'core/user_dashboard.html', context)
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def property_list(request):
     prop_list = Property.objects.all().order_by('-date_posted')
 
@@ -202,11 +202,6 @@ def property_list(request):
 
     return render(request, 'core/property_list.html', context)
 
-# @login_required(login_url='login')
-# def property_detail(request, property_id):
-#     property = get_object_or_404(Property, id=property_id)
-#     property.add_view(request.user) 
-#     return render(request, 'core/single_property.html',{'property': property,})
 
 @login_required(login_url='login')
 def property_detail(request, property_id):
@@ -233,7 +228,7 @@ def popular_properties(request):
 
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def search_property(request):
     query = request.GET.get('q') #Fetching the user's input from the search box
 

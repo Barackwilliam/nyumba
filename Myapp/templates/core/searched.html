@@ -12,6 +12,14 @@
     
     
     <style>
+
+            .center-screen {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+                }
+
         :root {
           --bg-light: #fff;
           --bg-dark: #1e1e1e;
@@ -335,7 +343,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css'%}">
     <link rel="stylesheet" href="{% static 'css/maps.css'%}">
     <link rel="stylesheet" id="color" href="{% static 'css/colors/pink.css'%}">
-    <body>
+   
 </head>
 
 
@@ -681,7 +689,7 @@
             
                 {% endfor %}
 
-
+     {% if request.user.is_authenticated %}
 
                 {% if results %}
                 <div><p style="text-align: center;">{{user.username}} Umekua Mtu wetu wa thamani sana Kwa kulitambua hilo tumeongeza vipengere hivi muhimu ili kuhakikisha haukosi makazi.
@@ -689,12 +697,19 @@
                   </p></div>
     
                        
-                  <div class="d-flex justify-content-center my-4">
-                    <a href="{% url 'Beforward_list' %}" class="btn btn-success mx-2">Makazi ya kifahari (VIP)</a>
-                    <a href="{% url 'makazi_list' %}" class="btn btn-success mx-2">Makazi Mchanganyiko</a>
-                </div>
+                        <div class="center-screen d-flex justify-content-center">
+            <a href="{% url 'Beforward_list' %}" class="btn btn-success mx-2">Makazi ya kifahari (VIP)</a>
+            <a href="{% url 'makazi_list' %}" class="btn btn-success mx-2">Makazi Mchanganyiko</a>
+        </div>
+
                
                      {% endif %}
+
+                    {% else %} 
+<br><br><br><br>
+                     <div><p style="text-align: center;"> Ili kuona nyumba nyingi zaidi Jisajiri na ufungue akaunt Bure kabisa.<br> Gusa <a href="{% url 'Register' %}">Hapa</a> Kujisajili<br><br><br><br><br>
+                  </p></div>
+     {% endif %}
             </div>  
             </div>
         </section>

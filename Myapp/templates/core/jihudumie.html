@@ -1,185 +1,309 @@
-
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-       
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyumba Za Kupanga - Bei Nafuu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #388E3C;
+            --secondary: #FF9800;
+            --secondary-dark: #F57C00;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
 
-        <script>
-            var a=10,b=20;console.log(a+b);
-        </script>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        <script>
-            // Kuzuia Right Click
-            document.addEventListener("contextmenu", function(event) {
-                event.preventDefault();
-                alert("🚫 Sorry, Right Click is Disabled! Wasiliana na Developer No: 0629712678");
-            });
-        
-            // Kuzuia DevTools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
-            document.addEventListener("keydown", function(event) {
-                if (event.keyCode == 123) {  // F12
-                    event.preventDefault();
-                    alert("🚫 Sorry, Inspect Element is Disabled! Wasiliana na Developer No: 0629712678");
-                }
-                if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) {  // Ctrl+Shift+I or Ctrl+Shift+J
-                    event.preventDefault();
-                    alert("🚫 Sorry, Developer Tools is Disabled! Wasiliana na Developer No: 0629712678");
-                }
-                if (event.ctrlKey && event.keyCode == 85) {  // Ctrl+U
-                    event.preventDefault();
-                    alert("🚫 Sorry, View Source is Disabled! Wasiliana na Developer No: 0629712678");
-                }
-            });
-        </script>
-        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
 
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
 
-  gtag('config', 'G-L8FYVV0MZV');
-</script>
-        <meta charset="utf-8">
-        <title>bei ya nyumba za kupanga</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="keywords">
-        <meta content="bei ya pango" name="description">
+        .header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
 
-        <!-- Favicons -->
-        <link href="img/favicon.ico" rel="icon">
-        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-        
-        <!-- Google Font -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:300,600,900|Raleway:300,400,500&display=swap" rel="stylesheet">  
+        .pricing-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
 
-        <!-- Font Awesome Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-        <!-- Main Stylesheet File -->
-        <link href="{% static 'css3/style.css' %}" rel="stylesheet">
-    </head>
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
 
-    <body>
-        <script defer src="https://static.getbutton.io/widget/bundle.js?id=UaD5Y"></script>
+        .pricing-card.popular {
+            border: 2px solid var(--secondary);
+        }
 
-        
-  <!-- Pricing Table 4 Start -->
-        <div class="pricing-table-title">
-            <h2>JIHUDUMIE</h2>
+        .popular-tag {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Silver Package */
+        .silver-card .card-header {
+            background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+            color: #212529;
+        }
+
+        /* Gold Package */
+        .gold-card .card-header {
+            background: linear-gradient(135deg, #FFD700, #D4AF37);
+            color: #212529;
+        }
+
+        /* Platinum Package */
+        .platinum-card .card-header {
+            background: linear-gradient(135deg, #E5E4E2, #C0C0C0);
+            color: #212529;
+        }
+
+        .card-header {
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .popular .card-header {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .card-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .card-price small {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .card-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-features li i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .popular .card-features li i {
+            color: var(--secondary);
+        }
+
+        .card-button {
+            display: block;
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .card-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .popular .card-button {
+            background: var(--secondary);
+        }
+
+        .popular .card-button:hover {
+            background: var(--secondary-dark);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pricing-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>JIHUDUMIE KWA UFANISI</h1>
+            <p>Chagua kifurushi kinachokufaa zaidi kwa mahitaji yako ya nyumba</p>
         </div>
-        <div class="pricing-table table-4">
-            <div class="ptable-item">
-                <div class="ptable-single">
-                    <div class="ptable-header">
-                        <div class="ptable-icon">
-                            <i class="fa fa-home"></i>
-                        </div>
-                        <div class="ptable-title">
-                            <h2>Silver</h2>
-                        </div>
-                        <div class="ptable-price">
-                            <h2><small>Tsh</small>.0<span>/ Mwezi</span></h2>
-                        </div>
+
+        <div class="pricing-cards">
+            <!-- Silver Card -->
+            <div class="pricing-card silver-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-home"></i>
                     </div>
-                    <div class="ptable-body">
-                        <div class="ptable-description">
-                            <b><p>Unatafuta Nyumba..? <br> Kifurushi hiki Cha bure kitakusaidia Kuona Angalau 15% ya Matokeo unayoyatafuta<br>Kwa kifurushi hiki..:</p></b><br>
-                            <ul>
-                                <li><small><i>Uwezekano wa 35% wa kupata nyumba unayoitaji</i></small></li>
-                                <li><small><i>Utafutaji wa nyumba bila mapendekezo</i></small></li>
-                                <li><small><i>Huduma ya Mazungumzo yenye Kikomo </i></small></li>
-                                
-                                
-                            </ul>
-                            <br>
-                            <b><p>Hii ni Njia Rahisi kuanza safari yako ya kutafuta nyumba.!</p></b>
-                        </div>
-                    </div>
-                    <div class="ptable-footer">
-                        <div class="ptable-action">
-                            <a href="{% url 'property_list' %}"><i class="fa fa-shopping-cart"></i>Tafuta Sasa </a>
-                        </div>
+                    <h2 class="card-title">Silver</h2>
+                    <div class="card-price">
+                        <small>Tsh</small> 0 <small>/mwezi</small>
                     </div>
                 </div>
-            </div>
-            
-            <div class="ptable-item featured-item">
-                <div class="ptable-single">
-                    <div class="ptable-header">
-                        <div class="ptable-icon">
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="ptable-title">
-                            <h2>Gold</h2>
-                        </div>
-                        <div class="ptable-price">
-                            <h2><small>Tsh</small>.2500/<span>Mwezi</span></h2>
-                        </div>
-                    </div>
-                    <div class="ptable-body">
-                        <div class="ptable-description">
-                            <b><p>Kama Unatafuta Usawa kati ya gharama nafuu na huduma Bora kifurushi hiki ni Chako<br>Kwa kifurushi hiki utapata:</p></b><br>
-                            <ul>
-                                
-                                <li><i>Utafutaji wa hali ya Juu utakaoleta 50% ya matokeo unayoitaji</i></li>                     
-                                <li><i>Uwezekano wa 75% kupata nyumba inayokidhi vigezo vyako</i></li>
-                                <li><i>Taarifa za nyumba zinazolingana na kiwango cha Wilaya Unayotaka</i></li>
-                                <li><i>Huduma ya Mazungumzo na mwenye Nyumba Moja kwa Moja bila kikomo</i></li>
-                              
-                            </ul><br>
-                            <b><p>Fanya utafutaji wako kuwa wa Uhakika zaidi na ubora kwa gharama nafuu Sana.!</p>
-                        </div>
-                    </div>
-                    <div class="ptable-footer">
-                        <div class="ptable-action">
-                            <a href="{% url 'final' %}"><i class="fa fa-shopping-cart"></i>Lipa hapa.!</a>
-                        </div>
-                    </div>
+                <div class="card-body">
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Kifurushi Cha Ofa</li>
+                        <li><i class="fas fa-check"></i> Uwezekano wa 35% wa kupata nyumba</li>
+                        <li><i class="fas fa-check"></i> Utafutaji wa nyumba bila mapendekezo</li>
+                        <li><i class="fas fa-check"></i> Huduma ya mazungumzo yenye kikomo</li>
+                    </ul>
+                    <a href="{% url 'property_list' %}" class="card-button">Anza Sasa <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-            
-            <div class="ptable-item">
-                <div class="ptable-single">
-                    <div class="ptable-header">
-                        <div class="ptable-icon">
-                            <i class="fa fa-gift"></i>
-                        </div>
-                        <div class="ptable-title">
-                            <h2>Platinum</h2>
-                        </div>
-                        <div class="ptable-price">
-                            <h2><small>Tsh</small>.5999/<span>Mwezi</span></h2>
-                        </div>
+
+            <!-- Gold Card (Popular) -->
+            <div class="pricing-card gold-card popular">
+                <div class="popular-tag">POPULAR</div>
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="ptable-body">
-                        <div class="ptable-description">
-                            <p><b>Hii ni chaguo lako kamili ikiwa unataka huduma bora na Matokeo ya uhakika katika kutafuta nyumba.<br>Kwa kifurushi hiki utapata:</b></p><br>
-                            <ul>
-                               <li><i>Uhakika wa 100% kupata chumba au nyumba unayotaka</i></li>
-                                <li><i>Utaarifiwa kwa kila nyumba inayosajiliwa Kwenye Mtaa wako</i></li>
-                                <li><i>Utafutaji wa kiwango cha juu kwa nyumba zote kwenye kata au mtaa unaotaka</i></li>
-                                <li><i>Msaada kamili wa wateja/wapangaji masaa 24</i></li>
-                                
-                            </ul><br>
-                            <p><b>Kwa Tsh 5999 tu kwa mwezi, pata ufanisi wa juu na utoshelevu.<br>Lipa sasa na Ufurahie huduma za premium..!</b></p>
-                        </div>
+                    <h2 class="card-title">Gold</h2>
+                    <div class="card-price">
+                        <small>Tsh</small> 2,500 <small>/mwezi</small>
                     </div>
-                    <div class="ptable-footer">
-                        <div class="ptable-action">
-                            <a href="{% url 'final' %}"><i class="fa fa-shopping-cart"></i>Lipa hapa.!</a>
-                        </div>
+                </div>
+                <div class="card-body">
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Utafutaji wa hali ya juu (50% matokeo)</li>
+                        <li><i class="fas fa-check"></i> Uwezekano wa 75% wa kupata nyumba</li>
+                        <li><i class="fas fa-check"></i> Taarifa za nyumba kwa wilaya unayotaka</li>
+                        <li><i class="fas fa-check"></i> Mazungumzo moja kwa moja bila kikomo</li>
+                    </ul>
+                    <a href="{% url 'final' %}" class="card-button">Lipia Hapa<i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Platinum Card -->
+            <div class="pricing-card platinum-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-gem"></i>
                     </div>
+                    <h2 class="card-title">Platinum</h2>
+                    <div class="card-price">
+                        <small>Tsh</small> 5,999 <small>/mwezi</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Uhakika wa 100% wa kupata nyumba</li>
+                        <li><i class="fas fa-check"></i> Taarifa za kila nyumba mpya kwenye mtaa wako</li>
+                        <li><i class="fas fa-check"></i> Utafutaji wa kiwango cha juu kwa nyumba zote</li>
+                        <li><i class="fas fa-check"></i> Msaada kwa wateja masaa 24</li>
+                    </ul>
+                    <a href="{% url 'final' %}" class="card-button">Lipia Hapa <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
-        <!-- Pricing Table 4 End -->
-    
-    </body>
+    </div>
+
+    <script>
+        // Simple animation on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const cards = document.querySelectorAll('.pricing-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+
 </html>
