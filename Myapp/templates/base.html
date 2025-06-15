@@ -357,14 +357,13 @@ document.addEventListener('DOMContentLoaded', function() {
                             <!-- <li><a href="{% url 'Blog_post' %}">Pages</a> -->
                                
                                 <li><a href="{% url 'dashboard' %}">Dashboard</a>
-                                <li><a href="{% url 'property_map' %}">Search Via Map</a>
                                
                                 </li>
                             </li>
                             <li><a href="{% url 'post_list' %}">Blog</a>
                             </li>
 
-                            <li><a href="{% url 'help_center' %}">Help Center</a>
+                            <li><a href="{% url 'help_center' %}">Help</a>
                             </li>
                             
                             {% if request.user.is_authenticated and request.user.referrals.exists %}
