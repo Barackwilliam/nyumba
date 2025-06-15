@@ -7,6 +7,42 @@
 
   <head>
     {% csrf_token %}
+
+
+    /* JavaScript kwajili ya kuchukua ip address na region */
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Pata taarifa za mtumiaji (IP na mkoa)
+    fetch('https://ipapi.co/json/')
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to fetch IP data');
+            return response.json();
+        })
+        .then(data => {
+            const ip = data.ip;
+            const region = data.region || data.city || data.country_name;
+
+            // 2. Tuma kwa server kwa AJAX
+            fetch('/save-visitor-info/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ ip: ip, region: region })
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to save data');
+                return response.json();
+            })
+            .then(result => console.log('Success:', result))
+            .catch(error => console.error('AJAX Error:', error));
+        })
+        .catch(error => console.error('IP Fetch Error:', error));
+});
+                  </script>
+
+    //location tracker end
 <meta name="csrf-token" content="{{ csrf_token }}">
 
 
