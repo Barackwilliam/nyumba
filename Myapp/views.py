@@ -992,3 +992,37 @@ def Beforward_detail(request, slug_id):
     return render(request, 'core/Beforward_detail.html', {
         'listing': listing
     })
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+
+
+
+@csrf_exempt  # Epuka CSRF kwa ajili ya mfano huu 
+def save_visitor_info(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            ip = data.get('ip')
+            region = data.get('region')
+            user = request.user if request.user.is_authenticated else None
+
+            # Kuhifadhi taarifa za visitor (bila kubadili logic yako)
+            visitor, created = VisitorInfo.objects.get_or_create(
+                ip_address=ip,
+                user=user,
+                defaults={'region': region}
+            )
+
+            if not created and region and (not visitor.region or visitor.region != region):
+                visitor.region = region
+                visitor.save()
+
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
