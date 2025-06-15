@@ -1,4 +1,6 @@
 from django.urls import path 
+from .views import save_visitor_info
+
 from .views import referral_dashboard,register_view,login_view, offer_list, offer_detail
 from .views import property_map
 from .views import receive_listing, receive_beforward_listing #API urls
@@ -7,6 +9,7 @@ from .views import receive_listing, receive_beforward_listing #API urls
 from . import views 
 
 urlpatterns = [
+    path('save-visitor-info/', save_visitor_info, name='save_visitor_info'),
     path('', views.popular_featured, name='popular_featured'),
     # path('', views.loading_page, name='loading'),
     path('upcoming_holidays', views.upcoming_holidays, name='upcoming_holidays'),
