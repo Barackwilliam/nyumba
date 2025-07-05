@@ -3,3 +3,4 @@ eu-north-1-bundle.pem
 __pycache__/
 *.pyc
 
+".env" 
