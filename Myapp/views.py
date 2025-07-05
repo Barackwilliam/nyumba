@@ -337,10 +337,6 @@ def reset_password(request):
             #Hakikisha old password ni sahihi
             if not user.check_password(form.cleaned_data['old_password']):
                 messages.error(request, 'Password ya Zamani sio Sahihi..!')
-                #Badirisha password na hakikisha mtumiaji anaendelea ku-login
-
-            # elif new_password != confirm_password:               
-            #     messages.error(request, "Password Hazifanani")
             else:
                 user.set_password(form.cleaned_data['new_password'])
                 user.save()

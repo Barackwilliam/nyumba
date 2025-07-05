@@ -237,7 +237,6 @@ DATABASES = {
 
 django_heroku.settings(locals())
 
-DATABASES['default'] = dj_database_url.config(conn_max_age = 600)
 
 
 LOGIN_URL = '/login/'

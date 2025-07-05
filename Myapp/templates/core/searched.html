@@ -171,22 +171,22 @@
         // Kuzuia Right Click
         document.addEventListener("contextmenu", function(event) {
             event.preventDefault();
-            alert("🚫 Sorry, Right Click is Disabled! Wasiliana na Developer No: 0629712678");
+            alert("🚫 Sorry, Right Click is Disabled! for more info call 0629712678");
         });
     
         // Kuzuia DevTools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
         document.addEventListener("keydown", function(event) {
             if (event.keyCode == 123) {  // F12
                 event.preventDefault();
-                alert("🚫 Sorry, Inspect Element is Disabled! Wasiliana na Developer No: 0629712678");
+                alert("🚫 Sorry, Inspect Element is Disabled! for more info call 0629712678");
             }
             if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) {  // Ctrl+Shift+I or Ctrl+Shift+J
                 event.preventDefault();
-                alert("🚫 Sorry, Developer Tools is Disabled! Wasiliana na Developer No: 0629712678");
+                alert("🚫 Sorry, Developer Tools is Disabled! for more info call 0629712678");
             }
             if (event.ctrlKey && event.keyCode == 85) {  // Ctrl+U
                 event.preventDefault();
-                alert("🚫 Sorry, View Source is Disabled! Wasiliana na Developer No: 0629712678");
+                alert("🚫 Sorry, View Source is Disabled! for more info call 0629712678");
             }
         });
     </script>
@@ -196,7 +196,7 @@
 <script>
     document.addEventListener("copy", function(event) {
         event.preventDefault();
-        alert("🚫 Sorry, Copying Content is Disabled! Wasiliana na Developer No: 0629712678");
+        alert("🚫 Sorry, Copying Content is Disabled! for more info call 0629712678");
     });
 </script>
 
@@ -566,65 +566,73 @@
                         
                         <br><br><br>
             <div class="row">
-                {% for property in results reversed %} 
+    {% for property in results reversed %} 
 
-                <a href="{% url 'property_detail' property.id %}"></a>
-                
-                <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
-                    <div class="project-single" data-aos="fade-up">
-                        <div class="project-inner project-head">
-                            <div class="homes">
-                                <!-- homes img -->
-                                <a href="{% url 'property_detail' property.id %}" class="homes-img">
-                                    <div class="homes-tag button alt featured">Featured</div>
-                                    <div class="homes-tag button alt sale">{{property.status}}</div>
-                                    <div class="homes-price">{{property.price}} Tsh</div>
-                                    <img src="{{property.image.url}}" alt="home-1" class="img-responsive">
-                                </a>
-                            </div>
-                            <div class="button-effect">
-                                <a href="{% url 'property_detail' property.id %}" class="btn"><i class="fa fa-link"></i></a>
-                                <a href="{% url 'property_detail' property.id %}" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                <a href="{% url 'property_detail' property.id %}" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                            </div>
-                        </div>
-                        <!-- homes content -->
-                        <div class="homes-content">
-                            <!-- homes address -->
-                            <h3><a href="{% url 'property_detail' property.id %}">{{property.title}}</a></h3>
-                            <p class="homes-address mb-3">
-                                <a href="{% url 'property_detail' property.id %}">
-                                    <i class="fa fa-map-marker"></i><span>{{property.region}}, {{property.ward}}</span>
-                                </a>
-                            </p>
-                            <!-- homes List -->
-                            <ul class="homes-list clearfix pb-3">
-                                <li class="the-icons">
-                                    <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                    <span>{{property.bedrooms}} Bedrooms</span>
-                                </li>
-                                <li class="the-icons">
-                                    <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                    <span>{{property.bathrooms}} Bathrooms</span>
-                                </li>
-                                <li class="the-icons">
-                                    <i class="flaticon-square mr-2" aria-hidden="true"></i>
-                                    <span>{{property.house_size}} sq m</span>
-                                </li>
-                                <li class="the-icons">
-                                    <i class="flaticon-car mr-2" aria-hidden="true"></i>
-                                    <span>0 Garages</span>
-                                </li>
-                            </ul>
-                            <div class="footer">
-                                <a href="{% url 'property_detail' property.id %}">
-                                    <img src="{{property.property_owner.url}}" alt="" class="mr-2"> {{property.owner}}
-                                </a>
-                                <span>Posted {{property.date_posted}}</span>
-                            </div>
-                        </div>
-                    </div>
+    <a href="{% url 'property_detail' property.id %}"></a>
+    
+    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
+        <div class="project-single" data-aos="fade-up">
+            <div class="project-inner project-head">
+                <div class="homes">
+                    <!-- homes img -->
+                    <a href="{% url 'property_detail' property.id %}" class="homes-img">
+                        <div class="homes-tag button alt featured">Featured</div>
+                        <div class="homes-tag button alt sale">{{ property.status }}</div>
+                        <div class="homes-price">{{ property.price }} Tsh</div>
+                        <img src="{{ property.image.url }}" alt="home-1" class="img-responsive">
+                    </a>
                 </div>
+                <div class="button-effect">
+                    <a href="{% url 'property_detail' property.id %}" class="btn"><i class="fa fa-link"></i></a>
+                    <a href="{% url 'property_detail' property.id %}" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
+                    <a href="{% url 'property_detail' property.id %}" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                </div>
+            </div>
+            <!-- homes content -->
+            <div class="homes-content">
+                <!-- homes address -->
+                <h3><a href="{% url 'property_detail' property.id %}">{{ property.title }}</a></h3>
+                <p class="homes-address mb-3">
+                    <a href="{% url 'property_detail' property.id %}">
+                        <i class="fa fa-map-marker"></i><span>{{ property.region }}, {{ property.ward }}</span>
+                    </a>
+                </p>
+                <!-- homes List -->
+                <ul class="homes-list clearfix pb-3">
+                    <li class="the-icons">
+                        <i class="flaticon-bed mr-2" aria-hidden="true"></i>
+                        <span>{{ property.bedrooms }} Bedrooms</span>
+                    </li>
+                    <li class="the-icons">
+                        <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
+                        <span>{{ property.bathrooms }} Bathrooms</span>
+                    </li>
+                    <li class="the-icons">
+                        <i class="flaticon-square mr-2" aria-hidden="true"></i>
+                        <span>{{ property.house_size }} sq m</span>
+                    </li>
+                    <li class="the-icons">
+                        <i class="flaticon-car mr-2" aria-hidden="true"></i>
+                        <span>0 Garages</span>
+                    </li>
+                </ul>
+
+                <!-- Tazama button -->
+                <div style="margin-bottom: 10px;">
+                    <a href="{% url 'property_detail' property.id %}" class="btn btn-primary">Tazama</a>
+                </div>
+
+                <div class="footer">
+                    <a href="{% url 'property_detail' property.id %}">
+                        <img src="{{ property.property_owner.url }}" alt="" class="mr-2"> {{ property.owner }}
+                    </a>
+                    <span>Posted {{ property.date_posted }}</span>
+                </div>
+            </div>
+        </div>
+   
+</div>
+
              
 
 
@@ -910,14 +918,14 @@
 document.addEventListener('keydown', function(event) {
     if (event.key === 'PrintScreen') {
         event.preventDefault();
-        alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+        alert('Screenshots not allowed for more info call 0629712678.');
     }
 });
 
 document.addEventListener('keyup', function(event) {
     if (event.key === 'PrintScreen') {
         navigator.clipboard.writeText('Screenshots is Disable.').then(function() {
-            alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+            alert('Screenshots not allowed for more info call 0629712678');
         });
     }
 });
@@ -928,7 +936,7 @@ document.addEventListener('keydown', function(event) {
         (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
         (event.ctrlKey && event.key === 'U')) {
         event.preventDefault();
-        alert('Developer tools Haziruhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+        alert('Developer tools not allowed for more info call 0629712678.');
     }
 });
 
