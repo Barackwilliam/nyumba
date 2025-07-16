@@ -78,8 +78,66 @@ class Property(models.Model):
     property_owner = CloudinaryField('image')
     # video = models.FileField(upload_to='property_video/',validators=[validate_video_size], blank=True, null=True default=)
     video_link = models.URLField(max_length=300, blank=True, null=True)
-   
 
+    # ✅ OG Image for main image
+    def get_og_image_url(self):
+        if self.image:
+            return self.image.build_url(width=1200, height=630, crop='fill')
+        return ''
+
+    # ✅ Optimized Image for main image
+    def get_image_url(self):
+        if self.image:
+            return self.image.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
+
+    # ✅ OG Image for image1
+    def get_og_image1_url(self):
+        if self.image1:
+            return self.image1.build_url(width=1200, height=630, crop='fill')
+        return ''
+
+    # ✅ Optimized Image for image1
+    def get_image1_url(self):
+        if self.image1:
+            return self.image1.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
+
+    # ✅ OG Image for image2
+    def get_og_image2_url(self):
+        if self.image2:
+            return self.image2.build_url(width=1200, height=630, crop='fill')
+        return ''
+
+    # ✅ Optimized Image for image2
+    def get_image2_url(self):
+        if self.image2:
+            return self.image2.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
+
+    # ✅ OG Image for image3
+    def get_og_image3_url(self):
+        if self.image3:
+            return self.image3.build_url(width=1200, height=630, crop='fill')
+        return ''
+
+    # ✅ Optimized Image for image3
+    def get_image3_url(self):
+        if self.image3:
+            return self.image3.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
+
+    # ✅ OG Image for property_owner image
+    def get_og_property_owner_url(self):
+        if self.property_owner:
+            return self.property_owner.build_url(width=800, height=800, crop='thumb')
+        return ''
+
+    # ✅ Optimized Image for property_owner image
+    def get_property_owner_url(self):
+        if self.property_owner:
+            return self.property_owner.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
 
 
 
@@ -138,10 +196,20 @@ class Profile(models.Model):
     subscription_plan = models.CharField(
         max_length=10,
         choices=[('silver', 'Silver'), ('gold', 'Gold'), ('platinum', 'Platinum')],
-        default='silver') # Default ni Silver
-    # profile_completed = models.BooleanField(default=False)  # Field to check if profile is complete
+        default='silver')
 
 
+        # ✅ Kwa social media (Open Graph)
+    def get_profile_picture_og_url(self):
+        if self.profile_picture:
+            return self.profile_picture.build_url(width=800, height=800, crop='thumb')
+        return ''
+
+    # ✅ Kwa matumizi ya kawaida kwenye tovuti
+    def get_profile_picture_url(self):
+        if self.profile_picture:
+            return self.profile_picture.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
     
     def days_remaining(self):
         """Hesabu siku zilizobaki kabla ya verification ku-expire"""
@@ -176,6 +244,19 @@ class PopularPlace(models.Model):
 
     def __str__(self):
         return self.name_of_place
+
+
+     # ✅ Kwa social media (Open Graph image)
+    def get_og_image_url(self):
+        if self.image_of_place:
+            return self.image_of_place.build_url(width=1200, height=630, crop='fill')
+        return ''
+
+    # ✅ Kwa matumizi ya kawaida kwenye tovuti
+    def get_image_url(self):
+        if self.image_of_place:
+            return self.image_of_place.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
     
 
 
@@ -185,6 +266,20 @@ class Offer(models.Model):
     description = models.TextField()
     offer_image = CloudinaryField('image')
     slug = models.SlugField(unique=True, blank=True,null=True)
+
+
+    
+    # ✅ Kwa social media (OG image)
+    def get_offer_image_og_url(self):
+        if self.offer_image:
+            return self.offer_image.build_url(width=1200, height=630, crop='fill')
+        return ''
+
+    # ✅ Kwa matumizi ya kawaida kwenye tovuti
+    def get_offer_image_url(self):
+        if self.offer_image:
+            return self.offer_image.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
 
     
     def save(self, *args, **kwargs):
@@ -218,10 +313,23 @@ class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     Transaction_image = CloudinaryField('image')
     timestamp = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         db_table = 'Myapp_payment'
     def __str__(self):
         return f" Payment by {self.user.username}"
+
+    # ✅ Kwa matumizi ya social media (OG preview)
+    def get_transaction_image_og_url(self):
+        if self.Transaction_image:
+            return self.Transaction_image.build_url(width=1200, height=630, crop='fill')
+        return ''
+
+    # ✅ Kwa matumizi ya kawaida kwenye website (compressed/optimized)
+    def get_transaction_image_url(self):
+        if self.Transaction_image:
+            return self.Transaction_image.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
 
 
 
@@ -254,12 +362,36 @@ class Agent(models.Model):
     def __str__(self):
         return self. jina
 
+     # ✅ Kwa matumizi ya Open Graph (social media)
+    def get_agent_og_image_url(self):
+        if self.image_of_agent:
+            return self.image_of_agent.build_url(width=800, height=800, crop='thumb')
+        return ''
+
+    # ✅ Kwa matumizi ya kawaida kwenye tovuti
+    def get_agent_image_url(self):
+        if self.image_of_agent:
+            return self.image_of_agent.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
+
 class Partner(models.Model):
     jina = models.CharField(max_length=50)
     image_of_partners = CloudinaryField('image')
 
     def __str__(self):
         return self.jina
+
+    # ✅ Kwa matumizi ya social media (OG)
+    def get_partner_og_image_url(self):
+        if self.image_of_partners:
+            return self.image_of_partners.build_url(width=1200, height=630, crop='fill')
+        return ''
+
+    # ✅ Kwa matumizi ya kawaida kwenye tovuti
+    def get_partner_image_url(self):
+        if self.image_of_partners:
+            return self.image_of_partners.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
 
 
 
@@ -273,6 +405,18 @@ class Client(models.Model):
 
     def __str__(self):
         return self. name
+    
+    # ✅ Kwa social media preview
+    def get_client_og_image_url(self):
+        if self.client_image:
+            return self.client_image.build_url(width=800, height=800, crop='thumb')
+        return ''
+
+    # ✅ Kwa matumizi ya kawaida kwenye tovuti
+    def get_client_image_url(self):
+        if self.client_image:
+            return self.client_image.build_url(format='jpg', quality='auto', fetch_format='auto')
+        return ''
 
 
 
@@ -293,18 +437,6 @@ class Inquiry(models.Model):
         return f'Inquiry from {self.full_name} for {self.property.title}'
     
 
-
-
-
-# class PropertyLocation(models.Model):
-#     property = models.OneToOneField('Property', on_delete=models.CASCADE, related_name='location')
-#     lat = models.FloatField()
-#     lon = models.FloatField()
-
-#     def __str__(self):
-#         return f"{self.property.title} - ({self.lat}, {self.lon})"
-    
-    
 
 from .utils import get_lat_lon  # Import the function
 
