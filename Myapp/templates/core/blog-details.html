@@ -150,8 +150,8 @@
 
                             {% if user.is_authenticated %}
                             <span>
-                                {% if user.profile.profile_picture %}
-                                <img src="{{user.profile.profile_picture.url}}" alt="{{user.username}}">
+                                {% if user.profile.profile_picture_1 %}
+                                <img src="{{user.profile.profile_picture_1}}" alt="{{user.username}}">
                             </span> Hi, {{user.username}}
                             {% else %}
                             <img src="{% static 'images/default.jpg' %}" alt="Default"> Hi, {{user.username}}

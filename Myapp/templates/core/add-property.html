@@ -23,7 +23,7 @@
                         <div class="user-profile-box mb-0">
                             <div class="sidebar-header"><img src="{% static 'images/logo-blue.svg' %}" alt="header-logo2.png"> </div>
                             <div class="header clearfix">
-                                <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}"  alt="avatar" class="img-fluid profile-img">
+                                <img src="{% if user.profile.profile_picture_1 %}{{user.profile.profile_picture_1}}{% else %} {% static 'images/default.jpg' %}{% endif %}"  alt="avatar" class="img-fluid profile-img">
 
                             </div>
                             <div class="active-user">
@@ -78,7 +78,7 @@
                            
                         </div>
                         <div class="widget-boxed-header">
-                            <h2>Properties Descriptions</h2>
+                            <h2>Properties Details</h2>
                         </div>
                         <div class="sidebar-widget author-widget2">
 
@@ -212,7 +212,7 @@
 
 
 
-                                     <!-- Nearby field -->
+                                  
                                      <div class="form-group">
                                         <label for='nearby'>Nearby</label><br>
                                         <textarea name="nearby" placeholder="Tueleze Nyumba yako hipo karibu na nini.." id="nearby" value="{{property.nearby}}" class="form-control" required></textarea>
@@ -221,7 +221,7 @@
 
 
 
-                                     <!-- link field -->
+                                
                                      <div class="form-group">
                                         <label for='video_link'>Video link</label><br>
                                         <input type="url" name="video_link" placeholder="Eg. youtube link, instagram etc" id="video_link" value="{{property.video_link}}" class="form-control" />
@@ -237,7 +237,7 @@
                                         <div class="error">{{form.description.errors}}</div></div>
 
 
-                                    <!-- Owner_image field -->
+<!--                              
                                     <div class="form-group">
                                         <label for="property_owner">Weka passport / picha yako</label><br>
                                         <input type="file" id="property_owner" name="property_owner" class="form-control" accept="image/*" required/>
@@ -246,7 +246,7 @@
 
                                         <div>
                                             <h3>Weka picha nne za Nyumba yako</h3>
-                                    <!-- image 1 field -->
+                              
                                     <div class="form-group">
                                         <label for="profile_picture">Property Image 1</label><br>
                                         <input type="file" id="image" name="image" class="form-control" accept="image/*" required/>
@@ -254,7 +254,7 @@
 
 
 
-                                    <!-- image 2 field -->
+                                  
                                     <div class="form-group">
                                         <label for="image1">Property Image 2</label><br>
                                         <input type="file" id="image1" name="image1" class="form-control" accept="image/*" required/>
@@ -262,29 +262,52 @@
 
 
 
-                                    <!-- image field -->
+                                 
                                     <div class="form-group">
                                         <label for="profile_picture">Property Image 3</label><br>
                                         <input type="file" id="image2" name="image2" class="form-control" accept="image/*" required/>
                                         <div class="error">{{form.image2.errors}}</div></div>
 
 
-                                    <!-- image field -->
                                     <div class="form-group">
                                         <label for="image3">Property Image 4</label><br>
                                         <input type="file" id="image3" name="image3" class="form-control" accept="image/*" required/>
                                         <div class="error">{{form.image3.errors}}</div></div>
 
-                                          </div>
-                                    <!-- video field -->
-                                    <!-- <div>
-                                        <h3>Upload video isiyozidi 15MB</h3>
-                                    <div class="form-group">
-                                        <label for="video">Property Video</label><br>
-                                        <input type="file" id="video" name="video" class="form-control" accept="video/*"/>
-                                        <div class="error">{{form.video.errors}}</div></div>
-                                        </div> -->
+                                          </div> -->
 
+
+
+                                          <!-- Owner image -->
+                                    <div class="form-group">
+                                    <label for="property_owner_0">Weka passport / picha yako</label><br>
+                                    <input type="hidden" role="uploadcare-uploader" data-clearable name="property_owner_0">
+                                    </div>
+
+                                    <h3>Weka picha nne za Nyumba yako</h3>
+
+                                    <div class="form-group">
+                                    <label>Property Image 1</label>
+                                    <input type="hidden" role="uploadcare-uploader" data-clearable name="image_0">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label>Property Image 2</label>
+                                    <input type="hidden" role="uploadcare-uploader" data-clearable name="image_1">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label>Property Image 3</label>
+                                    <input type="hidden" role="uploadcare-uploader" data-clearable name="image_2">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label>Property Image 4</label>
+                                    <input type="hidden" role="uploadcare-uploader" data-clearable name="image_3">
+                                    </div>
+
+                                    
+                                          
 
 
                                     <button type='submit' class="btn btn-primary">Save</button>

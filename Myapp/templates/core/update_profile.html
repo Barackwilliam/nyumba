@@ -48,10 +48,20 @@
 
      
     <!-- image field -->
-    <div class="form-group">
-        <label for="profile_picture">Profile Picture</label><br>
-        <input type="file" id="profile_picture" name="profile_picture" class="form-control" accept="image/*"/>
-        <div class="error">{{form.profile_picture.errors}}</div></div>
+ 
+                                    <div class="form-group">
+                                        <label for="profile_picture">Profile Picture</label><br>
+                                                <input type="hidden" role="uploadcare-uploader" data-images-only name="profile_picture_1" value="{{ user.profile.profile_picture_1 }}"/> 
 
-    <button type='submit' class="btn btn-primary">Save Changes</button>
+                                                <div class="error">{{form.profile_picture_1.errors}}</div></div>
+
+                        <button type='submit' class="btn btn-primary">Save Changes</button>
+
+
+                
+            <script>
+            UPLOADCARE_PUBLIC_KEY = 'b554dba7565f88537168';
+            </script>
+      <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+
 </form>

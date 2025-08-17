@@ -17,7 +17,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: white;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -140,6 +140,7 @@
             background-color: #265df2;
         }
     </style>
+
 </head>
 <body>
     <div class="login-container">
@@ -148,13 +149,26 @@
         <p>Baada ya kufanya Malipo tuma picha ya Mesaji ya Muamala kabla ya dakika 30 Kupita</p>
 
         <!-- Sehemu ya ku-upload picha -->
-        <form class="file-upload" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+       <form class="file-upload" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         
-            <label for="upload">Upload Image:</label>
-            <input type="file" id="upload" name="Transaction_image" accept=".jpg, .jpeg, .png"> <br><!-- Only image files allowed -->
-            <input type="submit" value="Submit" id="submit-btn">
-        </form>
+        <label for="upload">Upload Image:</label>
+        <!-- Uploadcare uploader -->
+       <input 
+        type="hidden"
+        role="uploadcare-uploader"
+        name="Transaction_image_1"
+        data-public-key="b554dba7565f88537168"
+       />
+        
+        <br>
+        <input type="submit" value="Submit" id="submit-btn">
+    </form>
+
+   <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+<script>
+    UPLOADCARE_PUBLIC_KEY = "b554dba7565f88537168"; 
+</script>
     </div>
 
     <!-- Popup Modal -->

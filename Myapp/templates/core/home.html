@@ -143,7 +143,7 @@
                         <!-- Image Box -->
                         <a href="{% url 'property_list'%}" class="img-box hover-effect no-mb x3">
                             
-                            <img src="{{place.image_of_place.url}} " class="img-responsive" alt="{{place.name_of_place}}">
+                            <img src="{{place.image_of_place_1}} " class="img-responsive" alt="{{place.name_of_place}}">
                             <!-- Badge -->
                             <div class="listing-badges">
                                 <span class="featured">Featured</span>
@@ -191,14 +191,14 @@
                                     <a href="{% url 'property_list' %}" class="homes-img">
                                         <div class="homes-tag button alt featured">Featured</div>
                                         <div class="homes-tag button alt sale">For Sale</div>
-                                        <img src="{{property.f_property_name.image.url}}" alt="home-1" class="img-responsive">
+                                        <img src="{{property.f_property_name.image_0}}" alt="home-1" class="img-responsive">
                                     </a>
                                     
                                 </div>  
                                 <div class="button-effect">
                                     <a href="{% url 'property_list' %}" class="btn"><i class="fa fa-link"></i></a>
                                     <a href="{{ property.f_property_name.video_link }}" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                    <a href="{{ property.f_property_name.image.url }}" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                                    <a href="{{ property.f_property_name.image_0 }}" class="img-poppu btn"><i class="fa fa-photo"></i></a>
                                 </div>
                             </div>
                             <!-- homes content -->
@@ -347,7 +347,7 @@
                                         <div class="homes-tag button alt featured">Featured</div>
                                         <div class="homes-tag button alt sale">For Sale</div>
                                         <div class="homes-price">{{nyumba.p_property_name.price}} Tsh</div>
-                                        <img src="{{nyumba.p_property_name.image.url}}" alt="home-1" class="img-responsive">
+                                        <img src="{{nyumba.p_property_name.image_0}}" alt="home-1" class="img-responsive">
                                     </a>
                                 </div>
                                 <div class="button-effect">
@@ -428,7 +428,7 @@
                     <div class="team-block col-sm-6 col-md-4 col-lg-4 col-xl-2" data-aos="fade-up" data-aos-delay="150">
                         <div class="inner-box team-details">
                             <div class="image team-head">
-                                <a href="#"><img src="{{agent.image_of_agent.url}}" alt="Agent image" /></a>
+                                <a href="#"><img src="{{agent.image_of_agent_1}}" alt="Agent image" /></a>
                                 <div class="team-hover">
                                     <ul class="team-social">
                                         <li><a href="{{agent.facebook_link}}" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -468,7 +468,7 @@
                             {{client.comment}}
                         </p>
                         <div class="detailJC">
-                            <span><img src="{{client.client_image.url}}" alt="client image"/></span>
+                            <span><img src="{{client.client_image_1}}" alt="client image"/></span>
                             <h5>{{client.name}}</h5>
                             <p>{{client.location}}</p>
                         </div>
@@ -488,7 +488,7 @@
                 </div>
                 <div class="owl-carousel style2">
                     {% for partner in partners reversed %}
-                    <div class="owl-item" data-aos="fade-up"><img src="{{partner.image_of_partners.url}}" alt=""></div>
+                    <div class="owl-item" data-aos="fade-up"><img src="{{partner.image_of_partner}}" alt=""></div>
                     {% endfor %} 
                    
                 </div>

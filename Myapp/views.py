@@ -98,24 +98,26 @@ def add_property(request):
         bathrooms = request.POST['bathrooms']
         house_size = request.POST['house_size']
         nearby = request.POST['nearby']
-        image = request.FILES['image']
-        image1 = request.FILES['image1']
-        image2 = request.FILES['image2']
-        image3 = request.FILES['image3']
+
+        image_0=request.POST.get('image_0'),
+        image_1=request.POST.get('image_1'),
+        image_2=request.POST.get('image_2'),
+        image_3=request.POST.get('image_3'),
+        property_owner_0=request.POST.get('property_owner_0')
+        
         status = request.POST['status']
         p_status = request.POST['p_status']
         # video = request.FILES.get('video')
         business_phone = request.POST['business_phone']
         business_email = request.POST['business_email']
         video_link = request.POST['video_link']
-        property_owner = request.FILES['property_owner']
 
 
 
         property = Property.objects.create(title=title, price=price,
-         description=description, property_type=property_type,business_phone=business_phone,country=country,business_email=business_email,
+        description=description, property_type=property_type,business_phone=business_phone,country=country,business_email=business_email,
         region=region,district=district, ward=ward, bedrooms=bedrooms,
-        bathrooms=bathrooms, house_size=house_size, nearby=nearby,video_link=video_link, status=status,owner=request.user, image=image, image1=image1, p_status=p_status,image2=image2, image3=image3,property_owner=property_owner)
+        bathrooms=bathrooms, house_size=house_size, nearby=nearby,video_link=video_link, status=status,owner=request.user, image_0=image_0, image_1=image_1, p_status=p_status,image_2=image_2, image_3=image_3,property_owner_0=property_owner_0)
         return redirect('property_list')
     return render(request,'core/add-property.html')
 
@@ -135,19 +137,20 @@ def final(request):
     return render(request,'core/final.html')
 
 def complete(request):
-    form = None
     if request.method == 'POST':
-        form = PaymentForm(request.POST, request.FILES)
+        form = PaymentForm(request.POST)
         if form.is_valid():
             payment = form.save(commit=False)
             payment.user = request.user
             payment.save()
             return redirect('Thanks')
         else:
-            form = PaymentForm()
             print(form.errors)
-    return render(request,'core/complete.html',{'form':form})
+    else:
+        form = PaymentForm()
+    return render(request, 'core/complete.html', {'form': form})
 
+    
 def Thanks(request):
     return render(request,'core/Thanks.html')
 
@@ -437,18 +440,30 @@ def popular_featured(request):
 
 
 @login_required(login_url='login')
+
 def edit_profile(request):
-    profile = request.user.profile
-    if request.method =='POST':
-        form = ProfileForm(request.POST, request.FILES, instance = profile)
+    profile = get_object_or_404(Profile, user=request.user)  # Hii inahakikisha profile ipo
+    
+    form = None  # Initialize form variable
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('edit_profile') 
-        
-
+            return redirect('edit_profile')  # Badilisha na URL yako
     else:
         form = ProfileForm(instance=profile)
-    return render(request, "core/profile_settings.html", {'form':form})
+
+    return render(request, 'core/profile_settings.html', {'form': form})
+# def edit_profile(request):
+#     profile = request.user.profile
+#     if request.method == 'POST':
+#         form = ProfileForm(request.POST, instance=profile)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('edit_profile')  
+#         form = ProfileForm(instance=profile)
+#     return render(request, 'profile_edit.html', {'form': form})
 
 
 @login_required(login_url='login')

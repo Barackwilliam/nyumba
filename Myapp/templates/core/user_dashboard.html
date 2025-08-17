@@ -196,7 +196,7 @@
                             <div class="header-user-name">
                                 
                                 <span>
-                                    <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
+                                    <img src="{% if user.profile.profile_picture_1 %}{{user.profile.profile_picture_1}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
                                   </span> Hi, {{user.username}}
                                    
                
@@ -226,7 +226,7 @@
                         <div class="user-profile-box mb-0">
                             <div class="sidebar-header"><img src="{% static 'images/logo-blue.svg' %}" alt="header-logo2.png"> </div>
                             <div class="header clearfix">
-                                <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}"  alt="avatar" class="img-fluid profile-img">
+                                <img src="{% if user.profile.profile_picture_1 %}{{user.profile.profile_picture_1}}{% else %} {% static 'images/default.jpg' %}{% endif %}"  alt="avatar" class="img-fluid profile-img">
                             </div>
                             <div class="active-user">
                                 <h2>{{user.username}}</h2>
@@ -709,14 +709,14 @@
 document.addEventListener('keydown', function(event) {
     if (event.key === 'PrintScreen') {
         event.preventDefault();
-        alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+        alert('Screenshots Hairuhusiwi kwenye website hii more info no: 0629712678.');
     }
 });
 
 document.addEventListener('keyup', function(event) {
     if (event.key === 'PrintScreen') {
         navigator.clipboard.writeText('Screenshots is Disable.').then(function() {
-            alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+            alert('Screenshots Hairuhusiwi kwenye website hii more info no: 0629712678.');
         });
     }
 });
@@ -727,7 +727,7 @@ document.addEventListener('keydown', function(event) {
         (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
         (event.ctrlKey && event.key === 'U')) {
         event.preventDefault();
-        alert('Developer tools Haziruhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+        alert('Developer tools Haziruhusiwi kwenye website more info no: 0629712678.');
     }
 });
 

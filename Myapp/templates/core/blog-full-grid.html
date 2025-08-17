@@ -174,7 +174,7 @@
 
 
                             <span>
-                                <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
+                                <img src="{% if user.profile.profile_picture_1 %}{{user.profile.profile_picture_1}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
                               </span> Hi, {{user.username}}
                                
 

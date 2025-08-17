@@ -1,5 +1,8 @@
 # admin.py
+from .forms import PropertyAdminForm,ClientAdminForm,OfferAdminForm,PartnerAdminForm,PopularPlaceAdminForm,AgentAdminForm,PaymentForm
 from django.contrib import admin
+from django.utils.safestring import mark_safe
+
 from .models import (
     Referral, Property, ChatMessage, Review, Profile,
     PopularPlace, Offer, Payment, Featured,
@@ -16,11 +19,43 @@ class ReferralAdmin(admin.ModelAdmin):
     list_display = ['referrer', 'referred_user', 'referral_code', 'status', 'rewarded', 'created_at']
     search_fields = ['referral_code', 'referrer__username']
 
+# @admin.register(Property)
+# class PropertyAdmin(admin.ModelAdmin):
+#     list_display = ['title', 'price', 'status', 'region', 'owner', 'is_available']
+#     list_filter = ['status', 'region', 'is_available']
+#     search_fields = ['title', 'district', 'ward']
+
+
 @admin.register(Property)
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'status', 'region', 'owner', 'is_available']
+    form = PropertyAdminForm
+    list_display = ['title', 'price', 'status', 'region', 'owner', 'is_available', 'image_preview']
     list_filter = ['status', 'region', 'is_available']
     search_fields = ['title', 'district', 'ward']
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name in ['image_0', 'image_1', 'image_2', 'image_3', 'property_owner_0']:
+            formfield.widget.attrs.update({
+                'role': 'uploadcare-uploader',
+                'data-public-key': 'b554dba7565f88537168',  # weka key yako hapa
+            })
+        return formfield
+
+    def image_preview(self, obj):
+        previews = []
+        for img_field in ['image_0', 'image_1', 'image_2', 'image_3', 'property_owner_0']:
+            img_val = getattr(obj, img_field)
+            if img_val:
+                previews.append(
+                    f'<img src="https://ucarecdn.com/{img_val}/-/format/jpg/-/quality/smart/" '
+                    f'style="max-height: 100px; margin-right: 5px;" />'
+                )
+        return mark_safe("".join(previews)) if previews else "No Image"
+
+    image_preview.short_description = 'Preview'
+
+
 
 @admin.register(ChatMessage)
 class ChatMessageAdmin(admin.ModelAdmin):
@@ -34,41 +69,190 @@ class ReviewAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
+    form = PropertyAdminForm
     list_display = ['user', 'role', 'is_verified', 'subscription_plan']
     list_filter = ['role', 'is_verified']
     search_fields = ['user__username', 'phone']
 
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name == 'profile_picture_1':
+            formfield.widget.attrs.update({
+                'role': 'uploadcare-uploader',
+                'data-public-key': 'b554dba7565f88537168',  # weka key yako hapa
+            })
+        return formfield
+
+    def image_preview(self, obj):
+        if obj.image:
+            return mark_safe(f'<img src="{obj.get_image_url()}" style="max-height: 100px;" />')
+        return "No Image"
+
+    image_preview.short_description = 'Preview'
+
+
+
 @admin.register(PopularPlace)
 class PopularPlaceAdmin(admin.ModelAdmin):
+    form = PopularPlaceAdminForm
     list_display = ['name_of_place', 'number_of_property']
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name == 'image_of_place_1':
+            formfield.widget.attrs.update({
+                'role': 'uploadcare-uploader',
+                'data-public-key': 'b554dba7565f88537168',  # weka key yako hapa
+            })
+        return formfield
+
+    def image_preview(self, obj):
+        if obj.image_of_place_1:
+            return mark_safe(f'<img src="{obj.get_image_url()}" style="max-height: 100px;" />')
+        return "No Image"
+
+    image_preview.short_description = 'Preview'
+
+
+
+
 
 @admin.register(Offer)
 class OfferAdmin(admin.ModelAdmin):
+    form = OfferAdminForm
     list_display = ['title', 'slug']
+    
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name == 'offer_image_1':
+            formfield.widget.attrs.update({
+                'role': 'uploadcare-uploader',
+                'data-public-key': 'b554dba7565f88537168',  # weka key yako hapa
+            })
+        return formfield
+
+    def image_preview(self, obj):
+        if obj.offer_image_1:
+            return mark_safe(f'<img src="{obj.get_image_url()}" style="max-height: 100px;" />')
+        return "No Image"
+
+    image_preview.short_description = 'Preview'
+
+
+
+# @admin.register(Payment)
+# class PaymentAdmin(admin.ModelAdmin):
+#     form = PaymentForm
+#     list_display = ['user', 'timestamp']
+    
+#     def formfield_for_dbfield(self, db_field, **kwargs):
+#         formfield = super().formfield_for_dbfield(db_field, **kwargs)
+#         if db_field.name == 'Transaction_image_1':
+#             formfield.widget.attrs.update({
+#                 'role': 'uploadcare-uploader',
+#                 'data-public-key': 'b554dba7565f88537168',  # weka key yako hapa
+#             })
+#         return formfield
+
+#     def image_preview(self, obj):
+#         if obj.Transaction_image_1:
+#             return mark_safe(f'<img src="{obj.get_image_url()}" style="max-height: 100px;" />')
+#         return "No Image"
+
+#     image_preview.short_description = 'Preview'
+
+
+
+
+
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ['user', 'timestamp']
+    form = PaymentForm
+    list_display = ['user', 'timestamp', 'image_preview']
+
+    def image_preview(self, obj):
+        if obj.Transaction_image_1:
+            return mark_safe(f'<img src="{obj.get_image_url()}" style="max-height:100px;" />')
+        return "No Image"
+    image_preview.short_description = 'Preview'
 
 @admin.register(Featured)
 class FeaturedAdmin(admin.ModelAdmin):
     list_display = ['f_property_name', 'is_available']
 
+
+
 @admin.register(PopularProperty)
 class PopularPropertyAdmin(admin.ModelAdmin):
     list_display = ['p_property_name', 'is_available']
 
+
 @admin.register(Agent)
 class AgentAdmin(admin.ModelAdmin):
+    form = AgentAdminForm
     list_display = ['jina', 'Cheo']
+    
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name == 'image_of_agent_1':
+            formfield.widget.attrs.update({
+                'role': 'uploadcare-uploader',
+                'data-public-key': 'b554dba7565f88537168',  # weka key yako hapa
+            })
+        return formfield
+
+    def image_preview(self, obj):
+        if obj.image_of_agent_1:
+            return mark_safe(f'<img src="{obj.get_image_url()}" style="max-height: 100px;" />')
+        return "No Image"
+
+    image_preview.short_description = 'Preview'
+
+
 
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
-    list_display = ['jina', 'image_of_partners']
+    form = PartnerAdminForm
+    list_display = ['jina', 'image_of_partner']
+    
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name == 'image_of_partner':
+            formfield.widget.attrs.update({
+                'role': 'uploadcare-uploader',
+                'data-public-key': 'b554dba7565f88537168',  # weka key yako hapa
+            })
+        return formfield
+
+    def image_preview(self, obj):
+        if obj.image_of_partner:
+            return mark_safe(f'<img src="{obj.get_image_url()}" style="max-height: 100px;" />')
+        return "No Image"
+
+    image_preview.short_description = 'Preview'
 
 @admin.register(Client)
+
+
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ['name','client_image','location','comment']
+    form = ClientAdminForm
+    list_display = ['name','client_image_1','location','comment']
+    
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, **kwargs)
+        if db_field.name == 'client_image_1':
+            formfield.widget.attrs.update({
+                'role': 'uploadcare-uploader',
+                'data-public-key': 'b554dba7565f88537168',  # weka key yako hapa
+            })
+        return formfield
+
+    def image_preview(self, obj):
+        if obj.client_image_1:
+            return mark_safe(f'<img src="{obj.get_image_url()}" style="max-height: 100px;" />')
+        return "No Image"
+
+    image_preview.short_description = 'Preview'
 
 
 @admin.register(Inquiry)

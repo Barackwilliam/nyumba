@@ -1,25 +1,12 @@
 from django.db import models
-# from cloudinary_storage.storage import MediaCloudinaryStorage
 from django.contrib.auth.models import User
-# from django.core.exceptions import ValidationError
-
-# from django.contrib.auth import get_user_model
 from cloudinary.models import CloudinaryField
 from datetime import timedelta
 from django.utils.timezone import now
 from django.utils.text import slugify
-
-
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
-
-    
-
-# def validate_video_size(value):
-#     limit = 15 * 1024 * 1024
-#     if value.size > limit:
-#         raise ValidationError('Video File is too large. Size should not Exceed 15MB.')
 
 
 class Referral(models.Model):
@@ -71,17 +58,36 @@ class Property(models.Model):
     bathrooms = models.IntegerField()
     house_size = models.IntegerField()
     nearby = models.TextField()
-    image = CloudinaryField('image')
-    image1 = CloudinaryField('image')
-    image2 = CloudinaryField('image')
-    image3 = CloudinaryField('image')
-    property_owner = CloudinaryField('image')
-    # video = models.FileField(upload_to='property_video/',validators=[validate_video_size], blank=True, null=True default=)
+
+    image_0 = models.CharField(max_length=255, blank=True, null=True)
+    image_1 = models.CharField(max_length=255, blank=True, null=True)
+    image_2 = models.CharField(max_length=255, blank=True, null=True)
+    image_3 = models.CharField(max_length=255, blank=True, null=True)
+    property_owner_0 = models.CharField(max_length=255, blank=True, null=True)
     video_link = models.URLField(max_length=300, blank=True, null=True)
-   
 
 
+    
+    def __str__(self):
+        return self.title
 
+    # Kwa Open Graph preview (Facebook, WhatsApp etc.)
+    def get_og_image_url(self):
+        if self.image:
+            return f"{self.image_0}/-/resize/1200x630/-/format/auto/"
+        return ''
+
+    # Kwa matumizi ya kawaida kwenye site (speed optimized)
+    # def get_image_url(self):
+    #     if self.image_0:
+    #         return f"{self.image_0}/-/format/jpg/-/quality/smart/"
+    #     return ''
+
+    def get_image_url(self):
+        if self.image_0:
+            # Ikiwa ni string (URL tayari), rudisha direct
+            return str(self.image_0)
+        return ""
 
 
     def add_view(self,user):
@@ -89,10 +95,6 @@ class Property(models.Model):
             self.viewers.add(user)
             self.view_count +=1
             self.save()
-
-
-    def __str__(self):
-        return self.title
 
     def get_absolute_url(self):
         return f"/property/{self.id}/"
@@ -131,15 +133,15 @@ class Profile(models.Model):
     address = models.CharField(max_length=255, blank=True)
     phone = models.CharField(max_length=20, blank=True)
     bio = models.TextField(max_length=250, blank=True)
-    profile_picture = CloudinaryField('image', blank=True, null=True)  # Profile picture as optional
-    verified_at = models.DateTimeField(null=True, blank=True)  # Tarehe ya kuthibitishwa
+    # profile_picture = CloudinaryField('image', blank=True, null=True) 
+    profile_picture_1 = models.CharField(max_length=255, blank=True, null=True)  
+    verified_at = models.DateTimeField(null=True, blank=True)  
 
-    is_verified = models.BooleanField(default=False)  # Field mpya ya verification
+    is_verified = models.BooleanField(default=False)  
     subscription_plan = models.CharField(
         max_length=10,
         choices=[('silver', 'Silver'), ('gold', 'Gold'), ('platinum', 'Platinum')],
         default='silver') # Default ni Silver
-    # profile_completed = models.BooleanField(default=False)  # Field to check if profile is complete
 
 
     
@@ -172,7 +174,8 @@ class Profile(models.Model):
 class PopularPlace(models.Model):
     name_of_place = models.CharField(max_length=50)
     number_of_property = models.IntegerField()
-    image_of_place = CloudinaryField('image')
+    # image_of_place = CloudinaryField('image')
+    image_of_place_1 = models.CharField(max_length=255, blank=True, null=True) 
 
     def __str__(self):
         return self.name_of_place
@@ -183,7 +186,8 @@ class PopularPlace(models.Model):
 class Offer(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    offer_image = CloudinaryField('image')
+    # offer_image = CloudinaryField('image')
+    offer_image_1 = models.CharField(max_length=255, blank=True, null=True) 
     slug = models.SlugField(unique=True, blank=True,null=True)
 
     
@@ -217,11 +221,19 @@ class Offer(models.Model):
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     Transaction_image = CloudinaryField('image')
+    Transaction_image_1 = models.CharField(max_length=255, blank=True, null=True) 
     timestamp = models.DateTimeField(auto_now_add=True)
     class Meta:
         db_table = 'Myapp_payment'
     def __str__(self):
         return f" Payment by {self.user.username}"
+
+    def get_image_url(self):
+        if self.Transaction_image_1:
+            # Ikiwa ni string (URL tayari), rudisha direct
+            return str(self.Transaction_image_1)
+        return ""
+
 
 
 
@@ -245,7 +257,8 @@ class PopularProperty(models.Model):
 class Agent(models.Model):
     jina = models.CharField(max_length=50)
     Cheo = models.CharField(max_length=50)
-    image_of_agent = CloudinaryField('image')
+    # image_of_agent = CloudinaryField('image')
+    image_of_agent_1 = models.CharField(max_length=255, blank=True, null=True) 
     facebook_link = models.URLField(max_length=300, blank=True, null=True)
     twitter_link = models.URLField(max_length=300, blank=True, null=True)
     instagram_link = models.URLField(max_length=300, blank=True, null=True)
@@ -256,7 +269,8 @@ class Agent(models.Model):
 
 class Partner(models.Model):
     jina = models.CharField(max_length=50)
-    image_of_partners = CloudinaryField('image')
+    # image_of_partners = CloudinaryField('image')
+    image_of_partner = models.CharField(max_length=255, blank=True, null=True) 
 
     def __str__(self):
         return self.jina
@@ -267,7 +281,8 @@ class Partner(models.Model):
 
 class Client(models.Model):
     name = models.CharField(max_length=50)  
-    client_image = CloudinaryField('image')
+    # client_image = CloudinaryField('image')
+    client_image_1 = models.CharField(max_length=255, blank=True, null=True) 
     location = models.CharField(max_length=50)
     comment = models.TextField(max_length=500)
 
@@ -292,17 +307,6 @@ class Inquiry(models.Model):
     def __str__(self):
         return f'Inquiry from {self.full_name} for {self.property.title}'
     
-
-
-
-
-# class PropertyLocation(models.Model):
-#     property = models.OneToOneField('Property', on_delete=models.CASCADE, related_name='location')
-#     lat = models.FloatField()
-#     lon = models.FloatField()
-
-#     def __str__(self):
-#         return f"{self.property.title} - ({self.lat}, {self.lon})"
     
     
 

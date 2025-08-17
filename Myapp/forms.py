@@ -1,30 +1,27 @@
 from django import forms 
 
 from django.core.exceptions import ValidationError
-from .models import Profile, Property, Inquiry, Payment
+from .models import Profile, Property, Inquiry, Payment,Client,Offer,Partner,PopularPlace,Agent,Payment
 
-class ProfileForm(forms.ModelForm): 
 
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = [
-            'first_name',
-            'last_name',
-            'role',
-            'address',
-            'bio',
-            'profile_picture',
-            'phone'
+        fields = ['first_name', 'last_name', 'address', 'phone', 'role', 'bio', 'profile_picture_1']
+
+    class Media:
+        js = [
+            'https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js',  # Uploadcare widget
         ]
 
-# class PropertyForm(forms.ModelForm):
-#     class Meta:
-#         model = Property
-#         fields = '__all__'
-#         widgets = {
-#             'video':
-#             forms.FileInput(attrs={'accept':'video/*'}),
-#         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['profile_picture_1'].widget.attrs.update({
+            'role': 'uploadcare-uploader',
+            'data-public-key': "b554dba7565f88537168",
+
+        })
+        self.fields['profile_picture_1'].empty_label = "Upload Image"
 
 
 
@@ -63,3 +60,84 @@ class PaymentForm(forms.ModelForm):
 #     name = forms.CharField()
 #     email = forms.EmailField()
 #     captcha = ReCaptchaField()
+
+
+class PropertyAdminForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        fields = '__all__'
+
+    class Media:
+        js = [
+            'https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js',
+        ]
+
+
+
+class ClientAdminForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = '__all__'
+
+    class Media:
+        js = [
+            'https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js',
+        ]
+
+class OfferAdminForm(forms.ModelForm):
+    class Meta:
+        model = Offer
+        fields = '__all__'
+
+    class Media:
+        js = [
+            'https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js',
+        ]
+
+
+class PartnerAdminForm(forms.ModelForm):
+    class Meta:
+        model = Partner
+        fields = '__all__'
+
+    class Media:
+        js = [
+            'https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js',
+        ]
+
+
+class PopularPlaceAdminForm(forms.ModelForm):
+    class Meta:
+        model = PopularPlace
+        fields = '__all__'
+
+    class Media:
+        js = [
+            'https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js',
+        ]
+
+
+class AgentAdminForm(forms.ModelForm):
+    class Meta:
+        model = Agent
+        fields = '__all__'
+
+    class Media:
+        js = [
+            'https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js',
+        ]
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ['Transaction_image_1']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['Transaction_image_1'].widget = forms.HiddenInput(attrs={
+            'role': 'uploadcare-uploader',
+            'data-public-key': "b554dba7565f88537168",
+        })
+    class Media:
+        js = [
+            'https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js',
+        ]

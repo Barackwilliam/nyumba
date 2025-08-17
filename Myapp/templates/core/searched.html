@@ -421,7 +421,7 @@
                     <div class="header-user-menu user-menu add">
                         <div class="header-user-name">
                             <span>
-                                <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
+                                <img src="{% if user.profile.profile_picture_1 %}{{user.profile.profile_picture_1}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
                               </span> Hi, {{user.username}}
                                
                         </div>
@@ -579,7 +579,7 @@
                         <div class="homes-tag button alt featured">Featured</div>
                         <div class="homes-tag button alt sale">{{ property.status }}</div>
                         <div class="homes-price">{{ property.price }} Tsh</div>
-                        <img src="{{ property.image.url }}" alt="home-1" class="img-responsive">
+                        <img src="{{ property.image_0}}" alt="home-1" class="img-responsive">
                     </a>
                 </div>
                 <div class="button-effect">
@@ -624,7 +624,7 @@
 
                 <div class="footer">
                     <a href="{% url 'property_detail' property.id %}">
-                        <img src="{{ property.property_owner.url }}" alt="" class="mr-2"> {{ property.owner }}
+                        <img src="{{ property.property_owner_0}}" alt="" class="mr-2"> {{ property.owner }}
                     </a>
                     <span>Posted {{ property.date_posted }}</span>
                 </div>

@@ -2,70 +2,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-L8FYVV0MZV');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Confirmation</title>
+
+    <!-- Google Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L8FYVV0MZV');
+    </script>
+
     <style>
+        /* General Body Styling */
         body {
-            font-family: Arial, sans-serif;
-            background-color: rgb(233, 11, 166);
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-        }
-        
-        .login-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0px 0px 20px 50px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
+            padding: 10px;
         }
 
-        .login-container img {
-            max-width: 100px;
+        /* Card Container */
+        .confirmation-container {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            padding: 30px 25px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* Logo */
+        .confirmation-container img {
+            max-width: 120px;
+            margin-bottom: 15px;
+        }
+
+        /* Title */
+        .confirmation-container h2 {
+            font-size: 1.6rem;
+            color: #333;
             margin-bottom: 20px;
         }
 
-        
+        /* Message Box */
         .thank-you-message {
-            box-shadow: 0px 0px 20px 0px rgb(221, 221, 221);
-            color: #000000;
-            padding: 20px;
-            margin-bottom: 50px;
-            background-color: rgb(218, 213, 213);
+            background: #f5f7ff;
+            border-left: 5px solid #2575fc;
+            color: #444;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
         }
 
+        /* Buttons */
         .button-container {
             display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
         }
 
         .button-container a {
-            padding: 10px 20px;
-            background-color: #4f04ff;
-            color: white;
+            flex: 1 1 100px;
+            padding: 12px;
+            background: #2575fc;
+            color: #fff;
             text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .button-container a:hover {
-            background-color: #4CAF50;
+            background: #6a11cb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .confirmation-container {
+                padding: 20px 15px;
+            }
+            .confirmation-container h2 {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
@@ -73,21 +111,27 @@
 
     <script defer src="https://static.getbutton.io/widget/bundle.js?id=UaD5Y"></script>
 
-    <div class="login-container">
-        <h2>Wait for Confirmation</h2>
-        <img src="{% static 'images/nyumbachap.png' %}" alt="Logo"> <!-- Add your image source here -->
+    <div class="confirmation-container">
+        <h2>⏳ Wait for Confirmation</h2>
+        <img src="{% static 'images/nyumbachap.png' %}" alt="Logo">
 
         <!-- Thank you message -->
         <div class="thank-you-message">
-        <small>Habari {{user.username}}..! Tumepokea Taarifa Zako za Malipo. Timu yetu inatayarisha Huduma yako na utapokea Taarifa Zaidi ndani ya Muda Mfupi. Tunakushukuru Kwa Kuchagua NyumbaChap.</small>
+            <small>
+                Habari <strong>{{user.username}}</strong>..!<br>
+                Tumepokea Taarifa Zako za Malipo.<br>
+                Timu yetu inatayarisha Huduma yako na utapokea taarifa zaidi ndani ya muda mfupi.<br>
+                <strong>Asante kwa kuchagua NyumbaChap.</strong>
+            </small>
         </div>
 
         <!-- Buttons for navigation -->
         <div class="button-container">
-            <a href="{% url 'popular_featured' %}">Home</a>
-            <a href="{% url 'Invoice' %}">Check Invoice</a>
-            <a href="{% url 'jihudumie' %}">Back</a>
+            <a href="{% url 'popular_featured' %}">🏠 Home</a>
+            <a href="{% url 'Invoice' %}">🧾 Invoice</a>
+            <a href="{% url 'jihudumie' %}">↩️ Back</a>
         </div>
     </div>
+
 </body>
 </html>

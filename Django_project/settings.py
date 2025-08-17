@@ -29,8 +29,8 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = 'pvcPAFrkq9V6lgl_AIryxut9DrMRFA5b0L2gmmU_Ic5NCgf7Lk3Cqbp3xdvYyZhyLs8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['*']
+DEBUG = True
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'nyumbachap.com', 'www.nyumbachap.com', 'www.nyumbachap.online', 'nyumbachap.online']
 
 
 # Application definition
@@ -103,35 +103,28 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
     }
 
-    # 'default': {
-    #     'BACKEND':'channels_redis.core.RedisChannelLayer',
-    #     'CONFIG':{
-    #         "hosts": ['127.0.0.1',6379],
-    #     },
-    # },
 }
-
 
 
 # supabase database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',  # Jina la database
-#         'USER': 'postgres.pwztkimkloomauuuzvhx',  # Jina la mtumiaji
-#         'PASSWORD': 'NyumbaChap',  # Badilisha kwa password yako halisi
-#         'HOST': 'aws-0-us-west-1.pooler.supabase.com',  # URL ya server ya database
-#         'PORT': '5432',  # Port ya PostgreSQL (default ni 5432)
-#     }
-# }
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres', 
+        'USER': 'postgres.pwztkimkloomauuuzvhx',  
+        'PASSWORD': 'NyumbaChap', 
+        'HOST': 'aws-0-us-west-1.pooler.supabase.com',  
+        'PORT': '5432',  
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 
@@ -174,9 +167,17 @@ STATIC_URL = '/static/'
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    BASE_DIR / "static", ]
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"  
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -281,6 +282,17 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
+
+
+
+# from pyuploadcare.dj import get_fields
+
+UPLOADCARE = {
+    "pub_key": "b554dba7565f88537168",
+    "secret": "86092ed986a8b1788d3c",
+}
+
+
 # Session Settings
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_SECURE = True
@@ -294,10 +306,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '27751749322-khts80a7a7bf7qdhr31aqlfticr7mraj.ap
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['picture', 'email']
-
-
-
-
 
 
 RECAPTCHA_PUBLIC_KEY = '6Lfr4xUrAAAAACmeCbB_ii2950eZIQBfWUfOX0Kc'

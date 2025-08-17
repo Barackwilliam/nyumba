@@ -25,7 +25,7 @@
                             <div class="sidebar-header"><img src="{% static 'images/logo-blue.svg' %}" alt="header-logo2.png"> </div>
                             <div class="header clearfix"> 
                                                                
-                             <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}"  alt="avatar" class="img-fluid profile-img">
+                             <img src="{% if user.profile.profile_picture_1 %}{{user.profile.profile_picture_1}}{% else %} {% static 'images/default.jpg' %}{% endif %}"  alt="avatar" class="img-fluid profile-img">
                             </div>
                             <div class="active-user">
                                 <h2 style="text-align:center; color:white">{{user.username}}</h2>
@@ -82,6 +82,9 @@
                        <div class="col-lg-12 mobile-dashbord dashbord">
                            
                         </div>  
+
+
+
                         <div class="widget-boxed-header">
                             <h2>Profile Details</h2>
                         </div>
@@ -89,13 +92,9 @@
                             <div class="author-box clearfix">
 
                                 
-                                <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}" class="author__img">
+                                <img src="{% if user.profile.profile_picture_1 %}{{user.profile.profile_picture_1}}{% else %} {% static 'images/default.jpg' %}{% endif %}" class="author__img">
                                 <h4 class="author__title">{{user.username}}</h4>
                                 <p class="author__meta">Agent of Property</p>
-
-                            
-
-                
                               
                             </div>
                             <ul class="author__contact">
@@ -158,8 +157,9 @@
                                     <!-- image field -->
                                     <div class="form-group">
                                         <label for="profile_picture">Profile Picture</label><br>
-                                        <input type="file" id="profile_picture" name="profile_picture" class="form-control" accept="image/*"/>
-                                        <div class="error">{{form.profile_picture.errors}}</div></div>
+                                                <input type="hidden" role="uploadcare-uploader" data-images-only name="profile_picture_1" value="{{ user.profile.profile_picture_1 }}"/> 
+
+                                                <div class="error">{{form.profile_picture_1.errors}}</div></div>
     
                                     <button type='submit' class="btn btn-primary">Save Changes</button>
                                 </form>

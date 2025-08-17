@@ -41,9 +41,14 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('IP Fetch Error:', error));
 });
                   </script>
+  <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 
     
 <meta name="csrf-token" content="{{ csrf_token }}">
+
+<script>
+UPLOADCARE_PUBLIC_KEY = 'b554dba7565f88537168';
+</script>
 
 
 <style>
@@ -230,22 +235,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Kuzuia Right Click
         document.addEventListener("contextmenu", function(event) {
             event.preventDefault();
-            alert("🚫 Sorry, Right Click is Disabled! Wasiliana na Developer No: 0629712678");
+            alert("🚫 Sorry, Right Click is Disabled! for more info call 0629712678");
         });
     
         // Kuzuia DevTools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
         document.addEventListener("keydown", function(event) {
             if (event.keyCode == 123) {  // F12
                 event.preventDefault();
-                alert("🚫 Sorry, Inspect Element is Disabled! Wasiliana na Developer No: 0629712678");
+                alert("🚫 Sorry, Inspect Element is Disabled! more info call 0629712678");
             }
             if (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74)) {  // Ctrl+Shift+I or Ctrl+Shift+J
                 event.preventDefault();
-                alert("🚫 Sorry, Developer Tools is Disabled! Wasiliana na Developer No: 0629712678");
+                alert("🚫 Sorry, Developer Tools is Disabled! more info call 0629712678");
             }
             if (event.ctrlKey && event.keyCode == 85) {  // Ctrl+U
                 event.preventDefault();
-                alert("🚫 Sorry, View Source is Disabled! Wasiliana na Developer No: 0629712678");
+                alert("🚫 Sorry, View Source is Disabled! for more info call 0629712678");
             }
         });
     </script>
@@ -257,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
     document.addEventListener("copy", function(event) {
         event.preventDefault();
-        alert("🚫 Sorry, Copying Content is Disabled! Wasiliana na Developer No: 0629712678");
+        alert("🚫 Sorry, Copying Content is Disabled! more info call 0629712678");
     });
 </script>
 
@@ -397,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
 
                <span>
-                <img src="{% if user.profile.profile_picture %}{{user.profile.profile_picture.url}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
+                <img src="{% if user.profile.profile_picture_1 %}{{user.profile.profile_picture_1}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
               </span> Hi, {{user.username}}
  
 <!-- Display a popup message if the user hasn't set a profile picture -->
@@ -686,7 +691,7 @@ document.addEventListener('keydown', function(event) {
 document.addEventListener('keyup', function(event) {
     if (event.key === 'PrintScreen') {
         navigator.clipboard.writeText('Screenshots is Disable.').then(function() {
-            alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+            alert('Screenshots Hairuhusiwi kwenye website hii piga no: 0629712678.');
         });
     }
 });
@@ -697,7 +702,7 @@ document.addEventListener('keydown', function(event) {
         (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
         (event.ctrlKey && event.key === 'U')) {
         event.preventDefault();
-        alert('Developer tools Haziruhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
+        alert('Developer tools Haziruhusiwi kwenye website hii piga no: 0629712678.');
     }
 });
 
