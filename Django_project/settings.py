@@ -30,7 +30,11 @@ SECRET_KEY = 'pvcPAFrkq9V6lgl_AIryxut9DrMRFA5b0L2gmmU_Ic5NCgf7Lk3Cqbp3xdvYyZhyLs
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'nyumbachap.com', 'www.nyumbachap.com', 'www.nyumbachap.online', 'nyumbachap.online']
+=======
+ALLOWED_HOSTS = ['*']
+>>>>>>> eb95acc6fe75ecf38630354f18152ee999e10e1e
 
 
 # Application definition
