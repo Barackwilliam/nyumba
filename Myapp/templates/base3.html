@@ -1,0 +1,202 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    {% csrf_token %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="NyumbaChap ni Jukwaa bora Tanzania la kukusaidia kutafuta nyumba za kupangisha au kununua, pamoja na mawasiliano ya wamiliki.">
+    <meta name="author" content="NyumbaChap Team">
+    <meta name="keywords" content="Nyumba Tanzania, Vyumba vya Kupangisha, Nyumba za Kuuza, Hostel, Dar es Salaam, Arusha, Mbeya, Zanzibar, NyumbaChap, Mali isiyohamishika, nyumba mpya, nyumba nzuri, vyumba bei nafuu">
+
+    <link rel="canonical" href="https://nyumbachap.com/" />
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <title>NyumbaChap - Tafuta nyumba kwa Urahisi Tanzania</title>
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="NyumbaChap - Tafuta nyumba kwa Urahisi Tanzania" />
+    <meta property="og:description" content="Jukwaa bora Tanzania la kutafuta nyumba, vyumba na mawasiliano ya wamiliki kwa urahisi." />
+    <meta property="og:image" content="https://nyumbachap.com/static/images/nyumbachap-og.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nyumbachap.com/" />
+    <meta property="fb:app_id" content="4155630028096866" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NyumbaChap - Tafuta nyumba kwa Urahisi Tanzania" />
+    <meta name="twitter:description" content="Jukwaa bora Tanzania la kutafuta nyumba, vyumba na mawasiliano ya wamiliki kwa urahisi." />
+    <meta name="twitter:image" content="https://nyumbachap.com/static/images/nyumbachap-og.jpg" />
+    <meta name="twitter:site" content="@nyumbachap" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/leaflet.css'%}">
+    <link rel="stylesheet" href="{% static 'css/leaflet-gesture-handling.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/leaflet.markercluster.css'%}">
+    <link rel="stylesheet" href="{% static 'css/leaflet.markercluster.default.css'%}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i|Montserrat:600,800" rel="stylesheet">
+    <link rel="stylesheet" id="color" href="{% static 'css/colors/pink.css'%}">
+    
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    
+    <!-- Google Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8FYVV0MZV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L8FYVV0MZV');
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+    :root {
+        --bg-light: #fff;
+        --bg-dark: #1e1e1e;
+        --text-light: #333;
+        --text-dark: #eee;
+        --input-bg-light: #f9f9f9;
+        --input-bg-dark: #2b2b2b;
+        --border-color: #ccc;
+        --green: #4CAF50;
+    }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-light: var(--bg-dark);
+            --text-light: var(--text-dark);
+            --input-bg-light: var(--input-bg-dark);
+            --border-color: #444;
+        }
+    }
+
+    /* Feedback Modal */
+    #feedback-modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:1000;justify-content:center;align-items:center;font-family:'Segoe UI',sans-serif;padding:20px;}
+    .modal-content {background:var(--bg-light);padding:25px;border-radius:20px;width:100%;max-width:450px;box-shadow:0 10px 30px rgba(0,0,0,0.2);position:relative;animation:fadeIn 0.3s ease-in-out;color:var(--text-light);}
+    .modal-content h3 {margin-top:0;font-size:22px;}
+    .modal-content input,.modal-content textarea,.modal-content select {width:100%;padding:12px 14px;margin-bottom:15px;border:1px solid var(--border-color);border-radius:10px;font-size:15px;background-color:var(--input-bg-light);color:var(--text-light);}
+    .modal-content button[type="submit"] {background-color:var(--green);color:white;padding:12px;border:none;border-radius:10px;cursor:pointer;font-size:16px;width:100%;}
+    #feedback-message {color:limegreen;margin-top:10px;display:none;}
+    .close-btn {position:absolute;top:12px;right:16px;font-size:22px;background:none;border:none;cursor:pointer;color:#999;}
+    .close-btn:hover {color:#333;}
+    @keyframes fadeIn {from {transform:scale(0.95);opacity:0;} to {transform:scale(1);opacity:1;}}
+
+    /* Floating button */
+    .floating-btn {position:fixed;bottom:20px;left:20px;background-color:var(--green);color:white;border:none;border-radius:50%;width:55px;height:55px;font-size:26px;cursor:pointer;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.3);}
+    .floating-btn:hover {transform:scale(1.1);}
+    @media(max-width:480px){.modal-content{padding:20px;border-radius:15px;}.floating-btn{width:45px;height:45px;font-size:22px;}}
+    
+    /* Announcement Bar */
+    .announcement-bar {width:100%;overflow:hidden;background:#00ffd0;padding:10px 0;position:relative;border-radius:8px;margin:20px 0;}
+    .announcement-text {display:inline-block;white-space:nowrap;padding-left:100%;animation:scroll-left 15s linear infinite;color:#141e30;font-weight:bold;font-size:1.2rem;}
+    @keyframes scroll-left {0%{transform:translateX(0);}100%{transform:translateX(-100%);}}
+    </style>
+
+</head>
+
+<body>
+
+<!-- ================= Header ================= -->
+<header id="header-container" class="header head-tr">
+    <div id="header" class="head-tr bottom">
+        <div class="container container-header">
+
+            <!-- Logo + Hamburger -->
+            <div class="left-side">
+                <div id="logo">
+                    <a href="{% url 'popular_featured' %}"><img src="{% static 'images/logo-white-1.svg' %}" data-sticky-logo="images/logo-red.svg" alt="NyumbaChap"></a>
+                </div>
+                <div class="mmenu-trigger">
+                    <button class="hamburger hamburger--collapse" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+                </div>
+
+                <!-- Main Nav -->
+                <nav id="navigation" class="style-1 head-tr">
+                    <ul id="responsive">
+                        <li><a href="{% url 'popular_featured' %}">Home</a></li>
+                        <li><a href="{% url 'property_list' %}">Property List</a></li>
+                        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'post_list' %}">Blog</a></li>
+                        <li><a href="{% url 'help_center' %}">Help</a></li>
+                        {% if request.user.is_authenticated and request.user.referrals.exists %}
+                            <li><a href="{% url 'referral_dashboard' %}">Get Money</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Right Side User -->
+            <div class="right-side d-none d-none d-lg-none d-xl-flex">
+                {% if user.is_authenticated %}
+                <div class="header-widget">
+                    <a href="{% url 'add_property' %}" class="button border">Sajili Nyumba<i class="fas fa-laptop-house ml-2"></i></a>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<!-- ================= Content ================= -->
+{% block content %}
+{% endblock %}
+
+<!-- ================= Feedback Modal ================= -->
+<div id="feedback-modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeFeedbackModal()">×</button>
+      <h3>📝 We'd love your feedback</h3>
+      <form id="feedback-form">{% csrf_token %}
+        <input type="text" id="name" name="name" placeholder="Your Name (optional)">
+        <textarea id="comment" name="comment" required placeholder="Write your feedback..."></textarea>
+        <select id="rating" name="rating" required>
+          <option value="">Rate our service</option>
+          <option value="1">★☆☆☆☆ - Poor</option>
+          <option value="2">★★☆☆☆ - Fair</option>
+          <option value="3">★★★☆☆ - Good</option>
+          <option value="4">★★★★☆ - Very good</option>
+          <option value="5">★★★★★ - Excellent</option>
+        </select>
+        <button type="submit">Send Feedback</button>
+      </form>
+      <p id="feedback-message"></p>
+    </div>
+</div>
+<button class="floating-btn" onclick="showFeedbackModal()">💬</button>
+
+<!-- ================= Scripts ================= -->
+<script src="{% static 'js/jquery-3.5.1.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<script src="{% static 'js/script.js'%}"></script>
+
+<script>
+// Feedback modal
+const feedbackModal = document.getElementById("feedback-modal");
+function showFeedbackModal(){feedbackModal.style.display="flex";}
+function closeFeedbackModal(){feedbackModal.style.display="none";}
+document.getElementById("feedback-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    const formData = new FormData(this);
+    fetch("{% url 'submit_feedback' %}", {method:"POST", headers:{"X-CSRFToken":document.querySelector("[name=csrfmiddlewaretoken]").value}, body:formData})
+    .then(r=>r.json()).then(data=>{if(data.success){document.getElementById("feedback-message").textContent="✅ Thank you for your feedback!";document.getElementById("feedback-message").style.display="block";localStorage.setItem("feedbackGiven","true");setTimeout(()=>{closeFeedbackModal();},3000);}});
+});
+
+// Visitor IP save
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('https://ipapi.co/json/').then(r=>r.json()).then(data=>{
+        fetch('/save-visitor-info/',{method:'POST',headers:{'Content-Type':'application/json','X-CSRFToken':'{{ csrf_token }}'},body:JSON.stringify({ip:data.ip,region:data.region||data.city||data.country_name})})
+    });
+});
+
+// Block right click & DevTools
+document.addEventListener("contextmenu", e=>{e.preventDefault();alert("🚫 Sorry, Right Click Disabled! info:0629712678");});
+document.addEventListener("keydown", e=>{if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&(e.keyCode==73||e.keyCode==74))||(e.ctrlKey&&e.keyCode==85)){e.preventDefault();alert("🚫 Developer Tools Disabled! info:0629712678");}});
+document.addEventListener("copy", e=>{e.preventDefault();alert("🚫 Copying Disabled! info:0629712678");});
+</script>
+
+</body>
+</html>
