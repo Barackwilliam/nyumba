@@ -200,12 +200,7 @@ class Profile(models.Model):
     subscription_plan = models.CharField(
         max_length=10,
         choices=[('silver', 'Silver'), ('gold', 'Gold'), ('platinum', 'Platinum')],
-<<<<<<< HEAD
         default='silver') # Default ni Silver
-=======
-        default='silver')
->>>>>>> eb95acc6fe75ecf38630354f18152ee999e10e1e
-
 
         # ✅ Kwa social media (Open Graph)
     def get_profile_picture_og_url(self):
@@ -330,14 +325,6 @@ class Payment(models.Model):
     def __str__(self):
         return f" Payment by {self.user.username}"
 
-<<<<<<< HEAD
-    def get_image_url(self):
-        if self.Transaction_image_1:
-            # Ikiwa ni string (URL tayari), rudisha direct
-            return str(self.Transaction_image_1)
-        return ""
-
-=======
     # ✅ Kwa matumizi ya social media (OG preview)
     def get_transaction_image_og_url(self):
         if self.Transaction_image:
@@ -349,7 +336,6 @@ class Payment(models.Model):
         if self.Transaction_image:
             return self.Transaction_image.build_url(format='jpg', quality='auto', fetch_format='auto')
         return ''
->>>>>>> eb95acc6fe75ecf38630354f18152ee999e10e1e
 
 
 
@@ -459,12 +445,6 @@ class Inquiry(models.Model):
     def __str__(self):
         return f'Inquiry from {self.full_name} for {self.property.title}'
     
-<<<<<<< HEAD
-    
-    
-=======
-
->>>>>>> eb95acc6fe75ecf38630354f18152ee999e10e1e
 
 from .utils import get_lat_lon  # Import the function
 
