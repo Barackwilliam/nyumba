@@ -827,51 +827,6 @@ def submit_feedback(request):
     return JsonResponse({'success': False, 'error': 'Invalid request'})
 
 
-
-# Feedback ikiwa na recaptcha
-# Feedback ikiwa na recaptcha
-# Feedback ikiwa na recaptcha
-# Feedback ikiwa na recaptcha
-# Feedback ikiwa na recaptcha
-
-
-# def submit_feedback(request):
-#     if request.method == 'POST':
-#         recaptcha_response = request.POST.get('g-recaptcha-response')
-#         if not recaptcha_response:
-#             return JsonResponse({'success': False, 'error': 'Tafadhali thibitisha reCAPTCHA.'})
-
-#         # Thibitisha reCAPTCHA na Google
-#         data = {
-#             'secret': settings.RECAPTCHA_PRIVATE_KEY,
-#             'response': recaptcha_response
-#         }
-#         r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-#         result = r.json()
-
-#         if not result.get('success'):
-#             return JsonResponse({'success': False, 'error': 'reCAPTCHA haikuthibitishwa. Tafadhali jaribu tena.'})
-
-#         comment = request.POST.get('comment')
-#         rating = request.POST.get('rating')
-#         name = request.POST.get('name', '')
-#         user = request.user if request.user.is_authenticated else None
-
-#         if not comment or not rating:
-#             return JsonResponse({'success': False, 'error': 'Missing fields'})
-
-#         Feedback.objects.create(
-#             user=user,
-#             name=name if not user else user.username,
-#             comment=comment,
-#             rating=int(rating)
-#         )
-
-#         return JsonResponse({'success': True})
-
-#     return JsonResponse({'success': False, 'error': 'Invalid request'})
-
-
 from django.db.models import Avg, Count
 from django.core.paginator import Paginator
 
@@ -906,9 +861,6 @@ def receive_listing(request):
         serializer.save()
         return Response({'message': 'Listing saved successfully'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# 'Token 7d9a3f905bf0c9fa46147447226d966d82f2ddf6'
 
 
 from .models import Scrape_BeforwardListing

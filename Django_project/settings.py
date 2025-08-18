@@ -22,16 +22,13 @@ dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'pvcPAFrkq9V6lgl_AIryxut9DrMRFA5b0L2gmmU_Ic5NCgf7Lk3Cqbp3xdvYyZhyLs8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'nyumbachap.com', 'www.nyumbachap.com', 'www.nyumbachap.online', 'nyumbachap.online']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
