@@ -4,3 +4,42 @@ __pycache__/
 *.pyc
 
 ".env" 
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# C extensions
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Django stuff
+*.log
+*.pot
+*.py,cover
+db.sqlite3
+media/
+staticfiles/
+
+# If using collectstatic
+/static/
+
+# VSCode / PyCharm settings
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Testing
+.coverage
+*.cover
+htmlcov/
