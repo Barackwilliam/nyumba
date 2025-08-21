@@ -612,9 +612,12 @@
                     <!-- Right Side Content / End -->
                     <div class="right-side d-none d-none d-lg-none d-xl-flex">
                         <!-- Header Widget -->
-                        <div class="header-widget">
+
+                     {% if request.user.is_authenticated %}
+                     <div class="header-widget">
                             <a href="{% url 'add_property' %}" class="button border">Sajili Nyumba<i class="fas fa-laptop-house ml-2"></i></a>
                         </div>
+                        {% endif %}
                         <!-- Header Widget / End -->
                     </div>
                     <!-- Right Side Content / End -->
@@ -627,6 +630,8 @@
                               </span> Hi, {{user.username}}
                                
                         </div>
+                         {% if request.user.is_authenticated %}
+
                          <ul>
                             <li><a href="{% url 'edit_profile' %}"> Edit profile</a></li>
                             <li><a href="{% url 'add_property' %}"> Sajili Nyumba</a></li>
@@ -634,6 +639,7 @@
                             <li><a href="{% url 'reset_password' %}"> Change Password</a></li>
                             <li><a href="{% url 'logout' %}">Log Out</a></li>
                         </ul>
+                        {% endif %}
                     </div>
                     <!-- Right Side Content / End -->
 
@@ -647,7 +653,7 @@
                     <!-- lang-wrap-->
                     <div class="header-user-menu user-menu add d-none d-lg-none d-xl-flex">
                         <div class="lang-wrap">
-                            <div class="show-lang"><span><i class="fas fa-globe-americas"></i><strong>ENG</strong></span><i class="fa fa-caret-down arrlan"></i></div>
+                            <!-- <div class="show-lang"><span><i class="fas fa-globe-americas"></i><strong>ENG</strong></span><i class="fa fa-caret-down arrlan"></i></div> -->
                             <ul class="lang-tooltip lang-action no-list-style">
                              
                             </ul>
