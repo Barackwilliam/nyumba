@@ -99,10 +99,10 @@ def add_property(request):
         house_size = request.POST['house_size']
         nearby = request.POST['nearby']
 
-        image_0=request.POST.get('image_0'),
-        image_1=request.POST.get('image_1'),
-        image_2=request.POST.get('image_2'),
-        image_3=request.POST.get('image_3'),
+        image_0=request.POST.get('image_0')
+        image_1=request.POST.get('image_1')
+        image_2=request.POST.get('image_2')
+        image_3=request.POST.get('image_3')
         property_owner_0=request.POST.get('property_owner_0')
         
         status = request.POST['status']
@@ -455,16 +455,6 @@ def edit_profile(request):
         form = ProfileForm(instance=profile)
 
     return render(request, 'core/profile_settings.html', {'form': form})
-# def edit_profile(request):
-#     profile = request.user.profile
-#     if request.method == 'POST':
-#         form = ProfileForm(request.POST, instance=profile)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('edit_profile')  
-#         form = ProfileForm(instance=profile)
-#     return render(request, 'profile_edit.html', {'form': form})
-
 
 @login_required(login_url='login')
 def logout(request):

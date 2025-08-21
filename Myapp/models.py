@@ -59,71 +59,71 @@ class Property(models.Model):
     house_size = models.IntegerField()
     nearby = models.TextField()
 
-    image_0 = models.CharField(max_length=255, blank=True, null=True)
-    image_1 = models.CharField(max_length=255, blank=True, null=True)
-    image_2 = models.CharField(max_length=255, blank=True, null=True)
-    image_3 = models.CharField(max_length=255, blank=True, null=True)
-    property_owner_0 = models.CharField(max_length=255, blank=True, null=True)
+    image_0 = models.URLField(max_length=500, blank=True, null=True)
+    image_1 = models.URLField(max_length=500, blank=True, null=True)
+    image_2 = models.URLField(max_length=500, blank=True, null=True)
+    image_3 = models.URLField(max_length=500, blank=True, null=True)
+    property_owner_0 = models.URLField(max_length=500, blank=True, null=True)
     video_link = models.URLField(max_length=300, blank=True, null=True)
 
     # ✅ OG Image for main image
     def get_og_image_url(self):
-        if self.image:
-            return self.image.build_url(width=1200, height=630, crop='fill')
+        if self.image_0:
+            return self.image_0.build_url(width=1200, height=630, crop='fill')
         return ''
 
     # ✅ Optimized Image for main image
     def get_image_url(self):
-        if self.image:
-            return self.image.build_url(format='jpg', quality='auto', fetch_format='auto')
+        if self.image_0:
+            return self.image_0.build_url(format='jpg', quality='auto', fetch_format='auto')
         return ''
 
     # ✅ OG Image for image1
     def get_og_image1_url(self):
-        if self.image1:
-            return self.image1.build_url(width=1200, height=630, crop='fill')
+        if self.image_0:
+            return self.image_0.build_url(width=1200, height=630, crop='fill')
         return ''
 
     # ✅ Optimized Image for image1
     def get_image1_url(self):
-        if self.image1:
-            return self.image1.build_url(format='jpg', quality='auto', fetch_format='auto')
+        if self.image_0:
+            return self.image_0.build_url(format='jpg', quality='auto', fetch_format='auto')
         return ''
 
     # ✅ OG Image for image2
     def get_og_image2_url(self):
-        if self.image2:
-            return self.image2.build_url(width=1200, height=630, crop='fill')
+        if self.image_2:
+            return self.image_2.build_url(width=1200, height=630, crop='fill')
         return ''
 
     # ✅ Optimized Image for image2
-    def get_image2_url(self):
-        if self.image2:
-            return self.image2.build_url(format='jpg', quality='auto', fetch_format='auto')
+    def get_image_2_url(self):
+        if self.image_2:
+            return self.image_2.build_url(format='jpg', quality='auto', fetch_format='auto')
         return ''
 
     # ✅ OG Image for image3
     def get_og_image3_url(self):
-        if self.image3:
-            return self.image3.build_url(width=1200, height=630, crop='fill')
+        if self.image_3:
+            return self.image_3.build_url(width=1200, height=630, crop='fill')
         return ''
 
     # ✅ Optimized Image for image3
     def get_image3_url(self):
-        if self.image3:
-            return self.image3.build_url(format='jpg', quality='auto', fetch_format='auto')
+        if self.image_3:
+            return self.image_3.build_url(format='jpg', quality='auto', fetch_format='auto')
         return ''
 
     # ✅ OG Image for property_owner image
     def get_og_property_owner_url(self):
-        if self.property_owner:
-            return self.property_owner.build_url(width=800, height=800, crop='thumb')
+        if self.property_owner_0:
+            return self.property_owner_0.build_url(width=800, height=800, crop='thumb')
         return ''
 
     # ✅ Optimized Image for property_owner image
     def get_property_owner_url(self):
-        if self.property_owner:
-            return self.property_owner.build_url(format='jpg', quality='auto', fetch_format='auto')
+        if self.property_owner_0:
+            return self.property_owner_0.build_url(format='jpg', quality='auto', fetch_format='auto')
         return ''
 
     
@@ -132,15 +132,11 @@ class Property(models.Model):
 
     # Kwa Open Graph preview (Facebook, WhatsApp etc.)
     def get_og_image_url(self):
-        if self.image:
+        if self.image_0:
             return f"{self.image_0}/-/resize/1200x630/-/format/auto/"
         return ''
 
-    # Kwa matumizi ya kawaida kwenye site (speed optimized)
-    # def get_image_url(self):
-    #     if self.image_0:
-    #         return f"{self.image_0}/-/format/jpg/-/quality/smart/"
-    #     return ''
+  
 
     def get_image_url(self):
         if self.image_0:

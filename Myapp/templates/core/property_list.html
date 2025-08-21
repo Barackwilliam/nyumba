@@ -150,7 +150,6 @@
 
 <head>
 
-
     <script>
         if (!navigator.userAgent.includes("Mozilla")) {
             document.body.innerHTML = "Bots not allowed!";
@@ -159,16 +158,15 @@
     
     <script>
         var a=10,b=20;console.log(a+b);
-    </script>
-
-    <script>
-        // Kuzuia Right Click
+    </script> 
+       <script>
         document.addEventListener("contextmenu", function(event) {
             event.preventDefault();
             alert("🚫 Sorry, Right Click is Disabled! for more info call 0629712678");
         });
     
-        // Kuzuia DevTools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+
+        <!-- // Kuzuia DevTools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
         document.addEventListener("keydown", function(event) {
             if (event.keyCode == 123) {  // F12
                 event.preventDefault();
@@ -183,11 +181,11 @@
                 alert("🚫 Sorry, View Source is Disabled! for more info call 0629712678");
             }
         });
-    </script>
+    </script> 
 
 
 
-
+ 
 <script>
     document.addEventListener("copy", function(event) {
         event.preventDefault();
@@ -199,7 +197,7 @@
 
 
 
-<meta name="monetag" content="d73f0efb5d369d24830f6c46b1316c00">
+<!-- <meta name="monetag" content="d73f0efb5d369d24830f6c46b1316c00"> -->
 
 
 <!-- Google tag (gtag.js) -->
@@ -778,7 +776,7 @@
                             {% if property.p_status == "Sold" %}Closed{% else %}{{property.status}}{% endif %}
                         </div>
                         <div class="homes-price">{{property.price}} Tsh</div>
-                        <img src="{{property.image_0}}" alt="nyumba inapangishwa" class="img-responsive">
+                        <img src="{{ property.image_0 }}" alt="nyumba inapangishwa" class="img-responsive">
                     </div>
                     <div class="button-effect">
                         <a href="{% url 'property_detail' property.id %}" class="btn"><i class="fa fa-link"></i></a>
@@ -1092,6 +1090,8 @@ document.addEventListener('keyup', function(event) {
 });
 
 // Zuia Developer Tools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+
+
 document.addEventListener('keydown', function(event) {
     if (event.key === 'F12' || 
         (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
