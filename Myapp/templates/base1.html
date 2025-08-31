@@ -424,6 +424,8 @@ UPLOADCARE_PUBLIC_KEY = 'b554dba7565f88537168';
                 <img src="{% if user.profile.profile_picture_1 %}{{user.profile.profile_picture_1}}{% else %} {% static 'images/default.jpg' %}{% endif %}" alt="{{user.username}}">
               </span> Hi, {{user.username}}
                 </div> 
+                 {% if request.user.is_authenticated %}
+
                 <ul>
                     <li><a href="{% url 'edit_profile' %}"> Edit profile</a></li>
                     <li><a href="{% url 'add_property' %}"> Sajili Nyumba</a></li>
@@ -431,6 +433,7 @@ UPLOADCARE_PUBLIC_KEY = 'b554dba7565f88537168';
                     <li><a href="{% url 'reset_password' %}"> Change Password</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                 </ul>
+                {% endif %}
             </div>
             <!-- Right Side Content / End -->
 
@@ -446,7 +449,7 @@ UPLOADCARE_PUBLIC_KEY = 'b554dba7565f88537168';
             <!-- lang-wrap-->
             <div class="header-user-menu user-menu add d-none d-lg-none d-xl-flex">
                 <div class="lang-wrap">
-                    <div class="show-lang"><span><i class="fas fa-globe-americas"></i><strong>ENG</strong></span><i class="fa fa-caret-down arrlan"></i></div>
+                    <!-- <div class="show-lang"><span><i class="fas fa-globe-americas"></i><strong>ENG</strong></span><i class="fa fa-caret-down arrlan"></i></div> -->
                     <ul class="lang-tooltip lang-action no-list-style">
                        
                     </ul>
@@ -460,34 +463,139 @@ UPLOADCARE_PUBLIC_KEY = 'b554dba7565f88537168';
 
 </header>
 
-
-
-
 {% block content %}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {% endblock %}
+{% comment %} 
+
+        <!-- START FOOTER -->
+        <footer class="first-footer rec-pro">
+            <div class="top-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="netabout">
+                                <a href="{% static 'index.html'%}" class="logo ">
+                                    <img src="{% static 'images/logo-footer.svg'%}" alt="netcom">
+                                    
+                                </a>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum incidunt architecto soluta laboriosam, perspiciatis, aspernatur officiis esse.</p>
+                            </div>
+                            <div class="contactus">
+                                <ul>
+                                    <li>
+                                        <div class="info">
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            <p class="in-p">95 South Park Avenue, USA</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="info">
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <p class="in-p">+456 875 369 208</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="info">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <p class="in-p ti">support@findhouses.com</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="navigation">
+                                <h3>Navigation</h3>
+                                <div class="nav-footer">
+                                    <ul>
+                                        <li><a href="index.html">Home One</a></li>
+                                        <li><a href="properties-right-sidebar.html">Properties Right</a></li>
+                                        <li><a href="properties-full-list.html">Properties List</a></li>
+                                        <li><a href="properties-details.html">Property Details</a></li>
+                                        <li class="no-mgb"><a href="agents-listing-grid.html">Agents Listing</a></li>
+                                    </ul>
+                                    <ul class="nav-right">
+                                        <li><a href="{% static 'agent-details.html'%}">Agents Details</a></li>
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="blog.html">Blog Default</a></li>
+                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                        <li class="no-mgb"><a href="contact-us.html">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="widget">
+                                <h3>Twitter Feeds</h3>
+                                <div class="twitter-widget contuct">
+                                    <div class="twitter-area">
+                                        <div class="single-item">
+                                            <div class="icon-holder">
+                                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h5><a href="#">@findhouses</a> all share them with me baby said inspet.</h5>
+                                                <h4>about 5 days ago</h4>
+                                            </div>
+                                        </div>
+                                        <div class="single-item">
+                                            <div class="icon-holder">
+                                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h5><a href="#">@findhouses</a> all share them with me baby said inspet.</h5>
+                                                <h4>about 5 days ago</h4>
+                                            </div>
+                                        </div>
+                                        <div class="single-item">
+                                            <div class="icon-holder">
+                                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h5><a href="#">@findhouses</a> all share them with me baby said inspet.</h5>
+                                                <h4>about 5 days ago</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="newsletters">
+                                <h3>Newsletters</h3>
+                                <p>Sign Up for Our Newsletter to get Latest Updates and Offers. Subscribe to receive news in your inbox.</p>
+                            </div>
+                            <form class="bloq-email mailchimp form-inline" method="post">
+                                <label for="subscribeEmail" class="error"></label>
+                                <div class="email">
+                                    <input type="email" id="subscribeEmail" name="EMAIL" placeholder="Enter Your Email">
+                                    <input type="submit" value="Subscribe">
+                                    <p class="subscription-success"></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="second-footer rec-pro">
+                <div class="container-fluid sd-f">
+                    <p>2021 © Copyright - All Rights Reserved.</p>
+                    <ul class="netsocials">
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+        <a data-scroll href="#wrapper" class="go-up"><i class="fa fa-angle-double-up" aria-hidden="true"></i></a>
+        <!-- END FOOTER --> {% endcomment %}
 
         <!-- START PRELOADER -->
         <div id="preloader">
@@ -541,27 +649,6 @@ UPLOADCARE_PUBLIC_KEY = 'b554dba7565f88537168';
         <script src="{% static 'revolution/js/jquery.themepunch.revolution.min.js'%}"></script>
 
         <script>
-
-          
-    // Fungua popup baada ya sekunde 3
-    window.onload = function () {
-      setTimeout(() => {
-        document.getElementById("popup").style.display = "block";
-        document.getElementById("overlay").style.display = "block";
-      }, 3000);
-    };
-
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-      document.getElementById("overlay").style.display = "none";
-    }
-
-
-
- // Fungua popup end
-
-
-
             var typed = new Typed('.typed', {
                 strings: ["House ^2000", "Apartment ^2000", "Plaza ^4000"],
                 smartBackspace: false,
@@ -636,8 +723,6 @@ UPLOADCARE_PUBLIC_KEY = 'b554dba7565f88537168';
         </script>
 
         <script>
-
-
             $('.style2').owlCarousel({
                 loop: true,
                 margin: 0,
@@ -690,46 +775,7 @@ UPLOADCARE_PUBLIC_KEY = 'b554dba7565f88537168';
     </div>
     <!-- Wrapper / End -->
 
-
-
-<script>
-    // Zuia matumizi ya Print Screen (PrtSc)
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'PrintScreen') {
-        event.preventDefault();
-        alert('Screenshots Hairuhusiwi kwenye website hii wasiliana na Developer no: 0629712678.');
-    }
-});
-
-document.addEventListener('keyup', function(event) {
-    if (event.key === 'PrintScreen') {
-        navigator.clipboard.writeText('Screenshots is Disable.').then(function() {
-            alert('Screenshots Hairuhusiwi kwenye website hii piga no: 0629712678.');
-        });
-    }
-});
-
-// Zuia Developer Tools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'F12' || 
-        (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
-        (event.ctrlKey && event.key === 'U')) {
-        event.preventDefault();
-        alert('Developer tools Haziruhusiwi kwenye website hii piga no: 0629712678.');
-    }
-});
-
-</script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var protectedText = 'This text is protected.';
-            var encodedText = btoa(protectedText); // Encode text to base64
-            document.getElementById('protectedContent').innerText = atob(encodedText); // Decode back to original text
-        });
-    </script>
-
-
+    
 <!-- Feedback Modal -->
 <div id="feedback-modal">
     <div class="modal-content">
@@ -807,9 +853,27 @@ document.addEventListener('keydown', function(event) {
       return document.querySelector("[name=csrfmiddlewaretoken]")?.value ||
              document.querySelector("meta[name='csrf-token']")?.getAttribute("content");
     }
+
+
+
+
+        
+    // Fungua popup baada ya sekunde 3
+    window.onload = function () {
+      setTimeout(() => {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }, 3000);
+    };
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
   </script>
-  
 </body>
 
 
 </html> 
+
